@@ -12,7 +12,7 @@ const rotate = keyframes`
 `;
 
 const StyledCTAContainer = styled.div`
-  animation: ${rotate} 10s linear infinite;
+  animation: ${rotate} 25s linear infinite;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -45,10 +45,10 @@ const StyledSvg = styled.svg`
   overflow: hidden;
 `
 
-export default function ContactCTA({ text }) {
+export default function ContactCTA() {
   const { setContactMenuIsOpened } = useContext(PortfolioContext);
   const theme = useTheme();
-  const textColor=theme.main
+  const textColor = theme.main;
 
   const handleClick = () => {
     setContactMenuIsOpened(current => !current)

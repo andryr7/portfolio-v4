@@ -1,17 +1,18 @@
-import { styled, keyframes } from "styled-components"
+import { styled, keyframes, useTheme } from "styled-components"
 import { useContext, useState } from "react";
 import { PortfolioContext } from "@/utils/Context";
 
 const StyledSection = styled.div`
-  transition: all 0.5s;
+  /* transition: all 0.5s; */
   transform-origin: bottom left;
   height: 100lvh;
   width: 100%;
   position: fixed;
-  background-color: black;
+  background-color: ${props => props.theme.background};
   top: 0;
   overflow: hidden;
   /* filter: invert(); */
+  z-index: -1;
 `
 
 const oscillate = keyframes`
@@ -19,7 +20,7 @@ const oscillate = keyframes`
     transform: scale(1.001);
   }
   50% {
-    transform: scale(1.0021);
+    transform: scale(1.0025);
   }
   100% {
     transform: scale(1.001);
@@ -33,35 +34,46 @@ const StyledBackgroundPart = styled.div`
   transform-origin: bottom left;
   position: absolute;
   top: 0;
+  filter: blur(50px);
 `
 
 export default function GradientBackground() {
   const [backgroundZoom, setBackgroundZoom] = useState(0);
+  const theme = useTheme();
+  const { isDarkMode } = useContext(PortfolioContext);
+  console.log(isDarkMode)
 
   const wrapperZoomStyle = {
     transform: `
-      scale(calc(1 + 3.5 * ${backgroundZoom}))
+      scale(calc(1 + 4 * ${backgroundZoom}))
     `
   }
 
-  const firstBackgroundStyle = {
+  const darkBackgroundStyle = {
     background:`
       radial-gradient(circle at 5% 67%, 
-        rgba(8,4,3,1) 0%, 
-        rgba(8,4,3,1) 25%, 
-        rgba(62,7,5,1) 43%, 
-        rgba(165,97,31,1) 51%, 
-        rgba(228,225,190,1) 58%, 
-        #3c445e 62%, 
-        rgba(8,4,3,1) 
+        ${theme.background} 0%, 
+        ${theme.background} 25%, 
+        ${theme.red} 43%, 
+        ${theme.orange} 51%, 
+        ${theme.main} 58%, 
+        ${theme.blue} 62%, 
+        ${theme.background} 
         100%)
     `,
-    // filter:` blur(10px)`
   }
+
+  const lightBackgroundStyle = {
+    background:`
+      ${theme.background}
+    `,
+  }
+
+  const backgroundStyle = isDarkMode ? darkBackgroundStyle : lightBackgroundStyle;
 
   return (
     <StyledSection style={wrapperZoomStyle}>
-      <StyledBackgroundPart style={firstBackgroundStyle}/>
+      <StyledBackgroundPart style={backgroundStyle}/>
     </StyledSection>
   )
 }

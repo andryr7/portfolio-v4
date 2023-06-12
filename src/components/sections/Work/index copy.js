@@ -1,10 +1,10 @@
 import { styled } from "styled-components"
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
-import slideimg1 from '../../assets/slides/1.jpg'
-import slideimg2 from '../../assets/slides/2.jpg'
-import slideimg3 from '../../assets/slides/3.jpg'
-import slideimg4 from '../../assets/slides/4.jpg'
+import slideimg2 from '../../../assets/slides/2.jpg'
+import slideimg3 from '../../../assets/slides/3.jpg'
+import slideimg1 from '../../../assets/slides/1.jpg'
+import slideimg4 from '../../../assets/slides/4.jpg'
 import { useEffect, useRef, useState } from "react";
 
 const StyledWorkSection = styled.section`

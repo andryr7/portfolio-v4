@@ -1,5 +1,5 @@
 import { styled } from "styled-components"
-import myPicture from '../../assets/mypicture.jpg'
+import myPicture from '../../../assets/mypicture.jpg'
 
 const StyledAboutSection = styled.section`
   height: 100lvh;

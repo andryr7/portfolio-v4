@@ -81,8 +81,7 @@ const StyledContactMenu = styled.div`
   width: calc(100% - 4px - 2rem);
   height: calc(10lvh - 1rem);
   z-index: 9;
-  border: 2px solid ${props => props.theme.main};
-  border-top: none;
+  border-bottom: 2px solid ${props => props.theme.main};
   box-sizing: border-box;
   margin: 1rem;
   transform: translateY(100%);

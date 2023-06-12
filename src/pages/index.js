@@ -2,15 +2,17 @@ import Head from 'next/head'
 import styled from 'styled-components'
 import { playfairDisplay } from '@/styles/fonts'
 import Frame from '@/components/Frame'
-import Hero from '@/components/Hero'
-import About from '@/components/About'
-import Work from '@/components/Work'
+import Hero from '@/components/sections/Hero'
+import About from '@/components/sections/About'
+import Work from '@/components/sections/Work'
 import GradientBackground from '@/components/GradientBackground'
 import GrainFilter from '@/components/GrainFilter'
 
 const StyledAppContainer = styled.div``
 
-const StyledMain = styled.main``
+const StyledMain = styled.main`
+  color: ${props => props.theme.main};
+`
 
 export default function Home() {
   return (
