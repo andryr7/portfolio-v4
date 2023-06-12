@@ -1,11 +1,10 @@
 import { styled } from "styled-components"
-import { Splide, SplideSlide } from '@splidejs/react-splide';
-import '@splidejs/react-splide/css';
 import slideimg2 from '../../../assets/slides/2.jpg'
 import slideimg3 from '../../../assets/slides/3.jpg'
 import slideimg1 from '../../../assets/slides/1.jpg'
 import slideimg4 from '../../../assets/slides/4.jpg'
 import { useEffect, useRef, useState } from "react";
+import workBackground from '../../../assets/workbackground.svg'
 
 const StyledWorkSection = styled.section`
   height: 100lvh;
@@ -15,26 +14,53 @@ const StyledWorkSection = styled.section`
   align-items: center;
   padding: 1rem;
   box-sizing: border-box;
-  background-color: red;
   overflow: hidden;
   position: relative;
   top: 0;
+  /* background:
+    ${props => props.theme.background}; */
+  background-size: cover;
+  background-position: center;
 `
 
 const StyledProjectsTrack = styled.div`
   display: flex;
-  gap: 5rem;
+  gap: 1vw;
   position: absolute;
   top: 50%;
   left: 50%;
   cursor: grab;
+  width: calc(auto - 25vw);
 `
 
 const StyledProjectCard = styled.article`
-  width: 500px;
-  height: 500px;
+  width: 35vw;
+  height: 50vh;
   background-color: ${props => props.theme.blue};
   user-select: none;
+  clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+`
+
+const StyledProjectImg = styled.img`
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  user-select: none;
+`
+
+const StyledBeforeProjectsCaption = styled.div`
+  position: absolute;
+  top: 50%;
+  transform: translate(-100%, -50%);
+  font-size: 1.5rem;
+`
+
+const StyledAfterProjectsCaption = styled.div`
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translate(100%, -50%);
+  font-size: 1.5rem;
 `
 
 export default function Work() {
@@ -44,8 +70,18 @@ export default function Work() {
   const [trackPosition, setTrackPosition] = useState(0);
   const trackRef = useRef(null);
 
+  const projectImage1Ref = useRef(null)
+  const projectImage2Ref = useRef(null)
+  const projectImage3Ref = useRef(null)
+  const projectImage4Ref = useRef(null)
+
   useEffect(() => {
     const track = trackRef.current;
+    // TODO Dynamiser
+    const project1image= projectImage1Ref.current;
+    const project2image= projectImage2Ref.current;
+    const project3image= projectImage3Ref.current;
+    const project4image= projectImage4Ref.current;
 
     const handleMouseDown = (e) => {
       isTracking.current = true;
@@ -53,6 +89,7 @@ export default function Work() {
     }
 
     const handleMouseUp = (e) => {
+      mouseDownAt.current = 0;
       isTracking.current = false;
       trackPercentage.current = trackPosition;
     }
@@ -67,55 +104,58 @@ export default function Work() {
       }
     }
 
-    // const handleMouseMove = (e) => {
-    //   if (isTracking.current) {
-    //     const mouseDelta = parseFloat(mouseDownAt.current - e.clientX);
-    //     const maxDelta = window.innerWidth * 0.75;
-    //     const percentage = (mouseDelta / maxDelta) * 100;
-    //     const newPercentage = Math.min(Math.max(parseFloat(trackPosition + percentage), 0), 100);
-    //     setTrackPosition(newPercentage);
-    //   }
-    // };
-
-    const handleMouseLeave = (e) => {
-      isTracking.current = false;
-    }
-
     track.addEventListener('mousedown', handleMouseDown);
-    track.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mousemove', handleMouseMove);
     document.addEventListener('mouseup', handleMouseUp);
-    // document.addEventListener('mouseleave', handleMouseLeave);
 
     track.animate({
       transform: `translate(-${trackPosition}%, -50%)`
     }, {duration: 500, fill: "forwards"});
 
+    project1image.animate({
+      objectPosition: `${trackPosition}% center`
+    }, {duration: 500, fill: 'forwards'});
+    
+    project2image.animate({
+      objectPosition: `${trackPosition}% center`
+    }, {duration: 500, fill: 'forwards'});
+
+    project3image.animate({
+      objectPosition: `${trackPosition}% center`
+    }, {duration: 500, fill: 'forwards'});
+
+    project4image.animate({
+      objectPosition: `${trackPosition}% center`
+    }, {duration: 500, fill: 'forwards'});
+
     return (() => {
       track.removeEventListener('mousedown', handleMouseDown);
       track.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseup', handleMouseUp);
-      // document.removeEventListener('mouseleave', handleMouseLeave);
     })
-  },[trackPosition])
+  },[trackPosition]);
 
   return (
     <StyledWorkSection >
       <StyledProjectsTrack ref={trackRef}>
+        <StyledBeforeProjectsCaption>
+          Découvrez mes projets :
+        </StyledBeforeProjectsCaption>
         <StyledProjectCard>
-          test
+          <StyledProjectImg src={slideimg1.src} draggable='false' ref={projectImage1Ref}/>
         </StyledProjectCard>
         <StyledProjectCard>
-          test
+          <StyledProjectImg src={slideimg2.src} draggable='false' ref={projectImage2Ref}/>
         </StyledProjectCard>
         <StyledProjectCard>
-          test
+          <StyledProjectImg src={slideimg3.src} draggable='false' ref={projectImage3Ref}/>
         </StyledProjectCard>
         <StyledProjectCard>
-          test
+          <StyledProjectImg src={slideimg4.src} draggable='false' ref={projectImage4Ref}/>
         </StyledProjectCard>
-        <StyledProjectCard>
-          test
-        </StyledProjectCard>
+        <StyledAfterProjectsCaption>
+          N'hésitez pas à me contacter
+        </StyledAfterProjectsCaption>
       </StyledProjectsTrack>
     </StyledWorkSection>
   )

@@ -7,7 +7,7 @@ const rotate = keyframes`
     transform: rotate(0deg);
   }
   to {
-    transform: rotate(360deg);
+    transform: rotate(-360deg);
   }
 `;
 
@@ -21,16 +21,17 @@ const StyledCTAContainer = styled.div`
   isolation: isolate;
   cursor: pointer;
   &::before {
-  transition: all 0.25s ;
+    transition: all 0.25s ;
     content: '';
     position: absolute;
     top: 50%;
     left: 50%;
+    border: 1px solid ${props => props.main};
     border-radius: 50%;
     width: 0%;
     height: 0%;
     transform-origin: center center;
-    background-color: ${props => props.theme.red};
+    background-color: ${props => props.theme.background};
     z-index: -1;
   }
   &:hover::before {

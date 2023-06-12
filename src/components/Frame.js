@@ -26,6 +26,7 @@ const StyledFrame = styled.div`
   flex-direction: column;
   justify-content: space-between;
   overflow: hidden;
+  outline: 10rem solid ${props => props.theme.background};
   &.reduced {
     height: calc(90lvh - 2rem - 4px);
   }
@@ -81,7 +82,6 @@ const StyledContactMenu = styled.div`
   width: calc(100% - 4px - 2rem);
   height: calc(10lvh - 1rem);
   z-index: 9;
-  border-bottom: 2px solid ${props => props.theme.main};
   box-sizing: border-box;
   margin: 1rem;
   transform: translateY(100%);

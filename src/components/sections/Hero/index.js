@@ -34,17 +34,17 @@ const StyledMainCaption = styled.div`
     background-color: ${props => props.theme.main};
     margin-left: auto;
     width: 50%;
-    height: 39%;
+    height: 90%;
     object-position: bottom right;
     mix-blend-mode: difference;
   }
 `
 
 const StyledDescriptionContainer = styled.div`
-  padding-left: 0.5rem;
+  padding-left: 1rem;
   font-size: 1.5rem;
   line-height: 2rem;
-  letter-spacing: 1vw;
+  letter-spacing: 0.75vw;
   width: 100%;
 `
 

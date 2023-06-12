@@ -20,7 +20,7 @@ const oscillate = keyframes`
     transform: scale(1.001);
   }
   50% {
-    transform: scale(1.0025);
+    transform: scale(1.0021);
   }
   100% {
     transform: scale(1.001);
@@ -30,42 +30,63 @@ const oscillate = keyframes`
 const StyledBackgroundPart = styled.div`
   height: 100%;
   width: 100%;
-  animation: ${oscillate} 0.1s linear infinite;
-  transform-origin: bottom left;
+  animation: ${oscillate} 100ms ease-in-out infinite;
   position: absolute;
   top: 0;
   filter: blur(50px);
 `
 
 export default function GradientBackground() {
-  const [backgroundZoom, setBackgroundZoom] = useState(0);
   const theme = useTheme();
-  const { isDarkMode } = useContext(PortfolioContext);
-  console.log(isDarkMode)
+  const { isDarkMode, backgroundShift } = useContext(PortfolioContext);
 
   const wrapperZoomStyle = {
     transform: `
-      scale(calc(1 + 4 * ${backgroundZoom}))
+      scale(calc(1 + 3.5 * ${backgroundShift}))
     `
   }
 
+  // const darkBackgroundStyle = {
+  //   background:`
+  //     radial-gradient(circle at 5% 67%, 
+  //       ${theme.background} 0%, 
+  //       ${theme.background} 20%, 
+  //       ${theme.red} 43%, 
+  //       ${theme.orange} 51%, 
+  //       ${theme.main} 58%, 
+  //       ${theme.blue} 62%, 
+  //       ${theme.background} 
+  //       100%)
+  //   `,
+  // }
+
   const darkBackgroundStyle = {
+    transformOrigin: 'bottom left',
     background:`
       radial-gradient(circle at 5% 67%, 
         ${theme.background} 0%, 
-        ${theme.background} 25%, 
+        ${theme.background} 20%, 
         ${theme.red} 43%, 
         ${theme.orange} 51%, 
-        ${theme.main} 58%, 
-        ${theme.blue} 62%, 
+        ${theme.main} 65%, 
+        ${theme.blue} 75%, 
+        ${theme.background} 90%, 
         ${theme.background} 
         100%)
     `,
   }
 
   const lightBackgroundStyle = {
+    transformOrigin: 'top right',
     background:`
-      ${theme.background}
+      linear-gradient(
+        90deg,
+        ${theme.background} 0%,
+        ${theme.red}55 25%,
+        ${theme.background} 50%,
+        ${theme.blue}55 75%,
+        ${theme.background} 
+        100%)
     `,
   }
 

@@ -5,6 +5,7 @@ export const PortfolioContext = createContext();
 export const PortfolioProvider = (({children}) => {
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [contactMenuIsOpened, setContactMenuIsOpened] = useState(false);
+  const [backgroundShift, setBackgroundShift] = useState(0);
 
   //Checking navigator language and saving theme and language preferences
   // useEffect(()=>{
@@ -18,7 +19,9 @@ export const PortfolioProvider = (({children}) => {
       isDarkMode,
       setIsDarkMode,
       contactMenuIsOpened,
-      setContactMenuIsOpened
+      setContactMenuIsOpened,
+      backgroundShift,
+      setBackgroundShift
     }}>
       {children}
     </PortfolioContext.Provider>

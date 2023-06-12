@@ -1,5 +1,7 @@
 import { styled } from "styled-components"
 import myPicture from '../../../assets/mypicture.jpg'
+import { useContext, useEffect, useRef } from "react";
+import { PortfolioContext } from "@/utils/Context";
 
 const StyledAboutSection = styled.section`
   height: 100lvh;
@@ -54,8 +56,27 @@ const StyledTextContainer = styled.div`
 `
 
 export default function About() {
+  const aboutSectionRef = useRef(null);
+
+  const { setBackgroundShift } = useContext(PortfolioContext);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sectionRectTop = aboutSectionRef.current.getBoundingClientRect().top;
+      const windowHeight = window.innerHeight;
+      const ratio = Math.max(sectionRectTop / windowHeight, 0);
+      setBackgroundShift(1 - ratio);
+    }
+
+    document.addEventListener('scroll', handleScroll);
+
+    return (() => {
+      document.removeEventListener('scroll', handleScroll)
+    })
+  })
+
   return (
-    <StyledAboutSection >
+    <StyledAboutSection ref={aboutSectionRef}>
       <StyledContainer>
         <StyledImageContainer>
           <StyledImg src={myPicture.src} />
