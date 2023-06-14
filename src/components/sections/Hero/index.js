@@ -11,32 +11,38 @@ const StyledHero = styled.section`
   justify-content: center;
   align-items: center;
   transition: all 1s;
-  mix-blend-mode: ${props => props.theme.blendmode};
 `
 
 const StyledCaptionsContainer = styled.div`
-  
+  width: 100%;
 `
 
 const StyledMainCaption = styled.div`
   position: relative;
   top: 0;
   /* isolation: isolate; */
-  & h1 {
-    font-size: 10vw;
-    letter-spacing: 2vw;
-  }
+  font-size: 10vw;
+  letter-spacing: 3vw;
+  display: flex;
+  justify-content: space-around;
+`
+
+const MainCaptionFirstPart = styled.div`
+`
+
+const MainCaptionSecondPart = styled.div`
+  position: relative;
+  mix-blend-mode: overlay;
   &:after {
     content: '';
     position: absolute;
     bottom: 0;
-    right: 0;
+    left: 0;
     background-color: ${props => props.theme.main};
     margin-left: auto;
-    width: 50%;
-    height: 90%;
-    object-position: bottom right;
-    mix-blend-mode: difference;
+    width: 95%;
+    height: 51%;
+    mix-blend-mode: exclusion;
   }
 `
 
@@ -44,7 +50,7 @@ const StyledDescriptionContainer = styled.div`
   padding-left: 1rem;
   font-size: 1.5rem;
   line-height: 2rem;
-  letter-spacing: 0.75vw;
+  letter-spacing: 0.5rem;
   width: 100%;
 `
 
@@ -54,7 +60,12 @@ export default function Hero() {
       <StyledHero >
         <StyledCaptionsContainer>
           <StyledMainCaption className={playfairDisplaySC.className}>
-            <h1>Hello There</h1>
+            <MainCaptionFirstPart>
+              <h1>Hello</h1>
+            </MainCaptionFirstPart>
+            <MainCaptionSecondPart>
+              <h1>World</h1>
+            </MainCaptionSecondPart>
           </StyledMainCaption>
           <StyledDescriptionContainer>
             <h3>Je m'appelle Andry</h3>

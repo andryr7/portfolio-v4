@@ -7,11 +7,14 @@ import About from '@/components/sections/About'
 import Work from '@/components/sections/Work'
 import GradientBackground from '@/components/GradientBackground'
 import GrainFilter from '@/components/GrainFilter'
+import NoiseFilter from '@/components/NoiseFilter'
 
 const StyledAppContainer = styled.div``
 
 const StyledMain = styled.main`
   color: ${props => props.theme.main};
+  padding-left: calc(1rem + 4px);
+  padding-right: calc(1rem + 4px);
 `
 
 export default function Home() {
@@ -34,6 +37,7 @@ export default function Home() {
       {/* <ContactMenu /> */}
       <Frame />
       <GrainFilter />
+      {/* <NoiseFilter /> */}
     </>
   )
 }

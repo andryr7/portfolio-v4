@@ -4,7 +4,7 @@ import { PortfolioContext } from "@/utils/Context";
 
 const StyledSection = styled.div`
   /* transition: all 0.5s; */
-  transform-origin: bottom left;
+  transform-origin: ${props => props.theme.transformOrigin};
   height: 100lvh;
   width: 100%;
   position: fixed;
@@ -33,7 +33,8 @@ const StyledBackgroundPart = styled.div`
   animation: ${oscillate} 100ms ease-in-out infinite;
   position: absolute;
   top: 0;
-  filter: blur(50px);
+  //TODO FIND SOLUTION TO OPTIMIZE
+  /* filter: blur(50px); */
 `
 
 export default function GradientBackground() {
@@ -68,23 +69,39 @@ export default function GradientBackground() {
         ${theme.background} 20%, 
         ${theme.red} 43%, 
         ${theme.orange} 51%, 
-        ${theme.main} 65%, 
+        ${theme.main} 59%, 
         ${theme.blue} 75%, 
-        ${theme.background} 90%, 
+        ${theme.background} 87.5%, 
         ${theme.background} 
         100%)
     `,
   }
 
+  // const lightBackgroundStyle = {
+  //   transformOrigin: 'top right',
+  //   background:`
+  //     linear-gradient(
+  //       90deg,
+  //       ${theme.background} 0%,
+  //       ${theme.red}55 25%,
+  //       ${theme.background} 50%,
+  //       ${theme.blue}55 75%,
+  //       ${theme.background} 
+  //       100%)
+  //   `,
+  // }
+
   const lightBackgroundStyle = {
-    transformOrigin: 'top right',
+    transformOrigin: 'bottom center',
     background:`
-      linear-gradient(
-        90deg,
-        ${theme.background} 0%,
-        ${theme.red}55 25%,
-        ${theme.background} 50%,
-        ${theme.blue}55 75%,
+      radial-gradient(circle at 50% 100%, 
+        ${theme.background} 0%, 
+        ${theme.background} 20%, 
+        #E49E6B 43%, 
+        #E49E6B 51%, 
+        #C98E90 65%, 
+        #7C6C98 75%, 
+        #65659A 87.5%, 
         ${theme.background} 
         100%)
     `,
