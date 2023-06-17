@@ -18,19 +18,20 @@ const StyledCaptionsContainer = styled.div`
 `
 
 const StyledMainCaption = styled.div`
-  position: relative;
-  top: 0;
   /* isolation: isolate; */
   font-size: 10vw;
   letter-spacing: 3vw;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  width: 100%;
 `
 
-const MainCaptionFirstPart = styled.div`
+const MainCaptionFirstPart = styled.h1`
+  display: block;
 `
 
-const MainCaptionSecondPart = styled.div`
+const MainCaptionSecondPart = styled.h1`
+  display: block;
   position: relative;
   mix-blend-mode: overlay;
   &:after {
@@ -61,10 +62,10 @@ export default function Hero() {
         <StyledCaptionsContainer>
           <StyledMainCaption className={playfairDisplaySC.className}>
             <MainCaptionFirstPart>
-              <h1>Hello</h1>
+              Hello
             </MainCaptionFirstPart>
             <MainCaptionSecondPart>
-              <h1>World</h1>
+              World
             </MainCaptionSecondPart>
           </StyledMainCaption>
           <StyledDescriptionContainer>

@@ -26,11 +26,24 @@ const StyledCarouselContainer = styled.div`
   height: 50%;
 `
 
+const StyledProjectTitle = styled.div`
+  position: absolute;
+  bottom: 1rem;
+  transform: translateX(-100%);
+  transition: all 0.5s;
+  font-size: 2rem;
+  opacity: 0;
+`
+
 const StyledProjectCard = styled.div`
   position: relative;
   width: 100%;
   height: 50vh;
   clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+  &:hover ${StyledProjectTitle} {
+    transform: translateX(2rem);
+    opacity: 1;
+  }
 `
 
 const StyledProjectImage = styled.img`
@@ -79,24 +92,23 @@ const projects = [
   },
 ]
 
-function ProjectCard( {project, isMoving, test }) {
+function ProjectCard( {project }) {
   const [shift, setShift] = useState(50)
   const cardRef = useRef(null)
 
   const projectImageStyle = {
     objectPosition: `${shift}% center`
-  }
+  };
 
   useEffect(() => {
     const adjustShift = () => {
       const rect = cardRef.current.getBoundingClientRect();
       const elWidth = rect.right - rect.left;
-      const windowWidth = window.innerWidth;
       const min = -elWidth;
-      const max = windowWidth;
-      const variator = ((rect.left + elWidth) / (max - min)) * 100;
-      const bornedVariator = Math.max((Math.min(variator, 100)), 0);
-      setShift(bornedVariator);
+      const max = window.innerWidth;
+      const shift = ((rect.left + (elWidth / 2)) / (max - min)) * 100;
+      const clampedShift = Math.max((Math.min(shift, 100)), 0);
+      setShift(clampedShift);
       window.requestAnimationFrame(adjustShift);
     }
 
@@ -109,23 +121,15 @@ function ProjectCard( {project, isMoving, test }) {
 
   return (
     <StyledProjectCard>
-      <h3>{project.name}</h3>
       <StyledProjectImage src={project.img} style={projectImageStyle} ref={cardRef}/>
+      <StyledProjectTitle>
+        {project.name}
+      </StyledProjectTitle>
     </StyledProjectCard>
   )
 }
  
 export default function Work() {
-  let isMoving = false
-
-  const handleMove = () => {
-    isMoving = true;
-  }
-  
-  const handleMoved = () => {
-    isMoving = false;
-  }
-
   return (
     <StyledWorkSection >
       <StyledCarouselContainer>
@@ -138,9 +142,6 @@ export default function Work() {
             pagination: false,
             perPage: 3,
           } }
-          
-          onMove={() => {handleMove()}}
-          onMoved={() => {handleMoved()}}
         >
           <SplideTrack>
             <SplideSlide>
@@ -148,7 +149,7 @@ export default function Work() {
             </SplideSlide>
             {projects.map((project, index) => (
               <SplideSlide key={project.id}>
-                <ProjectCard project={project} isMoving={isMoving}/>
+                <ProjectCard project={project} />
               </SplideSlide>
             ))}
             <SplideSlide>

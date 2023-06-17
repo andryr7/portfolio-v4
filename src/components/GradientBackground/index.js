@@ -11,7 +11,6 @@ const StyledSection = styled.div`
   background-color: ${props => props.theme.background};
   top: 0;
   overflow: hidden;
-  /* filter: invert(); */
   z-index: -1;
 `
 
@@ -20,7 +19,7 @@ const oscillate = keyframes`
     transform: scale(1.001);
   }
   50% {
-    transform: scale(1.0021);
+    transform: scale(1.004);
   }
   100% {
     transform: scale(1.001);
@@ -42,9 +41,9 @@ export default function GradientBackground() {
   const { isDarkMode, backgroundShift } = useContext(PortfolioContext);
 
   const wrapperZoomStyle = {
-    transform: `
-      scale(calc(1 + 3.5 * ${backgroundShift}))
-    `
+    // transform: `
+    //   scale(calc(1 + 3.5 * ${backgroundShift}))
+    // `
   }
 
   // const darkBackgroundStyle = {
@@ -66,12 +65,12 @@ export default function GradientBackground() {
     background:`
       radial-gradient(circle at 5% 67%, 
         ${theme.background} 0%, 
-        ${theme.background} 20%, 
-        ${theme.red} 43%, 
-        ${theme.orange} 51%, 
-        ${theme.main} 59%, 
-        ${theme.blue} 75%, 
-        ${theme.background} 87.5%, 
+        ${theme.background} ${15 + (backgroundShift * 100)}%, 
+        ${theme.red} ${40 + (backgroundShift * 100)}%, 
+        ${theme.orange} ${50 + (backgroundShift * 100)}%, 
+        ${theme.main} ${60 + (backgroundShift * 100)}%, 
+        ${theme.blue} ${75 + (backgroundShift * 100)}%, 
+        ${theme.background} ${95 + (backgroundShift * 100)}%, 
         ${theme.background} 
         100%)
     `,
