@@ -2,11 +2,9 @@ import { playfairDisplay } from "@/styles/fonts"
 import { PortfolioContext } from "@/utils/Context"
 import { useContext } from "react"
 import styled from "styled-components"
-import ThemeButton from "./Interactivity/ThemeButton"
-import ContactCTA from "./Interactivity/ContactCTA"
-import LinkedInIcon from '../assets/linkedin.png'
-import GitHubIcon from '../assets/github-mark-white.svg'
-import EmailIcon from '../assets/email.png'
+import ThemeButton from "./interactivity/ThemeButton"
+import ContactCTA from "./interactivity/ContactCTA"
+import ContactMenu from "./ContactMenu"
 
 const StyledFrame = styled.div`
   position: fixed;
@@ -64,37 +62,9 @@ const StyledButtonContainer = styled.div`
   align-items: end;
 `
 
-// const StyledContactMenu = styled.div`
-//   border-top: 2px solid ${props => props.theme.main};
-//   padding-top: 1rem;
-//   pointer-events: all;
-//   transition: transform 0.5s;
-//   transform: translateY(0%);
-//   &.opened {
-//     transform: translateY(150%);
-//   }
-// `
-
-const StyledContactMenu = styled.div`
-  position: fixed;
-  bottom: 0;
-  transition: all 0.5s;
-  width: calc(100% - 4px - 2rem);
-  height: calc(10lvh - 1rem);
-  z-index: 9;
-  box-sizing: border-box;
-  margin: 1rem;
-  transform: translateY(100%);
-  opacity: 0;
-  &.opened {
-    transform: translateY(0%);
-    opacity: 1;
-  }
-`
-
 export default function Frame() {
   const { contactMenuIsOpened } = useContext(PortfolioContext);
-
+  
   return (
     <>
       <StyledFrame className={`${playfairDisplay.className} ${contactMenuIsOpened && 'reduced'}`}>
@@ -120,9 +90,7 @@ export default function Frame() {
           </StyledButtonContainer>
         </StyledFooter>
       </StyledFrame>
-      <StyledContactMenu className={`${contactMenuIsOpened && 'opened'}`}>
-        test
-      </StyledContactMenu>
+      <ContactMenu />
     </>
   )
 }

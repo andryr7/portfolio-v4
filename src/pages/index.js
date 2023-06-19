@@ -7,7 +7,6 @@ import About from '@/components/sections/About'
 import Work from '@/components/sections/Work'
 import GradientBackground from '@/components/GradientBackground'
 import GrainFilter from '@/components/GrainFilter'
-import NoiseFilter from '@/components/NoiseFilter'
 
 const StyledAppContainer = styled.div``
 
@@ -34,10 +33,8 @@ export default function Home() {
           <Work />
         </StyledMain>
       </StyledAppContainer>
-      {/* <ContactMenu /> */}
       <Frame />
       <GrainFilter />
-      {/* <NoiseFilter /> */}
     </>
   )
 }

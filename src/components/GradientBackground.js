@@ -63,7 +63,7 @@ export default function GradientBackground() {
   const darkBackgroundStyle = {
     transformOrigin: 'bottom left',
     background:`
-      radial-gradient(circle at 5% 67%, 
+      radial-gradient(circle at 0% 57%, 
         ${theme.background} 0%, 
         ${theme.background} ${15 + (backgroundShift * 100)}%, 
         ${theme.red} ${40 + (backgroundShift * 100)}%, 
