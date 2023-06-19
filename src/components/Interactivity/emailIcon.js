@@ -1,7 +1,7 @@
 import { styled } from "styled-components"
 
 const StyledIconContainer = styled.div`
-  background-color: blue;
+  height: 75%;
 `
 
 export default function EmailIcon() {

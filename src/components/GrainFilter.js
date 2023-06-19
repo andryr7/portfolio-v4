@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 
 export default function GrainFilter({
-  opacity = 0.07,
+  opacity = 0.075,
   frameInterval = 3,
   grainFinesse = 0.1,
   greyMode = true,
@@ -74,7 +74,7 @@ export default function GrainFilter({
     const loop = () => {
       if(frameCount++ % frameInterval === 0) {
         drawNewGrain(ctx, canvasRef.current.width, canvasRef.current.height, patternWidth, patternHeight);
-      }
+      };
 
       animationFrameId = requestAnimationFrame(loop);
     };

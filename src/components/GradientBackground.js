@@ -32,43 +32,21 @@ const StyledBackgroundPart = styled.div`
   animation: ${oscillate} 100ms ease-in-out infinite;
   position: absolute;
   top: 0;
-  //TODO FIND SOLUTION TO OPTIMIZE
-  /* filter: blur(50px); */
 `
 
 export default function GradientBackground() {
   const theme = useTheme();
   const { isDarkMode, backgroundShift } = useContext(PortfolioContext);
 
-  const wrapperZoomStyle = {
-    // transform: `
-    //   scale(calc(1 + 3.5 * ${backgroundShift}))
-    // `
-  }
-
-  // const darkBackgroundStyle = {
-  //   background:`
-  //     radial-gradient(circle at 5% 67%, 
-  //       ${theme.background} 0%, 
-  //       ${theme.background} 20%, 
-  //       ${theme.red} 43%, 
-  //       ${theme.orange} 51%, 
-  //       ${theme.main} 58%, 
-  //       ${theme.blue} 62%, 
-  //       ${theme.background} 
-  //       100%)
-  //   `,
-  // }
-
   const darkBackgroundStyle = {
     transformOrigin: 'bottom left',
     background:`
-      radial-gradient(circle at 0% 57%, 
+      radial-gradient(circle at 14% 55%, 
         ${theme.background} 0%, 
         ${theme.background} ${15 + (backgroundShift * 100)}%, 
-        ${theme.red} ${40 + (backgroundShift * 100)}%, 
-        ${theme.orange} ${50 + (backgroundShift * 100)}%, 
-        ${theme.main} ${60 + (backgroundShift * 100)}%, 
+        ${theme.red} ${35 + (backgroundShift * 100)}%, 
+        ${theme.orange} ${45 + (backgroundShift * 100)}%, 
+        ${theme.main} ${53 + (backgroundShift * 100)}%, 
         ${theme.blue} ${75 + (backgroundShift * 100)}%, 
         ${theme.background} ${95 + (backgroundShift * 100)}%, 
         ${theme.background} 
@@ -76,41 +54,21 @@ export default function GradientBackground() {
     `,
   }
 
-  // const lightBackgroundStyle = {
-  //   transformOrigin: 'top right',
-  //   background:`
-  //     linear-gradient(
-  //       90deg,
-  //       ${theme.background} 0%,
-  //       ${theme.red}55 25%,
-  //       ${theme.background} 50%,
-  //       ${theme.blue}55 75%,
-  //       ${theme.background} 
-  //       100%)
-  //   `,
-  // }
-
   const lightBackgroundStyle = {
-    transformOrigin: 'bottom center',
+    transformOrigin: 'bottom left',
     background:`
-      radial-gradient(circle at 50% 100%, 
-        ${theme.background} 0%, 
-        ${theme.background} 20%, 
-        #E49E6B 43%, 
-        #E49E6B 51%, 
-        #C98E90 65%, 
-        #7C6C98 75%, 
-        #65659A 87.5%, 
-        ${theme.background} 
-        100%)
+      radial-gradient(circle at 0% 57%, 
+        ${theme.background} 0%,
+        ${theme.background} ${15 + (backgroundShift * 100)}%, 
+        #FEE7A7 ${30 + (backgroundShift * 100)}%,
+        #F6B98A ${45 + (backgroundShift * 100)}%,
+        #546E93 100%)
     `,
   }
 
-  const backgroundStyle = isDarkMode ? darkBackgroundStyle : lightBackgroundStyle;
-
   return (
-    <StyledSection style={wrapperZoomStyle}>
-      <StyledBackgroundPart style={backgroundStyle}/>
+    <StyledSection>
+      <StyledBackgroundPart style={isDarkMode ? darkBackgroundStyle : lightBackgroundStyle}/>
     </StyledSection>
   )
 }

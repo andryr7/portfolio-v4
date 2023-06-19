@@ -22,16 +22,17 @@ const StyledMainCaption = styled.div`
   font-size: 10vw;
   letter-spacing: 3vw;
   display: flex;
-  justify-content: center;
   width: 100%;
 `
 
 const MainCaptionFirstPart = styled.h1`
   display: block;
+  flex-grow: 1;
 `
 
 const MainCaptionSecondPart = styled.h1`
   display: block;
+  flex-grow: 1;
   position: relative;
   mix-blend-mode: overlay;
   &:after {
@@ -41,7 +42,7 @@ const MainCaptionSecondPart = styled.h1`
     left: 0;
     background-color: ${props => props.theme.main};
     margin-left: auto;
-    width: 95%;
+    width: 100%;
     height: 51%;
     mix-blend-mode: exclusion;
   }

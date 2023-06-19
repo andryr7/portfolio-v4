@@ -2,9 +2,9 @@ import { PortfolioContext } from "@/utils/Context"
 import { useContext } from "react"
 import { styled } from "styled-components"
 import { playfairDisplay } from "@/styles/fonts"
-import GitHubIcon from "./interactivity/icons/githubIcon"
-import LinkedInIcon from "./interactivity/icons/LinkedInIcon"
-import EmailIcon from "./interactivity/icons/emailIcon"
+import EmailIcon from "./Interactivity/emailIcon"
+import GitHubIcon from "./Interactivity/githubIcon"
+import LinkedInIcon from "./Interactivity/linkedinIcon"
 
 
 const StyledContactMenu = styled.div`
@@ -25,6 +25,16 @@ const StyledContactMenu = styled.div`
   }
 `
 
+const StyledMainLinkCaption = styled.div`
+  transition: transform 0.5s;
+  transform: translateY(50%);
+`
+
+const StyledSecondaryLinkCaption = styled.div`
+  opacity: 0;
+  transition: opacity 0.5s;
+`
+
 const StyledContactSection = styled.div`
   flex-grow: 1;
   display: flex;
@@ -34,7 +44,9 @@ const StyledContactSection = styled.div`
   color: ${props => props.theme.main};
   cursor: pointer;
   transition: all 0.5s;
-  font-size: 3.5rem;
+  font-size: 1.5rem;
+  flex-direction: column;
+  gap: 0rem;
   &:not(:last-of-type) {
     &::after {
       background-color: ${props => props.theme.main};
@@ -48,6 +60,13 @@ const StyledContactSection = styled.div`
   }
   &:hover {
     flex-grow: 2.5;
+    gap: 0.5rem;
+    & ${StyledMainLinkCaption} {
+      transform: translateY(0);
+    }
+    & ${StyledSecondaryLinkCaption} {
+      opacity: 1;
+    }
   }
 `
 
@@ -57,13 +76,28 @@ export default function ContactMenu() {
   return(
     <StyledContactMenu className={`${contactMenuIsOpened && 'opened'} ${playfairDisplay.className}`}>
       <StyledContactSection >
-        <GitHubIcon />
+        <StyledMainLinkCaption>
+          GitHub
+        </StyledMainLinkCaption>
+        <StyledSecondaryLinkCaption>
+          Retrouvez mes projets
+        </StyledSecondaryLinkCaption>
       </StyledContactSection>
       <StyledContactSection >
-        <LinkedInIcon />
+        <StyledMainLinkCaption>
+          LinkedIn
+        </StyledMainLinkCaption>
+        <StyledSecondaryLinkCaption>
+          Retrouvez mes expériences professionnelles
+        </StyledSecondaryLinkCaption>
       </StyledContactSection>
       <StyledContactSection >
-        <EmailIcon />
+        <StyledMainLinkCaption>
+          Email
+        </StyledMainLinkCaption>
+        <StyledSecondaryLinkCaption>
+          Contactez moi directement
+        </StyledSecondaryLinkCaption>
       </StyledContactSection>
     </StyledContactMenu>
   )
