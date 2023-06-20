@@ -39,6 +39,7 @@ const StyledHeader = styled.header`
 const StyledLogo = styled.div`
   font-size: 5rem;
   pointer-events: all;
+  cursor: pointer;
 `
 
 const StyledNav = styled.nav`

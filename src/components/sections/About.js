@@ -4,15 +4,13 @@ import { useContext, useEffect, useRef } from "react";
 import { PortfolioContext } from "@/utils/Context";
 
 const StyledAboutSection = styled.section`
-  height: 100lvh;
-  min-width: 100%;
+  width: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
   z-index: 1;
   display: flex;
-  flex-direction: column;
-  gap: 5vh;
+  gap: 20vh;
 `
 
 const StyledTopContainer = styled.div`
@@ -76,6 +74,17 @@ const StyledItemContainer = styled.ul`
   gap: 10vw;
 `
 
+const StyledHexContent = styled.li`
+  background-color: ${props => props.theme.background};
+  width: 246px;
+  height: 271px;
+  -webkit-clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); 
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
 const StyledHexContainer = styled.article`
   background-color: ${props => props.theme.main};
   width: 250px;
@@ -88,18 +97,11 @@ const StyledHexContainer = styled.article`
   transition: all 0.5s;
   &:hover {
     background-color: ${props => props.theme.orange};
+    & ${StyledHexContent} {
+      width: 242px;
+      height: 265px;
+    }
   }
-`
-
-const StyledHexContent = styled.li`
-  background-color: ${props => props.theme.background};
-  width: 246px;
-  height: 271px;
-  -webkit-clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); 
-  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `
 
 export default function About() {
@@ -108,9 +110,11 @@ export default function About() {
   useEffect(() => {
     const handleScroll = () => {
       const sectionRectTop = aboutSectionRef.current.getBoundingClientRect().top;
-      const windowHeight = window.innerHeight;
-      const ratio = Math.max(sectionRectTop / windowHeight, 0);
-      setBackgroundShift(1 - ratio);
+      const min = window.innerHeight;
+      const max = window.innerHeight / 2;
+      const ratio = - (sectionRectTop - min) / max;
+      const clampedRatio = Math.min(ratio, 1);
+      setBackgroundShift(clampedRatio)
     }
 
     document.addEventListener('scroll', handleScroll);

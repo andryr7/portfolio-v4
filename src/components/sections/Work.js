@@ -60,8 +60,7 @@ const StyledProjectImage = styled.img`
 `
 
 const StyledDummyProjectCard = styled.div`
-  width: 100%;
-  height: 50vh;
+  background-color: red;
 `
 
 const projects = [
@@ -106,6 +105,10 @@ function ProjectCard( {project }) {
     }
 
     const adjustShift = () => {
+      if(cardRef.current === null) {
+        return
+      };
+
       const rect = cardRef.current.getBoundingClientRect();
       const elWidth = rect.right - rect.left;
       const min = -elWidth;
@@ -135,6 +138,31 @@ function ProjectCard( {project }) {
  
 export default function Work() {
   const { workSectionRef } = useContext(PortfolioContext);
+  const [paddingSlideNb, setPaddingSlideNb] = useState(2);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 768) {
+        setPaddingSlideNb(0);
+        return
+      }
+      else if (window.innerWidth <= 2160) {
+        setPaddingSlideNb(1);
+        return
+      }
+      else {
+        setPaddingSlideNb(2);
+        return
+      }
+    }
+    handleResize();
+
+    window.addEventListener('resize', handleResize)
+
+    return (() => {
+      window.removeEventListener('resize', handleResize);
+    })
+  }, [])
 
   return (
     <StyledWorkSection ref={workSectionRef}>
@@ -146,21 +174,29 @@ export default function Work() {
             drag: 'free',
             arrows: false,
             pagination: false,
-            perPage: 3,
+            perPage: 5,
+            breakpoints: {
+              2160: {
+                perPage: 3
+              },
+              768: {
+                perPage: 1
+              }
+            }
           } }
         >
           <SplideTrack>
-            <SplideSlide>
-              <StyledDummyProjectCard />
-            </SplideSlide>
+            {[...Array(paddingSlideNb)].map((e, i) => (
+              <SplideSlide key={i} />
+            ))}
             {projects.map((project, index) => (
               <SplideSlide key={project.id}>
                 <ProjectCard project={project} />
               </SplideSlide>
             ))}
-            <SplideSlide>
-              <StyledDummyProjectCard />
-            </SplideSlide>
+            {[...Array(paddingSlideNb)].map((e, i) => (
+              <SplideSlide key={i} />
+            ))}
           </SplideTrack>
         </Splide>
       </StyledCarouselContainer>

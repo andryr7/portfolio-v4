@@ -21,7 +21,7 @@ export default function GrainFilter({
   useEffect(() => {
     if (canvasRef === null) {
       return
-    }
+    };
 
     const ctx = canvasRef.current.getContext('2d');
     let frameCount = 0;
@@ -100,6 +100,10 @@ export default function GrainFilter({
     }
 
     const handleResize = () => {
+      if (canvasRef === null) {
+        return
+      };
+      
       canvasRef.current.width = window.innerWidth;
       canvasRef.current.height = window.innerHeight;
     }
