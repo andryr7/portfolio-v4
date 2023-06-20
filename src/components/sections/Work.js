@@ -1,14 +1,14 @@
 import { styled } from "styled-components"
-import slideimg2 from '../../../assets/slides/2.jpg'
-import slideimg3 from '../../../assets/slides/3.jpg'
-import slideimg1 from '../../../assets/slides/1.jpg'
-import slideimg4 from '../../../assets/slides/4.jpg'
-import slideimg5 from '../../../assets/slides/5.jpg'
-import { useEffect, useRef, useState, createRef } from "react";
-import workBackground from '../../../assets/workbackground.svg'
+import slideimg3 from '../../assets/slides/3.jpg'
+import slideimg1 from '../../assets/slides/1.jpg'
+import slideimg2 from '../../assets/slides/2.jpg'
+import slideimg4 from '../../assets/slides/4.jpg'
+import slideimg5 from '../../assets/slides/5.jpg'
+import { useEffect, useRef, useState, useContext } from "react"
 
-import { Splide, SplideTrack, SplideSlide } from '@splidejs/react-splide';
+import { Splide, SplideTrack, SplideSlide } from '@splidejs/react-splide'
 import '@splidejs/react-splide/css';
+import { PortfolioContext } from "@/utils/Context"
 
 const StyledWorkSection = styled.section`
   height: 100lvh;
@@ -101,12 +101,16 @@ function ProjectCard( {project }) {
   };
 
   useEffect(() => {
+    if(cardRef.current === null) {
+      return
+    }
+
     const adjustShift = () => {
       const rect = cardRef.current.getBoundingClientRect();
       const elWidth = rect.right - rect.left;
       const min = -elWidth;
       const max = window.innerWidth;
-      const shift = ((rect.left + (elWidth / 2)) / (max - min)) * 100;
+      const shift = ((rect.left + elWidth) / (max - min)) * 100;
       const clampedShift = Math.max((Math.min(shift, 100)), 0);
       setShift(clampedShift);
       window.requestAnimationFrame(adjustShift);
@@ -130,8 +134,10 @@ function ProjectCard( {project }) {
 }
  
 export default function Work() {
+  const { workSectionRef } = useContext(PortfolioContext);
+
   return (
-    <StyledWorkSection >
+    <StyledWorkSection ref={workSectionRef}>
       <StyledCarouselContainer>
         <Splide 
           aria-label="Carousel de mes projets" 

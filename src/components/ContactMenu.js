@@ -17,7 +17,7 @@ const StyledContactMenu = styled.div`
   box-sizing: border-box;
   margin: 1rem;
   transform: translateY(100%);
-  border: 2px solid ${props => props.theme.main};
+  border: 2px inset ${props => props.theme.main};
   display: flex;
   &.opened {
     transform: translateY(0%);
@@ -26,16 +26,16 @@ const StyledContactMenu = styled.div`
 `
 
 const StyledMainLinkCaption = styled.div`
-  transition: transform 0.5s;
-  transform: translateY(50%);
 `
 
 const StyledSecondaryLinkCaption = styled.div`
-  opacity: 0;
-  transition: opacity 0.5s;
+  max-width: 0px;
+  overflow: hidden;
+  transition: all 0.5s;
+  white-space: nowrap;
 `
 
-const StyledContactSection = styled.div`
+const StyledContactItem = styled.div`
   flex-grow: 1;
   display: flex;
   justify-content: center;
@@ -45,8 +45,7 @@ const StyledContactSection = styled.div`
   cursor: pointer;
   transition: all 0.5s;
   font-size: 1.5rem;
-  flex-direction: column;
-  gap: 0rem;
+  line-height: 2rem;
   &:not(:last-of-type) {
     &::after {
       background-color: ${props => props.theme.main};
@@ -60,12 +59,11 @@ const StyledContactSection = styled.div`
   }
   &:hover {
     flex-grow: 2.5;
-    gap: 0.5rem;
     & ${StyledMainLinkCaption} {
-      transform: translateY(0);
+      text-shadow: ${props => props.theme.orange + '99'} 3px 3px;
     }
     & ${StyledSecondaryLinkCaption} {
-      opacity: 1;
+      max-width: 350px;
     }
   }
 `
@@ -75,30 +73,30 @@ export default function ContactMenu() {
 
   return(
     <StyledContactMenu className={`${contactMenuIsOpened && 'opened'} ${playfairDisplay.className}`}>
-      <StyledContactSection >
+      <StyledContactItem >
         <StyledMainLinkCaption>
           GitHub
         </StyledMainLinkCaption>
         <StyledSecondaryLinkCaption>
-          Retrouvez mes projets
+          : andryr7
         </StyledSecondaryLinkCaption>
-      </StyledContactSection>
-      <StyledContactSection >
+      </StyledContactItem>
+      <StyledContactItem >
         <StyledMainLinkCaption>
           LinkedIn
         </StyledMainLinkCaption>
         <StyledSecondaryLinkCaption>
-          Retrouvez mes expériences professionnelles
+          : andryratsimba
         </StyledSecondaryLinkCaption>
-      </StyledContactSection>
-      <StyledContactSection >
+      </StyledContactItem>
+      <StyledContactItem >
         <StyledMainLinkCaption>
           Email
         </StyledMainLinkCaption>
         <StyledSecondaryLinkCaption>
-          Contactez moi directement
+          : contact@andryratsimba.com
         </StyledSecondaryLinkCaption>
-      </StyledContactSection>
+      </StyledContactItem>
     </StyledContactMenu>
   )
 }

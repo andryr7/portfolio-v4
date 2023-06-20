@@ -11,7 +11,7 @@ const StyledFrame = styled.div`
   height: calc(100lvh - 2rem - 4px);
   width: calc(100% - 2rem - 4px);
   z-index: 9;
-  border: 2px solid ${props => props.theme.main};
+  border: 2px outset ${props => props.theme.main};
   box-sizing: border-box;
   top: 0;
   color: ${props => props.theme.main};
@@ -52,6 +52,7 @@ const StyledNavLinkList = styled.ul`
 `
 
 const StyledNavLink = styled.li`
+  cursor: pointer;
 `
 
 const StyledFooter = styled.footer``
@@ -63,21 +64,33 @@ const StyledButtonContainer = styled.div`
 `
 
 export default function Frame() {
-  const { contactMenuIsOpened } = useContext(PortfolioContext);
+  const { contactMenuIsOpened, aboutSectionRef, workSectionRef } = useContext(PortfolioContext);
+
+  const handleAboutLinkClick = () => {
+    aboutSectionRef.current.scrollIntoView();
+  };
+  
+  const handleWorkLinkClick = () => {
+    workSectionRef.current.scrollIntoView();
+  };
+
+  const handleHomeLinkClick = () => {
+    window.scrollTo(0,0);
+  };
   
   return (
     <>
       <StyledFrame className={`${playfairDisplay.className} ${contactMenuIsOpened && 'reduced'}`}>
         <StyledHeader>
-          <StyledLogo>
+          <StyledLogo onClick={handleHomeLinkClick}>
             AR
           </StyledLogo>
           <StyledNav>
             <StyledNavLinkList>
-              <StyledNavLink>
+              <StyledNavLink onClick={handleAboutLinkClick}>
                 about
               </StyledNavLink>
-              <StyledNavLink>
+              <StyledNavLink onClick={handleWorkLinkClick}>
                 work
               </StyledNavLink>
             </StyledNavLinkList>

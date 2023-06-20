@@ -70,7 +70,7 @@ export default function Hero() {
             </MainCaptionSecondPart>
           </StyledMainCaption>
           <StyledDescriptionContainer>
-            <h3>Je m'appelle Andry</h3>
+            <h3>Je m&apos;appelle Andry</h3>
             <h3>Je suis développeur web</h3>
             <h3>Bienvenue sur mon portfolio</h3>
             </StyledDescriptionContainer>

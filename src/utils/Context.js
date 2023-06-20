@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useRef } from "react";
 
 export const PortfolioContext = createContext();
 
@@ -6,6 +6,8 @@ export const PortfolioProvider = (({children}) => {
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [contactMenuIsOpened, setContactMenuIsOpened] = useState(false);
   const [backgroundShift, setBackgroundShift] = useState(0);
+  const aboutSectionRef = useRef(null);
+  const workSectionRef = useRef(null);
 
   //Checking navigator language and saving theme and language preferences
   // useEffect(()=>{
@@ -21,7 +23,9 @@ export const PortfolioProvider = (({children}) => {
       contactMenuIsOpened,
       setContactMenuIsOpened,
       backgroundShift,
-      setBackgroundShift
+      setBackgroundShift,
+      aboutSectionRef,
+      workSectionRef
     }}>
       {children}
     </PortfolioContext.Provider>

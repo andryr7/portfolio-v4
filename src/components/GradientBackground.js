@@ -1,6 +1,6 @@
 import { styled, keyframes, useTheme } from "styled-components"
-import { useContext, useState } from "react";
-import { PortfolioContext } from "@/utils/Context";
+import { useContext } from "react"
+import { PortfolioContext } from "@/utils/Context"
 
 const StyledSection = styled.div`
   /* transition: all 0.5s; */
@@ -26,7 +26,7 @@ const oscillate = keyframes`
   }
 `;
 
-const StyledBackgroundPart = styled.div`
+const StyledBackground = styled.div`
   height: 100%;
   width: 100%;
   animation: ${oscillate} 100ms ease-in-out infinite;
@@ -68,7 +68,7 @@ export default function GradientBackground() {
 
   return (
     <StyledSection>
-      <StyledBackgroundPart style={isDarkMode ? darkBackgroundStyle : lightBackgroundStyle}/>
+      <StyledBackground style={isDarkMode ? darkBackgroundStyle : lightBackgroundStyle}/>
     </StyledSection>
   )
 }
