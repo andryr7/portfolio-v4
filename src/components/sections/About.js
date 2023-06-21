@@ -62,7 +62,7 @@ const StyledBottomContainer = styled.div`
   font-size: 1.5rem;
   text-align: center;
   line-height: 150%;
-  gap: 5vh;
+  gap: 2.5rem;
 `
 
 const StyledItemCaption = styled.span`
@@ -76,8 +76,8 @@ const StyledItemContainer = styled.ul`
 
 const StyledHexContent = styled.li`
   background-color: ${props => props.theme.background};
-  width: 246px;
-  height: 271px;
+  width: 248px;
+  height: 273px;
   -webkit-clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); 
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
   display: flex;
@@ -98,8 +98,8 @@ const StyledHexContainer = styled.article`
   &:hover {
     background-color: ${props => props.theme.orange};
     & ${StyledHexContent} {
-      width: 242px;
-      height: 265px;
+      width: 244px;
+      height: 267px;
     }
   }
 `
@@ -136,7 +136,7 @@ export default function About() {
       </StyledTopContainer>
       <StyledBottomContainer>
         <StyledItemCaption>
-          Ce que je peux faire pour vous :
+          Domaines de compétence :
         </StyledItemCaption>
         <StyledItemContainer>
           <StyledHexContainer>

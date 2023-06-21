@@ -8,9 +8,10 @@ import ContactMenu from "./ContactMenu"
 
 const StyledFrame = styled.div`
   position: fixed;
-  height: calc(100lvh - 2rem - 4px);
-  width: calc(100% - 2rem - 4px);
+  height: calc(100dvh - 2rem);
+  width: calc(100% - 2rem);
   z-index: 9;
+  overflow: hidden;
   border: 2px outset ${props => props.theme.main};
   box-sizing: border-box;
   top: 0;
@@ -18,12 +19,10 @@ const StyledFrame = styled.div`
   margin: 1rem;
   padding: 1rem;
   pointer-events: none;
-  mix-blend-mode: normal;
   transition: all 0.5s;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  overflow: hidden;
   outline: 10rem solid ${props => props.theme.background};
   &.reduced {
     height: calc(90lvh - 2rem - 4px);
@@ -56,7 +55,8 @@ const StyledNavLink = styled.li`
   cursor: pointer;
 `
 
-const StyledFooter = styled.footer``
+const StyledFooter = styled.footer`
+`
 
 const StyledButtonContainer = styled.div`
   display: flex;

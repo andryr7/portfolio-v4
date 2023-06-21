@@ -8,12 +8,15 @@ import Work from '@/components/sections/Work'
 import GradientBackground from '@/components/GradientBackground'
 import GrainFilter from '@/components/GrainFilter'
 
-const StyledAppContainer = styled.div``
+const StyledAppContainer = styled.div`
+`
 
 const StyledMain = styled.main`
   color: ${props => props.theme.main};
-  padding-left: calc(1rem + 4px);
-  padding-right: calc(1rem + 4px);
+  box-sizing: border-box;
+  width: 100%;
+  padding-left: calc(1rem + 2px);
+  padding-right: calc(1rem + 2px);
 `
 
 export default function Home() {
@@ -32,9 +35,9 @@ export default function Home() {
           <About />
           <Work />
         </StyledMain>
+        <Frame />
+        <GrainFilter />
       </StyledAppContainer>
-      <Frame />
-      <GrainFilter />
     </>
   )
 }

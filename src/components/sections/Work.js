@@ -59,10 +59,6 @@ const StyledProjectImage = styled.img`
   }
 `
 
-const StyledDummyProjectCard = styled.div`
-  background-color: red;
-`
-
 const projects = [
   {
     id: 1,

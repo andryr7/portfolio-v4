@@ -2,17 +2,14 @@ import { PortfolioContext } from "@/utils/Context"
 import { useContext } from "react"
 import { styled } from "styled-components"
 import { playfairDisplay } from "@/styles/fonts"
-import EmailIcon from "./Interactivity/emailIcon"
-import GitHubIcon from "./Interactivity/githubIcon"
-import LinkedInIcon from "./Interactivity/linkedinIcon"
 
 
 const StyledContactMenu = styled.div`
   position: fixed;
   bottom: -1rem;
   transition: all 0.5s;
-  width: calc(100% - 4px - 2rem);
-  height: calc(10lvh - 1rem);
+  width: calc(100% - 2rem);
+  height: calc(10dvh - 1rem);
   z-index: 9;
   box-sizing: border-box;
   margin: 1rem;
