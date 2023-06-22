@@ -10,7 +10,9 @@ const StyledAboutSection = styled.section`
   align-items: center;
   z-index: 1;
   display: flex;
-  gap: 20vh;
+  background-color: ${props => props.theme.background};
+  border-top: 1px solid ${props => props.theme.main};
+  margin-top: 100vh;
 `
 
 const StyledTopContainer = styled.div`
@@ -18,6 +20,8 @@ const StyledTopContainer = styled.div`
   justify-content: space-around;
   align-items: center;
   gap: 5vw;
+  padding: 10vh 0;
+  width: 100%;
 `
 
 const StyledImageContainer = styled.div`
@@ -59,10 +63,14 @@ const StyledTextContainer = styled.div`
 const StyledBottomContainer = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   font-size: 1.5rem;
   text-align: center;
   line-height: 150%;
   gap: 2.5rem;
+  padding: 10vh 0;
+  width: 100%;
+  border-top: 1px solid ${props => props.theme.main};
 `
 
 const StyledItemCaption = styled.span`
@@ -111,7 +119,7 @@ export default function About() {
     const handleScroll = () => {
       const sectionRectTop = aboutSectionRef.current.getBoundingClientRect().top;
       const min = window.innerHeight;
-      const max = window.innerHeight / 2;
+      const max = window.innerHeight * 1;
       const ratio = - (sectionRectTop - min) / max;
       const clampedRatio = Math.min(ratio, 1);
       setBackgroundShift(clampedRatio)

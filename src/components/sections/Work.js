@@ -11,19 +11,15 @@ import '@splidejs/react-splide/css';
 import { PortfolioContext } from "@/utils/Context"
 
 const StyledWorkSection = styled.section`
-  height: 100lvh;
-  width: 100%;
+  height: 100dvh;
   display: flex;
-  justify-content: center;
   align-items: center;
-  overflow: hidden;
-  position: relative;
-  top: 0;
+  border-top: 1px solid ${props => props.theme.main};
+  background-color: ${props => props.theme.background};
 `
 
 const StyledCarouselContainer = styled.div`
   width: 100%;
-  height: 50%;
 `
 
 const StyledProjectTitle = styled.div`
@@ -41,9 +37,9 @@ const StyledProjectCard = styled.div`
   height: 50vh;
   clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
   &:hover ${StyledProjectTitle} {
-    transform: translateX(2rem);
+    transform: translateX(1.5rem);
     opacity: 1;
-  }
+  };
 `
 
 const StyledProjectImage = styled.img`
@@ -88,8 +84,9 @@ const projects = [
 ]
 
 function ProjectCard( {project }) {
-  const [shift, setShift] = useState(50)
-  const cardRef = useRef(null)
+  const [shift, setShift] = useState(50);
+  const animated = useRef(false);
+  const cardRef = useRef(null);
 
   const projectImageStyle = {
     objectPosition: `${shift}% center`
@@ -100,8 +97,25 @@ function ProjectCard( {project }) {
       return
     }
 
+    let animationId;
+    
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting) {
+          animated.current = true;
+          animationId = window.requestAnimationFrame(adjustShift);
+        }
+        else {
+          animated.current = false;
+          window.cancelAnimationFrame(animationId);
+        }
+      })
+    })
+
+    observer.observe(cardRef.current);
+
     const adjustShift = () => {
-      if(cardRef.current === null) {
+      if(cardRef.current === null || animated.current === false) {
         return
       };
 
@@ -115,10 +129,8 @@ function ProjectCard( {project }) {
       window.requestAnimationFrame(adjustShift);
     }
 
-    const projectImageAnimation = window.requestAnimationFrame(adjustShift);
-
     return (() => {
-      window.cancelAnimationFrame(projectImageAnimation);
+      window.cancelAnimationFrame(animationId);
     })
   }, []);
 

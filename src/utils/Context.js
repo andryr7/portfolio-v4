@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect, useRef } from "react";
+import { useScrollProgress } from "./useScrollProgress";
 
 export const PortfolioContext = createContext();
 
@@ -6,8 +7,10 @@ export const PortfolioProvider = (({children}) => {
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [contactMenuIsOpened, setContactMenuIsOpened] = useState(false);
   const [backgroundShift, setBackgroundShift] = useState(0);
+  const heroSectionRef = useRef(null);
   const aboutSectionRef = useRef(null);
   const workSectionRef = useRef(null);
+  // const heroSectionProgress = useScrollProgress(heroSectionRef);
 
   //Checking navigator language and saving theme and language preferences
   // useEffect(()=>{
@@ -24,6 +27,7 @@ export const PortfolioProvider = (({children}) => {
       setContactMenuIsOpened,
       backgroundShift,
       setBackgroundShift,
+      heroSectionRef,
       aboutSectionRef,
       workSectionRef
     }}>

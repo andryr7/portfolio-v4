@@ -12,7 +12,7 @@ const StyledFrame = styled.div`
   width: calc(100% - 2rem);
   z-index: 9;
   overflow: hidden;
-  border: 2px outset ${props => props.theme.main};
+  border: 2px solid ${props => props.theme.main};
   box-sizing: border-box;
   top: 0;
   color: ${props => props.theme.main};

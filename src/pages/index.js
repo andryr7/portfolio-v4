@@ -29,7 +29,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <StyledAppContainer>
-        <GradientBackground />
+        {/* <GradientBackground /> */}
         <StyledMain className={`${playfairDisplay.className}`}>
           <Hero />
           <About />
