@@ -65,23 +65,26 @@ const StyledButtonContainer = styled.div`
 `
 
 export default function Frame() {
-  const { contactMenuIsOpened, aboutSectionRef, workSectionRef } = useContext(PortfolioContext);
+  const { setContactMenuIsOpened, aboutSectionRef, workSectionRef } = useContext(PortfolioContext);
 
   const handleAboutLinkClick = () => {
     aboutSectionRef.current.scrollIntoView();
+    setContactMenuIsOpened(false);
   };
   
   const handleWorkLinkClick = () => {
     workSectionRef.current.scrollIntoView();
+    setContactMenuIsOpened(false);
   };
 
   const handleHomeLinkClick = () => {
     window.scrollTo(0,0);
+    setContactMenuIsOpened(false);
   };
   
   return (
     <>
-      <StyledFrame className={`${playfairDisplay.className} ${contactMenuIsOpened && 'reduced'}`}>
+      <StyledFrame className={`${playfairDisplay.className}`}>
         <StyledHeader>
           <StyledLogo onClick={handleHomeLinkClick}>
             AR
@@ -103,8 +106,8 @@ export default function Frame() {
             <ContactCTA />
           </StyledButtonContainer>
         </StyledFooter>
+        <ContactMenu />
       </StyledFrame>
-      <ContactMenu />
     </>
   )
 }

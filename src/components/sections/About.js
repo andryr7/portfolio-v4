@@ -70,7 +70,7 @@ const StyledBottomContainer = styled.div`
   gap: 2.5rem;
   padding: 10vh 0;
   width: 100%;
-  border-top: 1px solid ${props => props.theme.main};
+  border-top: 1px dashed ${props => props.theme.main};
 `
 
 const StyledItemCaption = styled.span`
