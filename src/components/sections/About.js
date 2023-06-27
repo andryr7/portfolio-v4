@@ -1,7 +1,9 @@
-import { styled } from "styled-components"
+import { keyframes, styled } from "styled-components"
 import myPicture from '../../assets/mypicture.jpg'
-import { useContext, useEffect, useRef } from "react";
-import { PortfolioContext } from "@/utils/Context";
+import { useContext, useEffect, useRef } from "react"
+import { PortfolioContext } from "@/utils/Context"
+import { Splide, SplideSlide } from '@splidejs/react-splide'
+import '@splidejs/react-splide/css'
 
 const StyledAboutSection = styled.section`
   width: 100%;
@@ -83,25 +85,38 @@ const StyledItemContainer = styled.ul`
 `
 
 const StyledHexContent = styled.li`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: ${props => props.theme.background};
   width: 248px;
   height: 273px;
   -webkit-clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); 
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-  display: flex;
+  position: relative;
+`
+
+const StyledHexTitle = styled.h4`
+`
+
+const StyledSlidercontainer = styled.div`
+  position: absolute;
+  display: none;
+  width: 100%;
+  height: 100%;
   justify-content: center;
   align-items: center;
 `
 
 const StyledHexContainer = styled.article`
-  background-color: ${props => props.theme.main};
   width: 250px;
   height: 275px;
-  -webkit-clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); 
-  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: ${props => props.theme.main};
+  -webkit-clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); 
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
   transition: all 0.5s;
   &:hover {
     background-color: ${props => props.theme.orange};
@@ -109,11 +124,56 @@ const StyledHexContainer = styled.article`
       width: 244px;
       height: 267px;
     }
+    & ${StyledHexTitle} {
+      opacity: 0;
+    }
+    & ${StyledSlidercontainer} {
+      display: flex;
+    }
   }
+`
+
+const StyledSkillItem = styled.article`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
 export default function About() {
   const { aboutSectionRef, setBackgroundShift } = useContext(PortfolioContext);
+
+  const fakeItems = [
+    {
+      id: 0,
+      name: 'congolexicomatisation'
+    },
+    {
+      id: 1,
+      name: 'des'
+    },
+    {
+      id: 2,
+      name: 'lois'
+    },
+    {
+      id: 2,
+      name: 'du'
+    },
+    {
+      id: 3,
+      name: 'marché'
+    },
+    {
+      id: 4,
+      name: 'propre'
+    },
+    {
+      id: 5,
+      name: 'congolais'
+    },
+  ]
 
   useEffect(() => {
     const handleScroll = () => {
@@ -122,7 +182,7 @@ export default function About() {
       const max = window.innerHeight * 1;
       const ratio = - (sectionRectTop - min) / max;
       const clampedRatio = Math.min(ratio, 1);
-      setBackgroundShift(clampedRatio)
+      setBackgroundShift(clampedRatio);
     }
 
     document.addEventListener('scroll', handleScroll);
@@ -149,17 +209,89 @@ export default function About() {
         <StyledItemContainer>
           <StyledHexContainer>
             <StyledHexContent>
-              Développement frontend
+              <StyledHexTitle>
+                Développement frontend
+              </StyledHexTitle>
+              <StyledSlidercontainer>
+                <Splide
+                  aria-label="Frontend skills carousel"
+                  options={{
+                    type: 'fade',
+                    rewind: true,
+                    autoplay: true,
+                    pauseOnHover : false,
+                    interval: 1000,
+                    pagination: false,
+                    arrows: false,
+                  }}
+                >
+                  {fakeItems.map(item => (
+                    <SplideSlide key={item.id}>
+                      <StyledSkillItem>
+                        {item.name}
+                      </StyledSkillItem>
+                    </SplideSlide>
+                  ))}
+                </Splide>
+              </StyledSlidercontainer>
             </StyledHexContent>
           </StyledHexContainer>
           <StyledHexContainer>
             <StyledHexContent>
-              Développement backend
+              <StyledHexTitle>
+                Développement backend
+              </StyledHexTitle>
+              <StyledSlidercontainer>
+                <Splide
+                  aria-label="Backend skills carousel"
+                  options={{
+                    type: 'fade',
+                    rewind: true,
+                    autoplay: true,
+                    pauseOnHover : false,
+                    interval: 1000,
+                    pagination: false,
+                    arrows: false,
+                  }}
+                >
+                  {fakeItems.map(item => (
+                    <SplideSlide key={item.id}>
+                      <StyledSkillItem>
+                        {item.name}
+                      </StyledSkillItem>
+                    </SplideSlide>
+                  ))}
+                </Splide>
+              </StyledSlidercontainer>
             </StyledHexContent>
           </StyledHexContainer>
           <StyledHexContainer>
             <StyledHexContent>
-              Gestion de projet
+              <StyledHexTitle>
+                Gestion de projet
+              </StyledHexTitle>
+              <StyledSlidercontainer>
+                <Splide
+                  aria-label="Project management skills carousel"
+                  options={{
+                    type: 'fade',
+                    rewind: true,
+                    autoplay: true,
+                    pauseOnHover : false,
+                    interval: 1000,
+                    pagination: false,
+                    arrows: false,
+                  }}
+                >
+                  {fakeItems.map(item => (
+                    <SplideSlide key={item.id}>
+                      <StyledSkillItem>
+                        {item.name}
+                      </StyledSkillItem>
+                    </SplideSlide>
+                  ))}
+                </Splide>
+              </StyledSlidercontainer>
             </StyledHexContent>
           </StyledHexContainer>
         </StyledItemContainer>

@@ -20,6 +20,7 @@ const StyledWorkSection = styled.section`
 
 const StyledCarouselContainer = styled.div`
   width: 100%;
+  cursor: grab;
 `
 
 const StyledProjectTitle = styled.div`
@@ -175,14 +176,15 @@ export default function Work() {
   return (
     <StyledWorkSection ref={workSectionRef}>
       <StyledCarouselContainer>
-        <Splide 
-          aria-label="Carousel de mes projets" 
+        <Splide
+          aria-label="Projects carousel" 
           hasTrack={ false }
           options={ {
             drag: 'free',
             arrows: false,
             pagination: false,
             perPage: 5,
+            // lazyLoad: false,
             breakpoints: {
               2160: {
                 perPage: 3

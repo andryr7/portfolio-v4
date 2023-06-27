@@ -62,7 +62,7 @@ const StyledCloseButton = styled.div`
   transform: rotate(45deg) scale(0.75);
   transition: all 0.5s;
   &.hidden {
-    opacity: 0;
+    transform: rotate(45deg) scale(0);
   }
   &::after {
     content: '';
