@@ -10,7 +10,36 @@ export const PortfolioProvider = (({children}) => {
   const heroSectionRef = useRef(null);
   const aboutSectionRef = useRef(null);
   const workSectionRef = useRef(null);
-  // const heroSectionProgress = useScrollProgress(heroSectionRef);
+  const [currentSection, setCurrentSection] = useState('hero');
+  
+  useEffect(() => {
+    if(heroSectionRef.current === 'null' || aboutSectionRef.current === 'null' || workSectionRef.current === 'null') {
+      return
+    };
+
+    const getCurrentSection = () =>  {
+      const aboutSectionTop = aboutSectionRef.current.getBoundingClientRect().top;
+      const workSectionTop = workSectionRef.current.getBoundingClientRect().top;
+
+      if (aboutSectionTop > (window.innerHeight / 2)) {
+        setCurrentSection('hero');
+      }
+      else {
+        if(Math.abs(aboutSectionTop) < Math.abs(workSectionTop)) {
+          setCurrentSection('about');
+        }
+        else {
+          setCurrentSection('work')
+        }
+      }
+    }
+
+    document.addEventListener('scroll', getCurrentSection);
+
+    return (() => {
+      document.removeEventListener('scroll', getCurrentSection);
+    })
+  },[])
 
   //Checking navigator language and saving theme and language preferences
   // useEffect(()=>{
@@ -29,7 +58,8 @@ export const PortfolioProvider = (({children}) => {
       setBackgroundShift,
       heroSectionRef,
       aboutSectionRef,
-      workSectionRef
+      workSectionRef,
+      currentSection
     }}>
       {children}
     </PortfolioContext.Provider>

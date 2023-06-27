@@ -142,7 +142,8 @@ const StyledSkillItem = styled.article`
 `
 
 export default function About() {
-  const { aboutSectionRef, setBackgroundShift } = useContext(PortfolioContext);
+  const { aboutSectionRef, setBackgroundShift, backgroundShift } = useContext(PortfolioContext);
+  // console.log(backgroundShift)
 
   const fakeItems = [
     {
@@ -158,19 +159,19 @@ export default function About() {
       name: 'lois'
     },
     {
-      id: 2,
+      id: 3,
       name: 'du'
     },
     {
-      id: 3,
+      id: 4,
       name: 'marché'
     },
     {
-      id: 4,
+      id: 5,
       name: 'propre'
     },
     {
-      id: 5,
+      id: 6,
       name: 'congolais'
     },
   ]

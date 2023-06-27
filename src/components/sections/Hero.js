@@ -75,12 +75,12 @@ export default function Hero() {
     background:`
       radial-gradient(circle at -10% 75%, 
         ${theme.background} 0%, 
-        ${theme.background} ${30 + (backgroundShift * 75)}%, 
-        ${theme.red} ${45 + (backgroundShift * 75)}%, 
-        ${theme.orange} ${50 + (backgroundShift * 75)}%, 
-        ${theme.main} ${55 + (backgroundShift * 75)}%, 
-        ${theme.blue} ${65 + (backgroundShift * 75)}%, 
-        ${theme.background} ${95 + (backgroundShift * 75)}%, 
+        ${theme.background} ${30 + (backgroundShift * 80)}%, 
+        ${theme.red} ${45 + (backgroundShift * 65)}%, 
+        ${theme.orange} ${50 + (backgroundShift * 60)}%, 
+        ${theme.main} ${55 + (backgroundShift * 55)}%, 
+        ${theme.blue} ${65 + (backgroundShift * 45)}%, 
+        ${theme.background} ${95 + (backgroundShift * 15)}%, 
         ${theme.background} 
         100%)
     `,

@@ -5,7 +5,6 @@ import Frame from '@/components/Frame'
 import Hero from '@/components/sections/Hero'
 import About from '@/components/sections/About'
 import Work from '@/components/sections/Work'
-import GradientBackground from '@/components/GradientBackground'
 import GrainFilter from '@/components/GrainFilter'
 
 const StyledAppContainer = styled.div`
@@ -29,7 +28,6 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <StyledAppContainer>
-        {/* <GradientBackground /> */}
         <StyledMain className={`${playfairDisplay.className}`}>
           <Hero />
           <About />

@@ -53,6 +53,10 @@ const StyledNavLinkList = styled.ul`
 
 const StyledNavLink = styled.li`
   cursor: pointer;
+  transition: all 0.5s;
+  &.current {
+    color: ${props => props.theme.orange};
+  }
 `
 
 const StyledFooter = styled.footer`
@@ -65,7 +69,7 @@ const StyledButtonContainer = styled.div`
 `
 
 export default function Frame() {
-  const { setContactMenuIsOpened, aboutSectionRef, workSectionRef } = useContext(PortfolioContext);
+  const { setContactMenuIsOpened, aboutSectionRef, workSectionRef, currentSection } = useContext(PortfolioContext);
 
   const handleAboutLinkClick = () => {
     aboutSectionRef.current.scrollIntoView();
@@ -91,10 +95,10 @@ export default function Frame() {
           </StyledLogo>
           <StyledNav>
             <StyledNavLinkList>
-              <StyledNavLink onClick={handleAboutLinkClick}>
+              <StyledNavLink onClick={handleAboutLinkClick} className={currentSection === 'about' && 'current'}>
                 about
               </StyledNavLink>
-              <StyledNavLink onClick={handleWorkLinkClick}>
+              <StyledNavLink onClick={handleWorkLinkClick} className={currentSection === 'work' && 'current'}>
                 work
               </StyledNavLink>
             </StyledNavLinkList>
