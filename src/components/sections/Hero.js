@@ -3,6 +3,8 @@ import { useContext } from "react"
 import { PortfolioContext } from "@/utils/Context"
 import { playfairDisplaySC } from "@/styles/fonts"
 
+import { Lenis as ReactLenis, useLenis } from '@studio-freight/react-lenis'
+
 const StyledHeroSection = styled.section`
   height: 100vh;
   width: calc(100% - 2vw - 4px);
@@ -66,12 +68,12 @@ const StyledHeroContainer = styled.header`
 
 
 const StyledFirstWord = styled.h3`
-  transition: transform 0.5s;
+  transition: transform 0.25s;
 `
 
 const StyledSecondWord = styled.h3`
   position: absolute;
-  transition: transform 0.5s;
+  transition: transform 0.25s;
 `
 
 const StyledHeaderPart = styled.div`

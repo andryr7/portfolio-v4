@@ -4,6 +4,7 @@ import { useContext, useEffect, useRef } from "react"
 import { PortfolioContext } from "@/utils/Context"
 import { Splide, SplideSlide } from '@splidejs/react-splide'
 import '@splidejs/react-splide/css'
+import { useLenis } from '@studio-freight/react-lenis'
 
 const StyledAboutSection = styled.section`
   width: 100%;
@@ -201,7 +202,7 @@ export default function About() {
     },
   ]
 
-  useEffect(() => {
+  const lenis = useLenis(({scroll}) => {
     const handleScroll = () => {
       const sectionRectTop = aboutSectionRef.current.getBoundingClientRect().top;
       const min = window.innerHeight;
@@ -210,13 +211,25 @@ export default function About() {
       const clampedRatio = Math.min(ratio, 1);
       setBackgroundShift(clampedRatio);
     }
-
-    document.addEventListener('scroll', handleScroll);
-
-    return (() => {
-      document.removeEventListener('scroll', handleScroll)
-    })
+    handleScroll();
   })
+
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     const sectionRectTop = aboutSectionRef.current.getBoundingClientRect().top;
+  //     const min = window.innerHeight;
+  //     const max = window.innerHeight * 1;
+  //     const ratio = - (sectionRectTop - min) / max;
+  //     const clampedRatio = Math.min(ratio, 1);
+  //     setBackgroundShift(clampedRatio);
+  //   }
+
+  //   document.addEventListener('scroll', handleScroll);
+
+  //   return (() => {
+  //     document.removeEventListener('scroll', handleScroll)
+  //   })
+  // })
 
   return (
     <StyledAboutSection ref={aboutSectionRef}>

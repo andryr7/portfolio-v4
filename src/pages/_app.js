@@ -4,6 +4,9 @@ import { ThemeProvider } from 'styled-components'
 import { lightTheme, darkTheme } from '@/styles/themes'
 import '@/styles/reset.css'
 import '@/styles/globals.css'
+//TODO if not a react component Next.js error import React from "react"
+
+import { Lenis as ReactLenis, useLenis } from '@studio-freight/react-lenis'
 
 export default function App({ Component, pageProps }) {
   return (
@@ -18,10 +21,19 @@ export default function App({ Component, pageProps }) {
 function AppWithPortfolioContext({ children }) {
   const { isDarkMode } = useContext(PortfolioContext);
   const usedTheme = isDarkMode ? darkTheme : lightTheme;
+  const lenis = useLenis(({scroll}) => {
+    // called every scroll
+  })
+
+  const options = {
+    lerp: 0.75
+  }
 
   return (
     <ThemeProvider theme={usedTheme}>
-      {children}
+      <ReactLenis root options={{ ...options }}>
+        {children}
+      </ReactLenis>
     </ThemeProvider>
   )
 }

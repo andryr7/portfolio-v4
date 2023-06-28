@@ -19,7 +19,7 @@ export default function GrainFilter({
   }
 
   useEffect(() => {
-    if (canvasRef === null) {
+    if (!canvasRef) {
       return
     };
 
