@@ -64,16 +64,35 @@ const StyledHeroContainer = styled.header`
   };
 `
 
+
+const StyledFirstWord = styled.h3`
+  transition: transform 0.5s;
+`
+
+const StyledSecondWord = styled.h3`
+  position: absolute;
+  transition: transform 0.5s;
+`
+
 const StyledHeaderPart = styled.div`
   position: relative;
-  & h3 {
-    margin-right: -3vw;
-    font-size: 10vw;
+  margin-right: -3vw;
+  font-size: 10vw;
+  letter-spacing: 3vw;
+  overflow: hidden;
+  @media (max-width: 768px) {
+    font-size: 20vw;
     letter-spacing: 3vw;
-    @media (max-width: 768px) {
-      font-size: 20vw;
-      letter-spacing: 3vw;
-    };
+  }
+  &.interactive:hover {
+  @media (min-width: 768px) {
+    ${StyledFirstWord} {
+      transform: translateY(-100%);
+    }
+    ${StyledSecondWord} {
+      transform: translateY(-100%);
+    }
+  };
   }
 `
 
@@ -81,7 +100,7 @@ const StyledCaptions = styled.div`
   display: flex;
   flex-direction: column;
   font-size: clamp(1rem, 1.5vw, 2rem);
-  line-height: clamp(1.5rem, 1.5vw, 3rem);
+  line-height: clamp(1.5rem, 2vw, 3rem);
   letter-spacing: 0.5vw;
   position: absolute;
   top: 100%;
@@ -97,7 +116,7 @@ const StyledCaptions = styled.div`
 `
 
 export default function Hero() {
-  const { heroSectionRef, isDarkMode, backgroundShift } = useContext(PortfolioContext);
+  const { heroSectionRef, backgroundShift } = useContext(PortfolioContext);
 
   const firstCircleStyle = {
     transform: `translate(${-50 + backgroundShift * 50}%, -50%)`
@@ -117,8 +136,9 @@ export default function Hero() {
         <StyledHeaderPart>
           <h3>Hello</h3>
         </StyledHeaderPart>
-        <StyledHeaderPart>
-          <h3 className='interactive'>World</h3>
+        <StyledHeaderPart className="interactive">
+          <StyledFirstWord>World</StyledFirstWord>
+          <StyledSecondWord>There</StyledSecondWord>
         </StyledHeaderPart>
         <StyledCaptions>
           <span>Je m&apos;appelle Andry</span>
