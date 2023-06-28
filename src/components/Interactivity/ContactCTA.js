@@ -24,7 +24,9 @@ const StyledCTAContainer = styled.div`
   height: clamp(100px, 11vw, 250px);
   transition: all 0.25s ;
   &:hover {
-    padding: 1rem;
+    @media (min-width: 768px) {
+      padding: 1rem;
+    };
   }
   &::before {
     transition: all 0.25s ;
@@ -40,10 +42,12 @@ const StyledCTAContainer = styled.div`
     z-index: -1;
   }
   &:hover::before {
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
+    @media (min-width: 768px) {
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+    };
   }
 `
 

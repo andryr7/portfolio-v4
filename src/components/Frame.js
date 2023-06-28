@@ -18,7 +18,6 @@ const StyledFrame = styled.div`
   margin: 1vw;
   padding: max(1vw, 1rem);
   pointer-events: none;
-  transition: all 0.5s;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

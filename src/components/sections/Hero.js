@@ -78,10 +78,9 @@ const StyledHeaderPart = styled.div`
 `
 
 const StyledCaptions = styled.div`
-pointer-events: all;
   display: flex;
   flex-direction: column;
-  font-size: clamp(1rem, 1vw, 2rem);
+  font-size: clamp(1rem, 1.5vw, 2rem);
   line-height: clamp(1.5rem, 1.5vw, 3rem);
   letter-spacing: 0.5vw;
   position: absolute;
@@ -89,7 +88,7 @@ pointer-events: all;
   left: clamp(3rem, 3vw, 5rem);
   width: 50%;
   @media (max-width: 768px) {
-    margin-top: 1rem;
+    margin-top: 0.5rem;
     position: static;
     flex-direction: column;
     align-items: center;

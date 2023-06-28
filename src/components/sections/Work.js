@@ -11,7 +11,7 @@ import '@splidejs/react-splide/css';
 import { PortfolioContext } from "@/utils/Context"
 
 const StyledWorkSection = styled.section`
-  height: 100dvh;
+  height: 100lvh;
   display: flex;
   align-items: center;
   border-top: 1px solid ${props => props.theme.main};

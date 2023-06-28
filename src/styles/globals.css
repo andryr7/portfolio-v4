@@ -3,12 +3,13 @@ html {
   scroll-behavior: smooth;
   scrollbar-width: thin;
   scrollbar-color: #F2E8E6 #191718 ;
+  scrollbar-gutter: stable;
   /* overflow-x: hidden; */
 }
 /* ::-webkit-scrollbar {
   width: 0px;
 } */
 
-html, body {
-  overflow: auto;
-}
+/* html, body {
+  overflow: hidden;
+} */

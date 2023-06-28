@@ -1,5 +1,5 @@
 import { PortfolioContext } from "@/utils/Context"
-import { useContext, useRef, useState } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
 import { styled } from "styled-components"
 import { playfairDisplay } from "@/styles/fonts"
 
@@ -13,10 +13,11 @@ import githublightlogo from '../assets/contact/githublight.png'
 import ReCAPTCHA from "react-google-recaptcha"
 import emailjs from '@emailjs/browser'
 import { emailJSSettings } from '../../emailjs'
+import { useDisableBodyScroll } from "@/utils/useDisableBodyScroll"
 
 const StyledContactMenu = styled.div`
   width: 100%;
-  height: 100%;
+  height: 100vh;
   position: absolute;
   display: flex;
   top:0;
@@ -25,13 +26,18 @@ const StyledContactMenu = styled.div`
   align-items: center;
   z-index: -1;
   pointer-events: all;
-  backdrop-filter: blur(100px);
   pointer-events: none;
   opacity: 0;
   transition: all 0.5s;
   &.opened {
     opacity: 1;
     pointer-events: all;
+  };
+  backdrop-filter: blur(100px);
+  -webkit-backdrop-filter: blur(100px);
+  @media (max-width: 768px) {
+    background-color: ${props => props.theme.background};
+    transition: none;
   };
 `
 
@@ -53,12 +59,12 @@ const StyledContactContainer = styled.div`
 
 const StyledContactLinksContainer = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 `
 
 const StyledContactLink = styled.a`
-  max-width: 30vw;
+  width: 30%;
 `
 
 const StyledContactLogo = styled.img`
@@ -66,7 +72,7 @@ const StyledContactLogo = styled.img`
   transition: all 0.5s;
   filter: drop-shadow(0px 0px ${props => props.theme.orange});
   &:hover {
-    filter: drop-shadow(-5px -5px ${props => props.theme.orange});
+    filter: drop-shadow(5px 5px ${props => props.theme.orange});
   };
 `
 
@@ -118,16 +124,21 @@ const StyledTextArea = styled.textarea`
     outline: none !important;
     border-color: ${props => props.theme.orange};
   }
+  @media (max-width: 768px) {
+    height: 5rem;
+  };
 `
 
 const StyledFormActionsContainer = styled.div`
   display: flex;
   justify-content: space-between;
   max-height: 0px;
-  overflow: hidden;
   transition: all 0.5s;
+  flex-wrap: wrap;
+  overflow: hidden;
   &.displayed {
     max-height: 150px;
+    overflow: unset;
   }
 `
 
@@ -155,6 +166,9 @@ export default function ContactMenu() {
   const { isDarkMode } = useContext(PortfolioContext);
   const recaptchaRef = useRef(null);
   const formIsValid = formName && /\S+@\S+\.\S+/.test(formEmail) && formMessage;
+
+  // Disabling body scroll when the contact menu is opened
+  useDisableBodyScroll(contactMenuIsOpened);
   
   const getTemplateParams = () => {
     return {

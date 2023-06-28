@@ -4,8 +4,8 @@ import { styled } from "styled-components"
 import { useTheme } from "styled-components"
 
 const StyledThemeButton = styled.button`
-  width: 50px;
-  height: 50px;
+  width: clamp(2.5rem, 3.5vw, 5rem);
+  aspect-ratio: 1;
   border: none;
   border-radius: 50%;
   background: none;
@@ -20,8 +20,8 @@ const StyledSvg = styled.svg`
   position: absolute;
   top: 0;
   left: 0;
-  width: 50px;
-  height: 50px;
+  width: 100%;
+  height: 100%;
   &.hidden {
     opacity: 0;
     transform: translateY(150px);
