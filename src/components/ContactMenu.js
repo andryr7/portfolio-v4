@@ -18,7 +18,7 @@ const StyledContactMenu = styled.div`
   width: 100%;
   height: 100%;
   position: absolute;
-  display: none;
+  display: flex;
   top:0;
   left: 0;
   justify-content: center;
@@ -26,8 +26,12 @@ const StyledContactMenu = styled.div`
   z-index: -1;
   pointer-events: all;
   backdrop-filter: blur(100px);
+  pointer-events: none;
+  opacity: 0;
+  transition: all 0.5s;
   &.opened {
-    display: flex;
+    opacity: 1;
+    pointer-events: all;
   };
 `
 
@@ -43,7 +47,7 @@ const StyledContactContainer = styled.div`
   flex-direction: column;
   gap: 2rem;
   width: 100%;
-  max-width: 600px;
+  max-width: min(600px, 90vw);
   position: relative;
 `
 
@@ -54,7 +58,7 @@ const StyledContactLinksContainer = styled.div`
 `
 
 const StyledContactLink = styled.a`
-  max-width: 150px;
+  max-width: 30vw;
 `
 
 const StyledContactLogo = styled.img`
@@ -62,7 +66,7 @@ const StyledContactLogo = styled.img`
   transition: all 0.5s;
   filter: drop-shadow(0px 0px ${props => props.theme.orange});
   &:hover {
-    filter: drop-shadow(5px 5px ${props => props.theme.orange});
+    filter: drop-shadow(-5px -5px ${props => props.theme.orange});
   };
 `
 
@@ -99,7 +103,7 @@ const StyledInput = styled.input`
 
 const StyledTextArea = styled.textarea`
   width: 100%;
-  height: 15rem;
+  height: 10rem;
   max-width: 1500px;
   padding: 1rem;
   font-size: 1rem;
@@ -129,20 +133,25 @@ const StyledFormActionsContainer = styled.div`
 
 const StyledSendButton = styled.button`
   height: 100%;
-  background-color: ${props => props.theme.orange};
+  background-color: ${props => props.theme.main};
   padding: 1rem 2rem;
   box-sizing: border-box;
   color: ${props => props.theme.background};
   font-size: 2rem;
   border: 1px solid ${props => props.theme.main};
   cursor: pointer;
+  transition: all 0.52s;
+  &:hover {
+    background-color: ${props => props.theme.orange};
+    border-color: ${props => props.theme.background};
+  };
 `
 
 export default function ContactMenu() {
   const { contactMenuIsOpened } = useContext(PortfolioContext);
-  const [formName, setFormName] = useState(undefined);
-  const [formEmail, setFormEmail] = useState(undefined);
-  const [formMessage, setFormMessage] = useState(undefined);
+  const [formName, setFormName] = useState('');
+  const [formEmail, setFormEmail] = useState('');
+  const [formMessage, setFormMessage] = useState('');
   const { isDarkMode } = useContext(PortfolioContext);
   const recaptchaRef = useRef(null);
   const formIsValid = formName && /\S+@\S+\.\S+/.test(formEmail) && formMessage;

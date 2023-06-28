@@ -15,13 +15,17 @@ const StyledCTAContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
+  box-sizing: border-box;
   pointer-events: all;
   isolation: isolate;
   cursor: pointer;
   position: relative;
-  width: 175px;
-  height: 175px;
+  width: clamp(100px, 11vw, 250px);
+  height: clamp(100px, 11vw, 250px);
+  transition: all 0.25s ;
+  &:hover {
+    padding: 1rem;
+  }
   &::before {
     transition: all 0.25s ;
     content: '';

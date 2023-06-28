@@ -8,50 +8,47 @@ import ContactMenu from "./ContactMenu"
 
 const StyledFrame = styled.div`
   position: fixed;
-  height: calc(100dvh - 2rem);
-  width: calc(100% - 2rem);
+  height: calc(100dvh - 2vw);
+  width: calc(100% - 2vw);
   z-index: 9;
-  overflow: hidden;
   border: 2px solid ${props => props.theme.main};
   box-sizing: border-box;
   top: 0;
   color: ${props => props.theme.main};
-  margin: 1rem;
-  padding: 1rem;
+  margin: 1vw;
+  padding: max(1vw, 1rem);
   pointer-events: none;
   transition: all 0.5s;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   outline: 10rem solid ${props => props.theme.background};
-  &.reduced {
-    height: calc(90lvh - 2rem - 4px);
-  }
+  overflow: hidden;
 `
 
-const StyledHeader = styled.header`
+const StyledHeader = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
 `
 
 const StyledLogo = styled.div`
-  font-size: 5rem;
+  font-size: clamp(2.5rem, 10vw, 5rem);
   pointer-events: all;
   cursor: pointer;
 `
 
 const StyledNav = styled.nav`
-  font-size: 2rem;
   pointer-events: all;
 `
 
 const StyledNavLinkList = styled.ul`
   display: flex;
-  gap: 2rem;
+  gap: clamp(1rem, 2vw, 3rem);
 `
 
 const StyledNavLink = styled.li`
+  font-size: clamp(1.5rem, 2vw, 2rem);
   cursor: pointer;
   transition: all 0.5s;
   &.current {

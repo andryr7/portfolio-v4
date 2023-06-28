@@ -1,4 +1,4 @@
-import { keyframes, styled } from "styled-components"
+import { styled } from "styled-components"
 import myPicture from '../../assets/mypicture.jpg'
 import { useContext, useEffect, useRef } from "react"
 import { PortfolioContext } from "@/utils/Context"
@@ -14,6 +14,7 @@ const StyledAboutSection = styled.section`
   display: flex;
   background-color: ${props => props.theme.background};
   border-top: 1px solid ${props => props.theme.main};
+  //TODO Margin for hero section
   margin-top: 100vh;
 `
 
@@ -21,14 +22,17 @@ const StyledTopContainer = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  gap: 5vw;
   padding: 10vh 0;
   width: 100%;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 20vw;
+  };
 `
 
 const StyledImageContainer = styled.div`
-  width: 450px;
-  max-width: 40lvw;
+  width: 35vw;
+  max-width: 1000px;
   border: 1px solid ${props => props.theme.main};
   position: relative;
   top: 0;
@@ -48,6 +52,9 @@ const StyledImageContainer = styled.div`
     z-index: -1;
     border: 1px solid ${props => props.theme.main};
   }
+  @media (max-width: 768px) {
+    width: 70vw;
+  };
 `;
 
 const StyledImg = styled.img`
@@ -56,10 +63,14 @@ const StyledImg = styled.img`
 `
 
 const StyledTextContainer = styled.div`
-  max-width: 40lvw;
+  width: 35vw;
+  max-width: 1000px;
   color: ${props => props.theme.main};
   text-align: justify;
-  font-size: 1.5rem;
+  font-size: clamp(1rem, 1.25vw, 2rem);
+  @media (max-width: 768px) {
+    width: 61vw;
+  };
 `
 
 const StyledBottomContainer = styled.div`
@@ -82,6 +93,9 @@ const StyledItemCaption = styled.span`
 const StyledItemContainer = styled.ul`
   display: flex;
   gap: 10vw;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  };
 `
 
 const StyledHexContent = styled.li`
@@ -89,14 +103,19 @@ const StyledHexContent = styled.li`
   justify-content: center;
   align-items: center;
   background-color: ${props => props.theme.background};
-  width: 248px;
-  height: 273px;
+  width: calc(20vw - 2px);
+  max-width: 498px;
+  aspect-ratio: .915;
   -webkit-clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); 
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
   position: relative;
+  @media (max-width: 768px) {
+    width: calc(61vw - 2px);
+  };
 `
 
 const StyledHexTitle = styled.h4`
+  font-size: clamp(1.25rem, 1.5vw, 2rem);
 `
 
 const StyledSlidercontainer = styled.div`
@@ -109,8 +128,9 @@ const StyledSlidercontainer = styled.div`
 `
 
 const StyledHexContainer = styled.article`
-  width: 250px;
-  height: 275px;
+  width: 20vw;
+  max-width: 500px;
+  aspect-ratio: .91;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -121,8 +141,10 @@ const StyledHexContainer = styled.article`
   &:hover {
     background-color: ${props => props.theme.orange};
     & ${StyledHexContent} {
-      width: 244px;
-      height: 267px;
+      width: calc(20vw - 8px);
+      @media (max-width: 768px) {
+        width: calc(61vw - 8px);
+      };
     }
     & ${StyledHexTitle} {
       opacity: 0;
@@ -131,6 +153,9 @@ const StyledHexContainer = styled.article`
       display: flex;
     }
   }
+  @media (max-width: 768px) {
+    width: 61vw;
+  };
 `
 
 const StyledSkillItem = styled.article`
@@ -139,11 +164,11 @@ const StyledSkillItem = styled.article`
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: clamp(1rem, 1.5vw, 1.5rem);
 `
 
 export default function About() {
   const { aboutSectionRef, setBackgroundShift, backgroundShift } = useContext(PortfolioContext);
-  // console.log(backgroundShift)
 
   const fakeItems = [
     {

@@ -30,6 +30,7 @@ const StyledProjectTitle = styled.div`
   transition: all 0.5s;
   font-size: 2rem;
   opacity: 0;
+  text-shadow: ${props => props.theme.background} 2px 2px;
 `
 
 const StyledProjectCard = styled.div`
@@ -49,10 +50,10 @@ const StyledProjectImage = styled.img`
   position: absolute;
   top: 0;
   object-fit: cover;
-  filter: sepia(1);
+  filter: saturate(0.25);
   transition: filter 1s;
   &:hover {
-    filter: sepia(0);
+    filter: saturate(1);
   }
 `
 
@@ -184,7 +185,8 @@ export default function Work() {
             arrows: false,
             pagination: false,
             perPage: 5,
-            // lazyLoad: false,
+            lazyLoad: false,
+            snap: true,
             breakpoints: {
               2160: {
                 perPage: 3
