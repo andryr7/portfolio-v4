@@ -5,6 +5,7 @@ import styled from "styled-components"
 import ThemeButton from "./interactivity/ThemeButton"
 import ContactCTA from "./interactivity/ContactCTA"
 import ContactMenu from "./ContactMenu"
+import { useLenis } from "@studio-freight/react-lenis"
 
 const StyledFrame = styled.div`
   position: fixed;
@@ -32,7 +33,7 @@ const StyledHeader = styled.div`
 `
 
 const StyledLogo = styled.div`
-  font-size: clamp(2.5rem, 10vw, 5rem);
+  font-size: clamp(2rem, 10vw, 5rem);
   pointer-events: all;
   cursor: pointer;
 `
@@ -47,7 +48,7 @@ const StyledNavLinkList = styled.ul`
 `
 
 const StyledNavLink = styled.li`
-  font-size: clamp(1.5rem, 2vw, 2rem);
+  font-size: clamp(1rem, 2vw, 2rem);
   cursor: pointer;
   transition: all 0.5s;
   &.current {
@@ -65,21 +66,31 @@ const StyledButtonContainer = styled.div`
 `
 
 export default function Frame() {
-  const { setContactMenuIsOpened, aboutSectionRef, workSectionRef, currentSection } = useContext(PortfolioContext);
+  const { contactMenuIsOpened, setContactMenuIsOpened, aboutSectionRef, workSectionRef, currentSection } = useContext(PortfolioContext);
+  const lenis = useLenis();
 
   const handleAboutLinkClick = () => {
-    aboutSectionRef.current.scrollIntoView();
-    setContactMenuIsOpened(false);
+    if(contactMenuIsOpened) {
+      lenis.start();
+      setContactMenuIsOpened(false);
+    }
+    lenis.scrollTo(aboutSectionRef.current);
   };
-  
+
   const handleWorkLinkClick = () => {
-    workSectionRef.current.scrollIntoView();
-    setContactMenuIsOpened(false);
+    if(contactMenuIsOpened) {
+      lenis.start();
+      setContactMenuIsOpened(false);
+    }
+    lenis.scrollTo(workSectionRef.current);
   };
 
   const handleHomeLinkClick = () => {
-    window.scrollTo(0,0);
-    setContactMenuIsOpened(false);
+    if(contactMenuIsOpened) {
+      lenis.start();
+      setContactMenuIsOpened(false);
+    }
+    lenis.scrollTo(0);
   };
   
   return (

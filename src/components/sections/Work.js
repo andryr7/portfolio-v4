@@ -187,6 +187,7 @@ export default function Work() {
             perPage: 5,
             lazyLoad: false,
             snap: true,
+            // focus: 'center',
             breakpoints: {
               2160: {
                 perPage: 3

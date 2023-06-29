@@ -13,7 +13,9 @@ import githublightlogo from '../assets/contact/githublight.png'
 import ReCAPTCHA from "react-google-recaptcha"
 import emailjs from '@emailjs/browser'
 import { emailJSSettings } from '../../emailjs'
-import { useDisableBodyScroll } from "@/utils/useDisableBodyScroll"
+// import { useDisableBodyScroll } from "@/utils/useDisableBodyScroll"
+
+import { Lenis as ReactLenis, useLenis } from '@studio-freight/react-lenis'
 
 const StyledContactMenu = styled.div`
   width: 100%;
@@ -166,9 +168,6 @@ export default function ContactMenu() {
   const { isDarkMode } = useContext(PortfolioContext);
   const recaptchaRef = useRef(null);
   const formIsValid = formName && /\S+@\S+\.\S+/.test(formEmail) && formMessage;
-
-  // Disabling body scroll when the contact menu is opened
-  useDisableBodyScroll(contactMenuIsOpened);
   
   const getTemplateParams = () => {
     return {

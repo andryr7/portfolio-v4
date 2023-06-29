@@ -1,6 +1,7 @@
-import { PortfolioContext } from "@/utils/Context";
-import { useContext } from "react";
-import { styled, keyframes, useTheme } from "styled-components"
+import { PortfolioContext } from "@/utils/Context"
+import { useContext, useEffect } from "react"
+import { styled, keyframes } from "styled-components"
+import { useLenis } from "@studio-freight/react-lenis";
 
 const rotate = keyframes`
   from {
@@ -20,8 +21,8 @@ const StyledCTAContainer = styled.div`
   isolation: isolate;
   cursor: pointer;
   position: relative;
-  width: clamp(100px, 11vw, 250px);
-  height: clamp(100px, 11vw, 250px);
+  width: clamp(75px, 11vw, 250px);
+  height: clamp(75px, 11vw, 250px);
   transition: all 0.25s ;
   &:hover {
     @media (min-width: 768px) {
@@ -88,12 +89,31 @@ const StyledPath = styled.path`
 
 export default function ContactCTA() {
   const { contactMenuIsOpened, setContactMenuIsOpened } = useContext(PortfolioContext);
-  const theme = useTheme();
-  const textColor = theme.main;
+  const lenis = useLenis();
 
   const handleClick = () => {
-    setContactMenuIsOpened(current => !current)
+    if(contactMenuIsOpened) {
+      lenis.start();
+    }
+    else {
+      lenis.stop();
+    }
+    setContactMenuIsOpened(current => !current);
   }
+
+  const handleKeyPress = (e) => {
+    if(e.key === 'Escape' && contactMenuIsOpened) {
+      lenis.start();
+      setContactMenuIsOpened(false);
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyPress);
+    return (() => {
+      document.removeEventListener('keydown', handleKeyPress)
+    })
+  },[])
 
   return (
     <StyledCTAContainer onClick={handleClick}>

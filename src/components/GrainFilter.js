@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 
 export default function GrainFilter({
-  opacity = 0.075,
+  opacity = 0.05,
   frameInterval = 3,
   grainFinesse = 0.1,
   greyMode = true,

@@ -26,7 +26,7 @@ function AppWithPortfolioContext({ children }) {
   })
 
   const options = {
-    lerp: 0.75
+    lerp: 0.1,
   }
 
   return (

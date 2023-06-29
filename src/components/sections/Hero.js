@@ -1,9 +1,7 @@
-import { styled, keyframes, useTheme } from "styled-components"
+import { styled } from "styled-components"
 import { useContext } from "react"
 import { PortfolioContext } from "@/utils/Context"
 import { playfairDisplaySC } from "@/styles/fonts"
-
-import { Lenis as ReactLenis, useLenis } from '@studio-freight/react-lenis'
 
 const StyledHeroSection = styled.section`
   height: 100vh;
@@ -86,15 +84,24 @@ const StyledHeaderPart = styled.div`
     font-size: 20vw;
     letter-spacing: 3vw;
   }
+  &.interactive::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    background-color: ${props => props.theme.background};
+    z-index: -1;
+    bottom: 0;
+  }
   &.interactive:hover {
-  @media (min-width: 768px) {
-    ${StyledFirstWord} {
-      transform: translateY(-100%);
-    }
-    ${StyledSecondWord} {
-      transform: translateY(-100%);
-    }
-  };
+    @media (min-width: 768px) {
+      ${StyledFirstWord} {
+        transform: translateY(-100%);
+      }
+      ${StyledSecondWord} {
+        transform: translateY(-100%);
+      }
+    };
   }
 `
 

@@ -4,7 +4,7 @@ import { styled } from "styled-components"
 import { useTheme } from "styled-components"
 
 const StyledThemeButton = styled.button`
-  width: clamp(2.5rem, 3.5vw, 5rem);
+  width: clamp(2rem, 3vw, 4rem);
   aspect-ratio: 1;
   border: none;
   border-radius: 50%;
@@ -37,7 +37,7 @@ export default function ThemeButton() {
 
   const handleClick = () => {
     setIsDarkMode(current => !current);
-  }
+  };
 
   return(
     <StyledThemeButton onClick={handleClick}>
