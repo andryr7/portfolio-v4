@@ -28,6 +28,6 @@ export const darkTheme = {
   main: '#E4E1BE',
   blue: '#3C445E',
   red: '#3E0705',
-  orange: '#A5611F',
+  orange: '#4F1909',
   blendmode: 'normal'
 }

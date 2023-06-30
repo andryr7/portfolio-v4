@@ -1,7 +1,9 @@
-import { styled } from "styled-components"
+import { styled, keyframes } from "styled-components"
 import { useContext } from "react"
 import { PortfolioContext } from "@/utils/Context"
 import { playfairDisplaySC } from "@/styles/fonts"
+import test from '../../assets/test.png'
+import { useLenis } from "@studio-freight/react-lenis"
 
 const StyledHeroSection = styled.section`
   height: 100vh;
@@ -64,7 +66,6 @@ const StyledHeroContainer = styled.header`
   };
 `
 
-
 const StyledFirstWord = styled.h3`
   transition: transform 0.25s;
 `
@@ -84,15 +85,14 @@ const StyledHeaderPart = styled.div`
     font-size: 20vw;
     letter-spacing: 3vw;
   }
-  &.interactive::before {
+  /* &.interactive::before {
     content: '';
     position: absolute;
     width: 100%;
     height: 50%;
-    background-color: ${props => props.theme.background};
-    z-index: -1;
+    background-color: ${props => props.theme.orange};
     bottom: 0;
-  }
+  } */
   &.interactive:hover {
     @media (min-width: 768px) {
       ${StyledFirstWord} {
@@ -125,7 +125,16 @@ const StyledCaptions = styled.div`
 `
 
 export default function Hero() {
-  const { heroSectionRef, backgroundShift } = useContext(PortfolioContext);
+  const { heroSectionRef, backgroundShift, setBackgroundShift, aboutSectionRef, isAltLang } = useContext(PortfolioContext);
+
+  useLenis(() => {
+    const sectionRectTop = aboutSectionRef.current.getBoundingClientRect().top;
+    const min = window.innerHeight;
+    const max = window.innerHeight * 1;
+    const ratio = - (sectionRectTop - min) / max;
+    const clampedRatio = Math.min(ratio, 1);
+    setBackgroundShift(clampedRatio);
+  })
 
   const firstCircleStyle = {
     transform: `translate(${-50 + backgroundShift * 50}%, -50%)`
@@ -150,9 +159,9 @@ export default function Hero() {
           <StyledSecondWord>There</StyledSecondWord>
         </StyledHeaderPart>
         <StyledCaptions>
-          <span>Je m&apos;appelle Andry</span>
-          <span>Je suis développeur web</span>
-          <span>Bienvenue sur mon portfolio</span>
+          <span>{isAltLang ? 'My name is Andry' : "Je m'appelle Andry"}</span>
+          <span>{isAltLang ? 'I am a web developer' : 'Je suis développeur web'}</span>
+          <span>{isAltLang ? 'Welcome to my portfolio' : 'Bienvenue sur mon portfolio'}</span>
         </StyledCaptions>
       </StyledHeroContainer>
     </StyledHeroSection>

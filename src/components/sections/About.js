@@ -4,7 +4,10 @@ import { useContext, useEffect, useRef } from "react"
 import { PortfolioContext } from "@/utils/Context"
 import { Splide, SplideSlide } from '@splidejs/react-splide'
 import '@splidejs/react-splide/css'
-import { useLenis } from '@studio-freight/react-lenis'
+import Image from "next/image"
+import PortableText from "react-portable-text"
+import { useNextSanityImage } from "next-sanity-image"
+import { sanityClient } from "../../../sanity"
 
 const StyledAboutSection = styled.section`
   width: 100%;
@@ -34,6 +37,7 @@ const StyledTopContainer = styled.div`
 const StyledImageContainer = styled.div`
   width: 35vw;
   max-width: 1000px;
+  aspect-ratio: 1.5;
   border: 1px solid ${props => props.theme.main};
   position: relative;
   top: 0;
@@ -48,8 +52,8 @@ const StyledImageContainer = styled.div`
     width: 100%;
     height: 100%;
     position: absolute;
-    top: 1rem;
-    left: 1rem;
+    top: 1vw;
+    left: 1vw;
     z-index: -1;
     border: 1px solid ${props => props.theme.main};
   }
@@ -70,7 +74,7 @@ const StyledTextContainer = styled.div`
   text-align: justify;
   font-size: clamp(1rem, 1.25vw, 2rem);
   @media (max-width: 768px) {
-    width: 61vw;
+    width: 70vw;
   };
 `
 
@@ -168,77 +172,31 @@ const StyledSkillItem = styled.article`
   font-size: clamp(1rem, 1.5vw, 1.5rem);
 `
 
-export default function About() {
-  const { aboutSectionRef, setBackgroundShift, backgroundShift } = useContext(PortfolioContext);
+export default function About({ infoData, skillData }) {
+  const { aboutSectionRef, isAltLang } = useContext(PortfolioContext);
+  const imageProps = useNextSanityImage(sanityClient, infoData.picture);
 
-  const fakeItems = [
-    {
-      id: 0,
-      name: 'congolexicomatisation'
-    },
-    {
-      id: 1,
-      name: 'des'
-    },
-    {
-      id: 2,
-      name: 'lois'
-    },
-    {
-      id: 3,
-      name: 'du'
-    },
-    {
-      id: 4,
-      name: 'marché'
-    },
-    {
-      id: 5,
-      name: 'propre'
-    },
-    {
-      id: 6,
-      name: 'congolais'
-    },
-  ]
-
-  const lenis = useLenis(({scroll}) => {
-    const handleScroll = () => {
-      const sectionRectTop = aboutSectionRef.current.getBoundingClientRect().top;
-      const min = window.innerHeight;
-      const max = window.innerHeight * 1;
-      const ratio = - (sectionRectTop - min) / max;
-      const clampedRatio = Math.min(ratio, 1);
-      setBackgroundShift(clampedRatio);
-    }
-    handleScroll();
-  })
-
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     const sectionRectTop = aboutSectionRef.current.getBoundingClientRect().top;
-  //     const min = window.innerHeight;
-  //     const max = window.innerHeight * 1;
-  //     const ratio = - (sectionRectTop - min) / max;
-  //     const clampedRatio = Math.min(ratio, 1);
-  //     setBackgroundShift(clampedRatio);
-  //   }
-
-  //   document.addEventListener('scroll', handleScroll);
-
-  //   return (() => {
-  //     document.removeEventListener('scroll', handleScroll)
-  //   })
-  // })
+  const frontendSkills = skillData.filter(skill => skill.skilltype === 'frontend');
+  const backendSkills = skillData.filter(skill => skill.skilltype === 'backend');
+  const projectmgmtSkills = skillData.filter(skill => skill.skilltype === 'projectmgmt');
 
   return (
     <StyledAboutSection ref={aboutSectionRef}>
       <StyledTopContainer>
         <StyledImageContainer>
-          <StyledImg src={myPicture.src} />
+          <Image
+            src={imageProps.src}
+            fill
+            alt="Photographie de Andry Ratsimba"
+            style={{objectFit: "cover"}}
+            quality={100}
+            sizes="(max-width: 768px) 70vw, 35vw"
+          />
         </StyledImageContainer>
         <StyledTextContainer>
-          Passionné par l’informatique et la résolution de problème depuis l’enfance, je me suis reconverti vers le métier de développeur après plusieurs stages en webmarketing qui m’ont permis de découvrir ce métier. J’ai désormais à coeur de développer des solutions innovantes et créatives pour le web.
+          <PortableText
+            content={isAltLang ? infoData.enPresentationText : infoData.frPresentationText}
+          />
         </StyledTextContainer>
       </StyledTopContainer>
       <StyledBottomContainer>
@@ -249,7 +207,7 @@ export default function About() {
           <StyledHexContainer>
             <StyledHexContent>
               <StyledHexTitle>
-                Développement frontend
+                {isAltLang ? 'Frontend web development' : 'Développement web frontend'}
               </StyledHexTitle>
               <StyledSlidercontainer>
                 <Splide
@@ -264,10 +222,10 @@ export default function About() {
                     arrows: false,
                   }}
                 >
-                  {fakeItems.map(item => (
-                    <SplideSlide key={item.id}>
+                  {frontendSkills.map(skill => (
+                    <SplideSlide key={skill._id}>
                       <StyledSkillItem>
-                        {item.name}
+                        {isAltLang ? skill.enName : skill.frName}
                       </StyledSkillItem>
                     </SplideSlide>
                   ))}
@@ -278,7 +236,7 @@ export default function About() {
           <StyledHexContainer>
             <StyledHexContent>
               <StyledHexTitle>
-                Développement backend
+                {isAltLang ? 'Backend web development' : 'Développement web backend'}
               </StyledHexTitle>
               <StyledSlidercontainer>
                 <Splide
@@ -293,10 +251,10 @@ export default function About() {
                     arrows: false,
                   }}
                 >
-                  {fakeItems.map(item => (
-                    <SplideSlide key={item.id}>
+                  {backendSkills.map(skill => (
+                    <SplideSlide key={skill._id}>
                       <StyledSkillItem>
-                        {item.name}
+                        {isAltLang ? skill.enName : skill.frName}
                       </StyledSkillItem>
                     </SplideSlide>
                   ))}
@@ -307,7 +265,7 @@ export default function About() {
           <StyledHexContainer>
             <StyledHexContent>
               <StyledHexTitle>
-                Gestion de projet
+                {isAltLang ? 'Project management' : 'Gestion de projet'}
               </StyledHexTitle>
               <StyledSlidercontainer>
                 <Splide
@@ -322,10 +280,10 @@ export default function About() {
                     arrows: false,
                   }}
                 >
-                  {fakeItems.map(item => (
-                    <SplideSlide key={item.id}>
+                  {projectmgmtSkills.map(skill => (
+                    <SplideSlide key={skill._id}>
                       <StyledSkillItem>
-                        {item.name}
+                        {isAltLang ? skill.enName : skill.frName}
                       </StyledSkillItem>
                     </SplideSlide>
                   ))}

@@ -6,6 +6,7 @@ import ThemeButton from "./interactivity/ThemeButton"
 import ContactCTA from "./interactivity/ContactCTA"
 import ContactMenu from "./ContactMenu"
 import { useLenis } from "@studio-freight/react-lenis"
+import LangButton from "./interactivity/LangButton"
 
 const StyledFrame = styled.div`
   position: fixed;
@@ -33,7 +34,7 @@ const StyledHeader = styled.div`
 `
 
 const StyledLogo = styled.div`
-  font-size: clamp(2rem, 10vw, 5rem);
+  font-size: clamp(2rem, 10vw, 4.5rem);
   pointer-events: all;
   cursor: pointer;
 `
@@ -48,7 +49,7 @@ const StyledNavLinkList = styled.ul`
 `
 
 const StyledNavLink = styled.li`
-  font-size: clamp(1rem, 2vw, 2rem);
+  font-size: clamp(1rem, 1.75vw, 2rem);
   cursor: pointer;
   transition: all 0.5s;
   &.current {
@@ -63,6 +64,11 @@ const StyledButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: end;
+`
+
+const StyledSiteOptionsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
 `
 
 export default function Frame() {
@@ -113,7 +119,10 @@ export default function Frame() {
         </StyledHeader>
         <StyledFooter>
           <StyledButtonContainer>
-            <ThemeButton />
+            <StyledSiteOptionsContainer>
+              <LangButton />
+              <ThemeButton />
+            </StyledSiteOptionsContainer>
             <ContactCTA />
           </StyledButtonContainer>
         </StyledFooter>

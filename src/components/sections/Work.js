@@ -1,14 +1,13 @@
 import { styled } from "styled-components"
-import slideimg3 from '../../assets/slides/3.jpg'
-import slideimg1 from '../../assets/slides/1.jpg'
-import slideimg2 from '../../assets/slides/2.jpg'
-import slideimg4 from '../../assets/slides/4.jpg'
-import slideimg5 from '../../assets/slides/5.jpg'
 import { useEffect, useRef, useState, useContext } from "react"
 
 import { Splide, SplideTrack, SplideSlide } from '@splidejs/react-splide'
 import '@splidejs/react-splide/css';
 import { PortfolioContext } from "@/utils/Context"
+
+import Image from "next/image"
+import { useNextSanityImage } from "next-sanity-image"
+import { sanityClient } from "../../../sanity"
 
 const StyledWorkSection = styled.section`
   height: 100lvh;
@@ -20,7 +19,9 @@ const StyledWorkSection = styled.section`
 
 const StyledCarouselContainer = styled.div`
   width: 100%;
-  cursor: grab;
+  cursor: crosshair;
+  padding-left: 1rem;
+  padding-right: 1rem;
 `
 
 const StyledProjectTitle = styled.div`
@@ -44,54 +45,15 @@ const StyledProjectCard = styled.div`
   };
 `
 
-const StyledProjectImage = styled.img`
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  top: 0;
-  object-fit: cover;
-  filter: saturate(0.25);
-  transition: filter 1s;
-  &:hover {
-    filter: saturate(1);
-  }
-`
-
-const projects = [
-  {
-    id: 1,
-    name: 'projet 1',
-    img: slideimg1.src,
-  },
-  {
-    id: 2,
-    name: 'projet 2',
-    img: slideimg2.src,
-  },
-  {
-    id: 3,
-    name: 'projet 3',
-    img: slideimg3.src,
-  },
-  {
-    id: 4,
-    name: 'projet 4',
-    img: slideimg4.src,
-  },
-  {
-    id: 5,
-    name: 'projet 5',
-    img: slideimg5.src,
-  },
-]
-
-function ProjectCard( {project }) {
+function ProjectCard({ project }) {
   const [shift, setShift] = useState(50);
   const animated = useRef(false);
   const cardRef = useRef(null);
+  const imageProps = useNextSanityImage(sanityClient, project.image);
 
   const projectImageStyle = {
-    objectPosition: `${shift}% center`
+    objectPosition: `${shift}% center`,
+    objectFit: "cover"
   };
 
   useEffect(() => {
@@ -138,7 +100,15 @@ function ProjectCard( {project }) {
 
   return (
     <StyledProjectCard>
-      <StyledProjectImage src={project.img} style={projectImageStyle} ref={cardRef}/>
+      <Image
+        ref={cardRef}
+        src={imageProps.src}
+        fill
+        alt={`Image of the ${project.title} project`}
+        style={projectImageStyle}
+        quality={100}
+        sizes="(max-width: 768px) 150vw, 100vw"
+      />
       <StyledProjectTitle>
         {project.name}
       </StyledProjectTitle>
@@ -146,7 +116,7 @@ function ProjectCard( {project }) {
   )
 }
  
-export default function Work() {
+export default function Work({ projectData }) {
   const { workSectionRef } = useContext(PortfolioContext);
   const [paddingSlideNb, setPaddingSlideNb] = useState(2);
 
@@ -202,8 +172,8 @@ export default function Work() {
             {[...Array(paddingSlideNb)].map((e, i) => (
               <SplideSlide key={i} />
             ))}
-            {projects.map((project, index) => (
-              <SplideSlide key={project.id}>
+            {projectData.map((project, index) => (
+              <SplideSlide key={project._id}>
                 <ProjectCard project={project} />
               </SplideSlide>
             ))}
