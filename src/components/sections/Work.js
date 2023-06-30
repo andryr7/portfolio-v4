@@ -20,8 +20,6 @@ const StyledWorkSection = styled.section`
 const StyledCarouselContainer = styled.div`
   width: 100%;
   cursor: crosshair;
-  padding-left: 1rem;
-  padding-right: 1rem;
 `
 
 const StyledProjectTitle = styled.div`

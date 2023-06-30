@@ -160,7 +160,7 @@ const StyledSendButton = styled.button`
   };
 `
 
-export default function ContactMenu() {
+export default function ContactMenu({ infoData }) {
   const { contactMenuIsOpened } = useContext(PortfolioContext);
   const [formName, setFormName] = useState('');
   const [formEmail, setFormEmail] = useState('');
@@ -209,10 +209,10 @@ export default function ContactMenu() {
     <StyledContactMenu className={contactMenuIsOpened && 'opened'}>
       <StyledContactContainer>
         <StyledContactLinksContainer>
-          <StyledContactLink href='linkedin.com'>
+          <StyledContactLink href={infoData.linkedin} target="_blank" rel="noopener noreferrer">
             <StyledContactLogo src={isDarkMode ? linkedinlightlogo.src : linkedindarklogo.src} />
           </StyledContactLink>
-          <StyledContactLink href='github.com'>
+          <StyledContactLink href={infoData.github}>
             <StyledContactLogo src={isDarkMode ? githublightlogo.src : githubdarklogo.src} />
           </StyledContactLink>
         </StyledContactLinksContainer>

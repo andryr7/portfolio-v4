@@ -113,7 +113,7 @@ export default function ContactCTA() {
     return (() => {
       document.removeEventListener('keydown', handleKeyPress)
     })
-  },[])
+  })
 
   return (
     <StyledCTAContainer onClick={handleClick}>

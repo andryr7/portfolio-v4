@@ -7,6 +7,7 @@ export const PortfolioProvider = (({children}) => {
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [contactMenuIsOpened, setContactMenuIsOpened] = useState(false);
   const [backgroundShift, setBackgroundShift] = useState(0);
+  const containerRef = useRef(null);
   const heroSectionRef = useRef(null);
   const aboutSectionRef = useRef(null);
   const workSectionRef = useRef(null);
@@ -28,6 +29,7 @@ export const PortfolioProvider = (({children}) => {
       setContactMenuIsOpened,
       backgroundShift,
       setBackgroundShift,
+      containerRef,
       heroSectionRef,
       aboutSectionRef,
       workSectionRef,

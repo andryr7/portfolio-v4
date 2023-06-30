@@ -191,6 +191,7 @@ export default function About({ infoData, skillData }) {
             style={{objectFit: "cover"}}
             quality={100}
             sizes="(max-width: 768px) 70vw, 35vw"
+            priority={true}
           />
         </StyledImageContainer>
         <StyledTextContainer>

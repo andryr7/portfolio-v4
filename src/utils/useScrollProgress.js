@@ -1,48 +1,16 @@
-import { useState, useEffect } from "react";
+import { useLenis } from "@studio-freight/react-lenis";
+import { useState } from "react"
 
-export const useScrollProgress = (ref) => {
-  const [progress, setProgress] = useState(0);
+export default function useScroll(element) {
+  const [scroll, setScroll] = useState(0);
+  useLenis(() => {
+    const elementRect = element.current.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+    const min = elementRect.height + windowHeight;
+    const indicator = ( elementRect.bottom - min ) / (windowHeight - min);
+    const clampedIndicator = Math.min(Math.max(indicator, 0), 1);
+    setScroll(clampedIndicator);
+  })
 
-  useEffect(() => {
-    const options = {
-      root: null,
-      rootMargin: '0px',
-      threshold: buildThresholdList(20),
-    };
-
-    const observer = new IntersectionObserver(handleScroll, options);
-    const target = ref.current;
-    observer.observe(target);
-
-    function buildThresholdList(stepNb) {
-      const thresholds = [];
-      const numSteps = stepNb;
-
-      for (let i = 1; i <= numSteps; i++) {
-        const ratio = i / numSteps;
-        thresholds.push(ratio);
-      }
-
-      thresholds.push(0);
-      return thresholds;
-    }
-
-    function handleScroll(entries, observer) {
-
-      entries.forEach((entry) => {
-        const { intersectionRatio } = entry;
-        // console.log(entry)
-
-        if (intersectionRatio > progress) {
-          setProgress(intersectionRatio);
-        }
-      });
-    }
-
-    return () => {
-      observer.unobserve(target);
-    };
-  }, [progress, ref]);
-
-  return progress;
-};
+  return scroll
+}

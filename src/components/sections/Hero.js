@@ -113,7 +113,7 @@ const StyledCaptions = styled.div`
   letter-spacing: 0.5vw;
   position: absolute;
   top: 100%;
-  left: clamp(3rem, 3vw, 5rem);
+  left: clamp(1rem, 2vw, 5rem);
   width: 50%;
   @media (max-width: 768px) {
     margin-top: 0.5rem;

@@ -71,7 +71,7 @@ const StyledSiteOptionsContainer = styled.div`
   flex-direction: column;
 `
 
-export default function Frame() {
+export default function Frame({ infoData }) {
   const { contactMenuIsOpened, setContactMenuIsOpened, aboutSectionRef, workSectionRef, currentSection } = useContext(PortfolioContext);
   const lenis = useLenis();
 
@@ -126,7 +126,7 @@ export default function Frame() {
             <ContactCTA />
           </StyledButtonContainer>
         </StyledFooter>
-        <ContactMenu />
+        <ContactMenu infoData={infoData}/>
       </StyledFrame>
     </>
   )

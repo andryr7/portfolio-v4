@@ -6,10 +6,11 @@ import Hero from '@/components/sections/Hero'
 import About from '@/components/sections/About'
 import Work from '@/components/sections/Work'
 import GrainFilter from '@/components/GrainFilter'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useRef } from 'react'
 import { PortfolioContext } from '@/utils/Context'
 import { useLenis } from '@studio-freight/react-lenis'
 import { sanityClient } from '../../sanity'
+import useScroll from '@/utils/useScrollProgress'
 
 const StyledAppContainer = styled.div`
 `
@@ -56,7 +57,7 @@ export default function Home({ infoData, projectData, skillData }) {
           <About infoData={infoData} skillData={skillData}/>
           <Work projectData={projectData}/>
         </StyledMain>
-        <Frame />
+        <Frame infoData={infoData}/>
         <GrainFilter />
       </StyledAppContainer>
     </>
@@ -67,7 +68,7 @@ export async function getStaticProps() {
   const { infoData, projectData, skillData } = await sanityClient.fetch(
     `{
       "infoData": *[_type == "info"][0],
-      "projectData": *[_type == "project"],
+      "projectData": *[_type == "project"] | order(releaseDate asc),
       "skillData": *[_type == "skill"],
     }`
   );
