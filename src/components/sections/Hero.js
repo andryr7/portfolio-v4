@@ -32,7 +32,7 @@ const StyledFirstCircle = styled.div`
   aspect-ratio: 1;
   position: absolute;
   top: 50%;
-  left: 33.33%;
+  left: 40%;
   border-radius: 50% 50% 50% 50%;
   mix-blend-mode: ${props => props.theme.blendmode};
   background: 
@@ -47,7 +47,7 @@ const StyledSecondCircle = styled.div`
   aspect-ratio: 1;
   position: absolute;
   top: 50%;
-  left: 66.66%;
+  left: 60%;
   border-radius: 50% 50% 50% 50%;
   mix-blend-mode: ${props => props.theme.blendmode};
   background: 
@@ -85,14 +85,6 @@ const StyledHeaderPart = styled.div`
     font-size: 20vw;
     letter-spacing: 3vw;
   }
-  /* &.interactive::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 50%;
-    background-color: ${props => props.theme.orange};
-    bottom: 0;
-  } */
   &.interactive:hover {
     @media (min-width: 768px) {
       ${StyledFirstWord} {

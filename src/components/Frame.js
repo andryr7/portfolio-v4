@@ -18,7 +18,7 @@ const StyledFrame = styled.div`
   top: 0;
   color: ${props => props.theme.main};
   margin: 1vw;
-  padding: max(1vw, 1rem);
+  padding: max(1vw, 0.5rem);
   pointer-events: none;
   display: flex;
   flex-direction: column;
@@ -33,10 +33,23 @@ const StyledHeader = styled.div`
   justify-content: space-between;
 `
 
+const StyledFullName = styled.div`
+  overflow: hidden;
+  max-width: 0px;
+  transition: all 1s;
+`
+
 const StyledLogo = styled.div`
+  display: flex;
   font-size: clamp(2rem, 10vw, 4.5rem);
   pointer-events: all;
   cursor: pointer;
+  line-height: 7vh;
+  &:hover {
+    ${StyledFullName} {
+      max-width: 500px;
+    }
+  }
 `
 
 const StyledNav = styled.nav`
@@ -49,7 +62,7 @@ const StyledNavLinkList = styled.ul`
 `
 
 const StyledNavLink = styled.li`
-  font-size: clamp(1rem, 1.75vw, 2rem);
+  font-size: clamp(1.25rem, 1.75vw, 2rem);
   cursor: pointer;
   transition: all 0.5s;
   &.current {
@@ -104,7 +117,10 @@ export default function Frame({ infoData }) {
       <StyledFrame className={`${playfairDisplay.className}`}>
         <StyledHeader>
           <StyledLogo onClick={handleHomeLinkClick}>
-            AR
+            <div>A</div>
+            <StyledFullName>ndry&nbsp;</StyledFullName>
+            <div>R</div>
+            <StyledFullName>atsimba</StyledFullName>
           </StyledLogo>
           <StyledNav>
             <StyledNavLinkList>
