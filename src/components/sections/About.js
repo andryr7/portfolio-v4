@@ -175,6 +175,9 @@ const StyledSkillItem = styled.article`
 export default function About({ infoData, skillData }) {
   const { aboutSectionRef, isAltLang } = useContext(PortfolioContext);
   const imageProps = useNextSanityImage(sanityClient, infoData.picture);
+  const frontendSliderRef = useRef(null);
+  const backendSliderRef = useRef(null);
+  const projectMgmtSliderRef = useRef(null);
 
   const frontendSkills = skillData.filter(skill => skill.skilltype === 'frontend');
   const backendSkills = skillData.filter(skill => skill.skilltype === 'backend');
@@ -210,13 +213,16 @@ export default function About({ infoData, skillData }) {
               <StyledHexTitle>
                 {isAltLang ? 'Frontend web development' : 'Développement web frontend'}
               </StyledHexTitle>
-              <StyledSlidercontainer>
+              <StyledSlidercontainer
+                onMouseEnter={() => {frontendSliderRef.current.splide.Components.Autoplay.play()}}
+                onMouseLeave={() => {frontendSliderRef.current.splide.Components.Autoplay.pause()}}
+              >
                 <Splide
+                  ref={frontendSliderRef}
                   aria-label="Frontend skills carousel"
                   options={{
                     type: 'fade',
                     rewind: true,
-                    autoplay: true,
                     pauseOnHover : false,
                     interval: 1000,
                     pagination: false,
@@ -239,13 +245,16 @@ export default function About({ infoData, skillData }) {
               <StyledHexTitle>
                 {isAltLang ? 'Backend web development' : 'Développement web backend'}
               </StyledHexTitle>
-              <StyledSlidercontainer>
+              <StyledSlidercontainer
+                onMouseEnter={() => {backendSliderRef.current.splide.Components.Autoplay.play()}}
+                onMouseLeave={() => {backendSliderRef.current.splide.Components.Autoplay.pause()}}
+              >
                 <Splide
+                  ref={backendSliderRef}
                   aria-label="Backend skills carousel"
                   options={{
                     type: 'fade',
                     rewind: true,
-                    autoplay: true,
                     pauseOnHover : false,
                     interval: 1000,
                     pagination: false,
@@ -268,8 +277,12 @@ export default function About({ infoData, skillData }) {
               <StyledHexTitle>
                 {isAltLang ? 'Project management' : 'Gestion de projet'}
               </StyledHexTitle>
-              <StyledSlidercontainer>
+              <StyledSlidercontainer
+                onMouseEnter={() => {projectMgmtSliderRef.current.splide.Components.Autoplay.play()}}
+                onMouseLeave={() => {projectMgmtSliderRef.current.splide.Components.Autoplay.pause()}}
+              >
                 <Splide
+                  ref={projectMgmtSliderRef}
                   aria-label="Project management skills carousel"
                   options={{
                     type: 'fade',

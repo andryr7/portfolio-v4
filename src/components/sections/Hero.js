@@ -1,9 +1,10 @@
 import { styled, keyframes } from "styled-components"
-import { useContext } from "react"
+import { useContext, useLayoutEffect, useRef } from "react"
 import { PortfolioContext } from "@/utils/Context"
 import { playfairDisplaySC } from "@/styles/fonts"
 import test from '../../assets/test.png'
 import { useLenis } from "@studio-freight/react-lenis"
+import { gsap } from "gsap"
 
 const StyledHeroSection = styled.section`
   height: 100vh;
@@ -119,6 +120,16 @@ const StyledCaptions = styled.div`
 export default function Hero() {
   const { heroSectionRef, backgroundShift, setBackgroundShift, aboutSectionRef, isAltLang } = useContext(PortfolioContext);
 
+  const secondWordRef = useRef(null);
+
+  useLayoutEffect(() => {
+    let ctx = gsap.context(() => {
+      gsap.to(secondWordRef.current, { rotation: 180});
+    }, heroSectionRef)
+
+    return () => ctx.revert();
+  }, [heroSectionRef]);
+
   useLenis(() => {
     const sectionRectTop = aboutSectionRef.current.getBoundingClientRect().top;
     const min = window.innerHeight;
@@ -146,7 +157,7 @@ export default function Hero() {
         <StyledHeaderPart>
           <h3>Hello</h3>
         </StyledHeaderPart>
-        <StyledHeaderPart className="interactive">
+        <StyledHeaderPart className="interactive" ref={secondWordRef}>
           <StyledFirstWord>World</StyledFirstWord>
           <StyledSecondWord>There</StyledSecondWord>
         </StyledHeaderPart>
