@@ -37,10 +37,17 @@ const StyledProjectCard = styled.div`
   width: 100%;
   height: 50vh;
   clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+  transition: filter 0.5s;
   &:hover ${StyledProjectTitle} {
     transform: translateX(1.5rem);
     opacity: 1;
   };
+  @media (min-width: 768px) {
+    filter: grayscale(1);
+  };
+  &:hover {
+    filter: grayscale(0);
+  }
 `
 
 function ProjectCard({ project }) {
@@ -155,7 +162,7 @@ export default function Work({ projectData }) {
             perPage: 5,
             lazyLoad: false,
             snap: true,
-            // focus: 'center',
+            focus: 'center',
             breakpoints: {
               2160: {
                 perPage: 3

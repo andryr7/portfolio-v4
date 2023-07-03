@@ -72,9 +72,9 @@ const StyledContactLink = styled.a`
 const StyledContactLogo = styled.img`
   width: 100%;
   transition: all 0.5s;
-  filter: drop-shadow(0px 0px ${props => props.theme.orange});
+  filter: drop-shadow(0px 0px ${props => props.theme.accent});
   &:hover {
-    filter: drop-shadow(5px 5px ${props => props.theme.orange});
+    filter: drop-shadow(5px 5px ${props => props.theme.accent});
   };
 `
 
@@ -105,7 +105,7 @@ const StyledInput = styled.input`
   color: ${props => props.theme.main};
   &:focus {
     outline: none !important;
-    border-color: ${props => props.theme.orange};
+    border-color: ${props => props.theme.accent};
   };
 `
 
@@ -124,7 +124,7 @@ const StyledTextArea = styled.textarea`
   color: ${props => props.theme.main};
   &:focus {
     outline: none !important;
-    border-color: ${props => props.theme.orange};
+    border-color: ${props => props.theme.accent};
   }
   @media (max-width: 768px) {
     height: 5rem;
@@ -155,7 +155,7 @@ const StyledSendButton = styled.button`
   cursor: pointer;
   transition: all 0.52s;
   &:hover {
-    background-color: ${props => props.theme.orange};
+    background-color: ${props => props.theme.accent};
     border-color: ${props => props.theme.background};
   };
 `

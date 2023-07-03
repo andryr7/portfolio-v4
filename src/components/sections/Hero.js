@@ -1,9 +1,12 @@
 import { styled, keyframes } from "styled-components"
-import { useContext } from "react"
+import { useContext, useRef } from "react"
+import useIsomorphicLayoutEffect from "@/utils/useIsomorphicLayoutEffect"
 import { PortfolioContext } from "@/utils/Context"
 import { playfairDisplaySC } from "@/styles/fonts"
-import test from '../../assets/test.png'
 import { useLenis } from "@studio-freight/react-lenis"
+import { gsap } from "gsap"
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
+import noisefilter from '../../assets/noise.svg'
 
 const StyledHeroSection = styled.section`
   height: 100vh;
@@ -32,11 +35,12 @@ const StyledFirstCircle = styled.div`
   aspect-ratio: 1;
   position: absolute;
   top: 50%;
-  left: 40%;
-  border-radius: 50% 50% 50% 50%;
-  mix-blend-mode: ${props => props.theme.blendmode};
+  left: 33%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
   background: 
-    linear-gradient(180deg, #9f260077, rgba(217,217,217,0) 61%);
+    linear-gradient(180deg, ${props => props.theme.accent}, rgba(217,217,217,0) 50%);
+  mask-image: url(${noisefilter.src});
 `
 
 const StyledSecondCircle = styled.div`
@@ -47,11 +51,12 @@ const StyledSecondCircle = styled.div`
   aspect-ratio: 1;
   position: absolute;
   top: 50%;
-  left: 60%;
-  border-radius: 50% 50% 50% 50%;
-  mix-blend-mode: ${props => props.theme.blendmode};
+  left: 66%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
   background: 
-    linear-gradient(0deg, #2a3d6377, rgba(217,217,217,0) 61%);
+    linear-gradient(0deg, ${props => props.theme.altaccent}, rgba(217,217,217,0) 50%);
+  mask-image: url(${noisefilter.src});
 `
 
 const StyledHeroContainer = styled.header`
@@ -117,30 +122,33 @@ const StyledCaptions = styled.div`
 `
 
 export default function Hero() {
-  const { heroSectionRef, backgroundShift, setBackgroundShift, aboutSectionRef, isAltLang } = useContext(PortfolioContext);
+  const { heroSectionRef, aboutSectionRef, isAltLang } = useContext(PortfolioContext);
+  const firstCircleRef = useRef(null);
+  const secondCircleRef = useRef(null);
 
-  useLenis(() => {
-    const sectionRectTop = aboutSectionRef.current.getBoundingClientRect().top;
-    const min = window.innerHeight;
-    const max = window.innerHeight * 1;
-    const ratio = - (sectionRectTop - min) / max;
-    const clampedRatio = Math.min(ratio, 1);
-    setBackgroundShift(clampedRatio);
-  })
-
-  const firstCircleStyle = {
-    transform: `translate(${-50 + backgroundShift * 50}%, -50%)`
-  }
-
-  const secondCircleStyle = {
-    transform: `translate(${-50 - backgroundShift * 50}%, -50%)`
-  }
+  useIsomorphicLayoutEffect(() => {
+    let ctx = gsap.context(() => {
+      // Circle translation animation
+      gsap.to([firstCircleRef.current, secondCircleRef.current], {
+        scrollTrigger: {
+          trigger: aboutSectionRef.current,
+          scrub: true,
+          start: 'top bottom',
+          // end: 'top center'
+        },
+        left: '50%'
+      });
+    }, heroSectionRef);
+    return () => ctx.revert();
+  }, []);
   
   return (
     <StyledHeroSection ref={heroSectionRef}>
       <StyledBackground>
-        <StyledFirstCircle style={firstCircleStyle}/>
-        <StyledSecondCircle style={secondCircleStyle}/>
+        {/* <StyledFirstCircle style={firstCircleStyle}/>
+        <StyledSecondCircle style={secondCircleStyle}/> */}
+        <StyledFirstCircle ref={firstCircleRef}/>
+        <StyledSecondCircle ref={secondCircleRef}/>
       </StyledBackground>
       <StyledHeroContainer className={playfairDisplaySC.className}>
         <StyledHeaderPart>
