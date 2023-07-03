@@ -144,7 +144,7 @@ const StyledHexContainer = styled.article`
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
   transition: all 0.5s;
   &:hover {
-    background-color: ${props => props.theme.orange};
+    background-color: ${props => props.theme.accent};
     & ${StyledHexContent} {
       width: calc(20vw - 8px);
       @media (max-width: 768px) {

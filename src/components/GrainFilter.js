@@ -6,6 +6,7 @@ export default function GrainFilter({
   grainFinesse = 0.1,
   greyMode = true,
 }) {
+
   const canvasRef = useRef(null);
   const pixelAlpha = 255 * opacity;
 

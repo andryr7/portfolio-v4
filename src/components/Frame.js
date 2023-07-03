@@ -66,7 +66,7 @@ const StyledNavLink = styled.li`
   cursor: pointer;
   transition: all 0.5s;
   &.current {
-    color: ${props => props.theme.orange};
+    color: ${props => props.theme.accent};
   }
 `
 
