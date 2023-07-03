@@ -10,10 +10,8 @@ import { useContext, useEffect, useRef } from 'react'
 import { PortfolioContext } from '@/utils/Context'
 import { useLenis } from '@studio-freight/react-lenis'
 import { sanityClient } from '../../sanity'
-import useScroll from '@/utils/useScrollProgress'
 
-const StyledAppContainer = styled.div`
-`
+const StyledAppContainer = styled.div``
 
 const StyledMain = styled.main`
   color: ${props => props.theme.main};

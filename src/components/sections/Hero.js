@@ -1,11 +1,9 @@
 import { styled, keyframes } from "styled-components"
-import { useContext, useRef } from "react"
+import { useContext, useRef, useState } from "react"
 import useIsomorphicLayoutEffect from "@/utils/useIsomorphicLayoutEffect"
 import { PortfolioContext } from "@/utils/Context"
 import { playfairDisplaySC } from "@/styles/fonts"
 import { useLenis } from "@studio-freight/react-lenis"
-import { gsap } from "gsap"
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 import noisefilter from '../../assets/noise.svg'
 
 const StyledHeroSection = styled.section`
@@ -123,32 +121,22 @@ const StyledCaptions = styled.div`
 
 export default function Hero() {
   const { heroSectionRef, aboutSectionRef, isAltLang } = useContext(PortfolioContext);
-  const firstCircleRef = useRef(null);
-  const secondCircleRef = useRef(null);
+  const [backgroundShift, setBackgroundShift] = useState(0);
 
-  useIsomorphicLayoutEffect(() => {
-    let ctx = gsap.context(() => {
-      // Circle translation animation
-      gsap.to([firstCircleRef.current, secondCircleRef.current], {
-        scrollTrigger: {
-          trigger: aboutSectionRef.current,
-          scrub: true,
-          start: 'top bottom',
-          // end: 'top center'
-        },
-        left: '50%'
-      });
-    }, heroSectionRef);
-    return () => ctx.revert();
-  }, []);
+  useLenis(() => {
+    const sectionRectTop = aboutSectionRef.current.getBoundingClientRect().top;
+    const min = window.innerHeight;
+    const max = window.innerHeight * 1;
+    const ratio = - (sectionRectTop - min) / max;
+    const clampedRatio = Math.min(ratio, 1);
+    setBackgroundShift(clampedRatio);
+  })
   
   return (
     <StyledHeroSection ref={heroSectionRef}>
       <StyledBackground>
-        {/* <StyledFirstCircle style={firstCircleStyle}/>
-        <StyledSecondCircle style={secondCircleStyle}/> */}
-        <StyledFirstCircle ref={firstCircleRef}/>
-        <StyledSecondCircle ref={secondCircleRef}/>
+        <StyledFirstCircle/>
+        <StyledSecondCircle/>
       </StyledBackground>
       <StyledHeroContainer className={playfairDisplaySC.className}>
         <StyledHeaderPart>
