@@ -1,8 +1,6 @@
 import { styled } from "styled-components"
-import myPicture from '../../assets/mypicture.jpg'
-import { useContext, useEffect, useRef } from "react"
+import { useContext } from "react"
 import { PortfolioContext } from "@/utils/Context"
-import { Splide, SplideSlide } from '@splidejs/react-splide'
 import '@splidejs/react-splide/css'
 import Image from "next/image"
 import PortableText from "react-portable-text"
@@ -19,6 +17,7 @@ const StyledAboutSection = styled.section`
   display: flex;
   background-color: ${props => props.theme.background};
   border-top: 1px solid ${props => props.theme.main};
+  border-bottom: 1px solid ${props => props.theme.main};
   //TODO Margin for hero section
   margin-top: 100vh;
 `
@@ -72,7 +71,7 @@ const StyledImageContainer = styled.div`
     border: 1px solid ${props => props.theme.main};
   }
   @media (max-width: 768px) {
-    width: 70vw;
+    width: 80vw;
   };
 `;
 
@@ -84,7 +83,7 @@ const StyledTextContainer = styled.div`
   font-size: clamp(1rem, 1.25vw, 2rem);
   line-height: normal;
   @media (max-width: 768px) {
-    width: 70vw;
+    width: 80vw;
   };
 `
 
@@ -96,8 +95,10 @@ const StyledItemContainer = styled.ul`
   width: 100%;
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
   @media (max-width: 768px) {
     flex-direction: column;
+    gap: 7.5vh;
   };
 `
 

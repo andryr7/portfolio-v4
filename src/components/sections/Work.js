@@ -1,10 +1,8 @@
 import { styled } from "styled-components"
 import { useEffect, useRef, useState, useContext } from "react"
-
 import { Splide, SplideTrack, SplideSlide } from '@splidejs/react-splide'
 import '@splidejs/react-splide/css';
 import { PortfolioContext } from "@/utils/Context"
-
 import Image from "next/image"
 import { useNextSanityImage } from "next-sanity-image"
 import { sanityClient } from "../../../sanity"
@@ -19,29 +17,17 @@ const StyledWorkSection = styled.section`
 
 const StyledCarouselContainer = styled.div`
   width: 100%;
-  cursor: crosshair;
+  cursor: grab;
 `
 
-const StyledProjectTitle = styled.div`
-  position: absolute;
-  bottom: 1rem;
-  transform: translateX(-100%);
-  transition: all 0.5s;
-  font-size: 2rem;
-  opacity: 0;
-  text-shadow: ${props => props.theme.background} 2px 2px;
-`
-
-const StyledProjectCard = styled.div`
+const StyledProjectCard = styled.a`
+  display: block;
   position: relative;
   width: 100%;
   height: 50vh;
   clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
   transition: filter 0.5s;
-  &:hover ${StyledProjectTitle} {
-    transform: translateX(1.5rem);
-    opacity: 1;
-  };
+  cursor: pointer;
   @media (min-width: 768px) {
     filter: grayscale(1);
   };
@@ -104,7 +90,7 @@ function ProjectCard({ project }) {
   }, []);
 
   return (
-    <StyledProjectCard>
+    <StyledProjectCard target="_blank" rel="noopener noreferrer" href={project.url}>
       <Image
         ref={cardRef}
         src={imageProps.src}
@@ -114,9 +100,6 @@ function ProjectCard({ project }) {
         quality={100}
         sizes="(max-width: 768px) 150vw, 100vw"
       />
-      <StyledProjectTitle>
-        {project.name}
-      </StyledProjectTitle>
     </StyledProjectCard>
   )
 }
@@ -161,14 +144,14 @@ export default function Work({ projectData }) {
             pagination: false,
             perPage: 5,
             lazyLoad: false,
-            snap: true,
             focus: 'center',
             breakpoints: {
               2160: {
                 perPage: 3
               },
               768: {
-                perPage: 1
+                perPage: 1,
+                snap: true,
               }
             }
           } }

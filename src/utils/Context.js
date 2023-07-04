@@ -1,20 +1,16 @@
-import { createContext, useState, useEffect, useRef } from "react";
-import { useScrollProgress } from "./useScrollProgress";
+import { createContext, useState, useRef } from "react";
 
 export const PortfolioContext = createContext();
 
 export const PortfolioProvider = (({children}) => {
   const [isDarkMode, setIsDarkMode] = useState(true);
+  const [isAltLang, setIsAltLang] = useState(false);
   const [contactMenuIsOpened, setContactMenuIsOpened] = useState(false);
-  const [backgroundShift, setBackgroundShift] = useState(0);
-  const containerRef = useRef(null);
-  const heroSectionRef = useRef(null);
+  const [currentSection, setCurrentSection] = useState('hero');
   const aboutSectionRef = useRef(null);
   const workSectionRef = useRef(null);
-  const [currentSection, setCurrentSection] = useState('hero');
-  const [isAltLang, setIsAltLang] = useState(false);
 
-  //Checking navigator language and saving theme and language preferences
+  // Checking navigator language and saving theme and language preferences
   // useEffect(()=>{
   //   localStorage.getItem('lang') === 'en' && setLanguage('en');
   //   window.navigator.language === 'en' && setLanguage('en') && localStorage.setItem('lang', 'en');
@@ -27,16 +23,12 @@ export const PortfolioProvider = (({children}) => {
       setIsDarkMode,
       contactMenuIsOpened,
       setContactMenuIsOpened,
-      backgroundShift,
-      setBackgroundShift,
-      containerRef,
-      heroSectionRef,
-      aboutSectionRef,
-      workSectionRef,
-      currentSection,
       setCurrentSection,
       isAltLang,
-      setIsAltLang
+      setIsAltLang,
+      currentSection,
+      aboutSectionRef,
+      workSectionRef,
     }}>
       {children}
     </PortfolioContext.Provider>

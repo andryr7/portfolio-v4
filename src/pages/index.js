@@ -10,6 +10,7 @@ import { useContext, useEffect, useRef } from 'react'
 import { PortfolioContext } from '@/utils/Context'
 import { useLenis } from '@studio-freight/react-lenis'
 import { sanityClient } from '../../sanity'
+import Interlude from '@/components/sections/Interlude'
 
 const StyledAppContainer = styled.div``
 
@@ -48,11 +49,15 @@ export default function Home({ infoData, projectData, skillData }) {
         <meta name="description" content="Portfolio de Andry Ratsimba, développeur web fullstack basé à Toulouse" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
+        <noscript>
+          <span>Merci d&apos;activer Javascript pour consulter ce site.</span>
+        </noscript>
       </Head>
       <StyledAppContainer>
         <StyledMain className={`${playfairDisplay.className}`}>
           <Hero />
           <About infoData={infoData} skillData={skillData}/>
+          <Interlude />
           <Work projectData={projectData}/>
         </StyledMain>
         <Frame infoData={infoData}/>

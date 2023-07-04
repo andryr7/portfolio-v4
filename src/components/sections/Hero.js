@@ -132,6 +132,10 @@ export default function Hero() {
     setSectionScroll(clampedRatio);
   })
 
+  const backgroundStyle = {
+    transform: `rotate(${sectionScroll === 1 ? '180deg' : '0deg'})`
+  }
+
   const firstCircleStyle = {
     left: `${Math.min((35 + 30 * sectionScroll), 50)}%`
   }
@@ -142,7 +146,8 @@ export default function Hero() {
   
   const textAnimationStyle = {
     letterSpacing: `${2.5 - 3 * sectionScroll}vw`,
-    transform: `translateY(-${sectionScroll * 300}%)`
+    transform: `translateY(-${sectionScroll * 300}%)`,
+    opacity: `${sectionScroll === 1 ? 0 : 1}`
   }
   
   const captionAnimationStyle = {
@@ -151,7 +156,7 @@ export default function Hero() {
 
   return (
     <StyledHeroSection ref={heroSectionRef}>
-      <StyledBackground>
+      <StyledBackground style={backgroundStyle}>
         <StyledFirstCircle style={firstCircleStyle}/>
         <StyledSecondCircle style={secondCircleStyle}/>
       </StyledBackground>

@@ -128,7 +128,7 @@ export default function Frame({ infoData }) {
                 {isAltLang ? 'about' : 'à propos'}
               </StyledNavLink>
               <StyledNavLink onClick={handleWorkLinkClick} className={currentSection === 'work' && 'current'}>
-                {isAltLang ? 'work' : 'réalisations'}
+                {isAltLang ? 'work' : 'projets'}
               </StyledNavLink>
             </StyledNavLinkList>
           </StyledNav>
