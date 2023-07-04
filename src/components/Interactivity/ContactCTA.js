@@ -48,6 +48,7 @@ const StyledCTAContainer = styled.div`
       height: 100%;
       top: 0;
       left: 0;
+      border-color: ${props => props.theme.accent};
     };
   }
 `

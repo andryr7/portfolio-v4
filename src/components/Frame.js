@@ -85,7 +85,7 @@ const StyledSiteOptionsContainer = styled.div`
 `
 
 export default function Frame({ infoData }) {
-  const { contactMenuIsOpened, setContactMenuIsOpened, aboutSectionRef, workSectionRef, currentSection } = useContext(PortfolioContext);
+  const { contactMenuIsOpened, setContactMenuIsOpened, aboutSectionRef, workSectionRef, currentSection, isAltLang } = useContext(PortfolioContext);
   const lenis = useLenis();
 
   const handleAboutLinkClick = () => {
@@ -125,10 +125,10 @@ export default function Frame({ infoData }) {
           <StyledNav>
             <StyledNavLinkList>
               <StyledNavLink onClick={handleAboutLinkClick} className={currentSection === 'about' && 'current'}>
-                about
+                {isAltLang ? 'about' : 'à propos'}
               </StyledNavLink>
               <StyledNavLink onClick={handleWorkLinkClick} className={currentSection === 'work' && 'current'}>
-                work
+                {isAltLang ? 'work' : 'réalisations'}
               </StyledNavLink>
             </StyledNavLinkList>
           </StyledNav>

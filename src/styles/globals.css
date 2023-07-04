@@ -2,7 +2,7 @@
 html {
   scroll-behavior: smooth;
   scrollbar-width: thin;
-  scrollbar-color: #F2E8E6 #191718 ;
+  scrollbar-color: #f0efe6 #141820 ;
   scrollbar-gutter: stable;
   /* overflow-x: hidden; */
 }

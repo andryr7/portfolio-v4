@@ -1,6 +1,5 @@
-import { styled, keyframes } from "styled-components"
-import { useContext, useRef, useState } from "react"
-import useIsomorphicLayoutEffect from "@/utils/useIsomorphicLayoutEffect"
+import { styled } from "styled-components"
+import { useContext, useEffect, useRef, useState } from "react"
 import { PortfolioContext } from "@/utils/Context"
 import { playfairDisplaySC } from "@/styles/fonts"
 import { useLenis } from "@studio-freight/react-lenis"
@@ -26,35 +25,35 @@ const StyledBackground = styled.div`
 `
 
 const StyledFirstCircle = styled.div`
-  height: 55vw;
+  height: 77vh;
   @media (max-width: 768px) {
     height: 100vw;
   };
   aspect-ratio: 1;
   position: absolute;
   top: 50%;
-  left: 33%;
   border-radius: 50%;
   transform: translate(-50%, -50%);
   background: 
     linear-gradient(180deg, ${props => props.theme.accent}, rgba(217,217,217,0) 50%);
   mask-image: url(${noisefilter.src});
+  filter: blur(25px);
 `
 
 const StyledSecondCircle = styled.div`
-  height: 55vw;
+  height: 77vh;
   @media (max-width: 768px) {
     height: 100vw;
   };
   aspect-ratio: 1;
   position: absolute;
   top: 50%;
-  left: 66%;
   border-radius: 50%;
   transform: translate(-50%, -50%);
   background: 
     linear-gradient(0deg, ${props => props.theme.altaccent}, rgba(217,217,217,0) 50%);
   mask-image: url(${noisefilter.src});
+  filter: blur(25px);
 `
 
 const StyledHeroContainer = styled.header`
@@ -82,13 +81,13 @@ const StyledHeaderPart = styled.div`
   position: relative;
   margin-right: -3vw;
   font-size: 10vw;
-  letter-spacing: 3vw;
   overflow: hidden;
   @media (max-width: 768px) {
     font-size: 20vw;
     letter-spacing: 3vw;
   }
   &.interactive:hover {
+    cursor: help;
     @media (min-width: 768px) {
       ${StyledFirstWord} {
         transform: translateY(-100%);
@@ -103,12 +102,12 @@ const StyledHeaderPart = styled.div`
 const StyledCaptions = styled.div`
   display: flex;
   flex-direction: column;
-  font-size: clamp(1rem, 1.5vw, 2rem);
+  font-size: clamp(1.1rem, 1.5vw, 2rem);
   line-height: clamp(1.5rem, 2vw, 3rem);
-  letter-spacing: 0.5vw;
+  letter-spacing: 0.35vw;
   position: absolute;
   top: 100%;
-  left: clamp(1rem, 2vw, 5rem);
+  left: clamp(1rem, 3.5vw, 5rem);
   width: 50%;
   @media (max-width: 768px) {
     margin-top: 0.5rem;
@@ -121,7 +120,8 @@ const StyledCaptions = styled.div`
 
 export default function Hero() {
   const { heroSectionRef, aboutSectionRef, isAltLang } = useContext(PortfolioContext);
-  const [backgroundShift, setBackgroundShift] = useState(0);
+  const [sectionScroll, setSectionScroll] = useState(0);
+  const helloThere = useRef(null);
 
   useLenis(() => {
     const sectionRectTop = aboutSectionRef.current.getBoundingClientRect().top;
@@ -129,24 +129,42 @@ export default function Hero() {
     const max = window.innerHeight * 1;
     const ratio = - (sectionRectTop - min) / max;
     const clampedRatio = Math.min(ratio, 1);
-    setBackgroundShift(clampedRatio);
+    setSectionScroll(clampedRatio);
   })
+
+  const firstCircleStyle = {
+    left: `${Math.min((35 + 30 * sectionScroll), 50)}%`
+  }
+
+  const secondCircleStyle = {
+    left: `${Math.max((65 - 30 * sectionScroll), 50)}%`
+  }
   
+  const textAnimationStyle = {
+    letterSpacing: `${2.5 - 3 * sectionScroll}vw`,
+    transform: `translateY(-${sectionScroll * 300}%)`
+  }
+  
+  const captionAnimationStyle = {
+    opacity: `${1 - sectionScroll * 3}`
+  }
+
   return (
     <StyledHeroSection ref={heroSectionRef}>
       <StyledBackground>
-        <StyledFirstCircle/>
-        <StyledSecondCircle/>
+        <StyledFirstCircle style={firstCircleStyle}/>
+        <StyledSecondCircle style={secondCircleStyle}/>
       </StyledBackground>
       <StyledHeroContainer className={playfairDisplaySC.className}>
-        <StyledHeaderPart>
+        <StyledHeaderPart style={textAnimationStyle}>
           <h3>Hello</h3>
         </StyledHeaderPart>
-        <StyledHeaderPart className="interactive">
+        <StyledHeaderPart className="interactive" style={textAnimationStyle}>
           <StyledFirstWord>World</StyledFirstWord>
-          <StyledSecondWord>There</StyledSecondWord>
+          <StyledSecondWord onClick={() => helloThere.current.play()}>There</StyledSecondWord>
+          <audio src={'hellothere.mp3'} ref={helloThere}/>
         </StyledHeaderPart>
-        <StyledCaptions>
+        <StyledCaptions style={captionAnimationStyle}>
           <span>{isAltLang ? 'My name is Andry' : "Je m'appelle Andry"}</span>
           <span>{isAltLang ? 'I am a web developer' : 'Je suis développeur web'}</span>
           <span>{isAltLang ? 'Welcome to my portfolio' : 'Bienvenue sur mon portfolio'}</span>

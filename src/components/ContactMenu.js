@@ -13,9 +13,6 @@ import githublightlogo from '../assets/contact/githublight.png'
 import ReCAPTCHA from "react-google-recaptcha"
 import emailjs from '@emailjs/browser'
 import { emailJSSettings } from '../../emailjs'
-// import { useDisableBodyScroll } from "@/utils/useDisableBodyScroll"
-
-import { Lenis as ReactLenis, useLenis } from '@studio-freight/react-lenis'
 
 const StyledContactMenu = styled.div`
   width: 100%;
@@ -27,8 +24,6 @@ const StyledContactMenu = styled.div`
   justify-content: center;
   align-items: center;
   z-index: -1;
-  pointer-events: all;
-  pointer-events: none;
   opacity: 0;
   transition: all 0.5s;
   &.opened {
@@ -74,7 +69,7 @@ const StyledContactLogo = styled.img`
   transition: all 0.5s;
   filter: drop-shadow(0px 0px ${props => props.theme.accent});
   &:hover {
-    filter: drop-shadow(5px 5px ${props => props.theme.accent});
+    filter: drop-shadow(3px 3px ${props => props.theme.accent});
   };
 `
 

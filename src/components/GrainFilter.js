@@ -28,8 +28,8 @@ export default function GrainFilter({
     let frameCount = 0;
     let animationFrameId;
 
-    const patternWidth = 150;
-    const patternHeight = 150;
+    const patternWidth = 100;
+    const patternHeight = 100;
 
     //Adjusting the canvas size to the size of the viewport
     canvasRef.current.width = window.innerWidth;
