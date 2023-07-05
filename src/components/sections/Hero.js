@@ -80,6 +80,7 @@ const StyledHeaderPart = styled.div`
   margin-right: -3vw;
   font-size: 10vw;
   overflow: hidden;
+  transition: opacity 0.5s;
   @media (max-width: 768px) {
     font-size: 20vw;
     letter-spacing: 3vw;
@@ -148,7 +149,7 @@ export default function Hero() {
   const textAnimationStyle = {
     letterSpacing: `${2.5 - 3 * aboutSectionScroll}vw`,
     // transform: `translateY(-${aboutSectionScroll * 300}%)`,
-    opacity: `${aboutSectionScroll === 1 ? 0 : 1}`
+    opacity: `${aboutSectionScroll >= 0.5 ? 0 : 1}`
   }
   
   const captionAnimationStyle = {
@@ -157,6 +158,10 @@ export default function Hero() {
 
   const mobileAnimation = {
     opacity: `${aboutSectionScroll === 1 ? 0 : 1}`
+  }
+
+  const scrollButtonStyle = {
+    display: `${aboutSectionScroll !== 0 ? 'none' : 'block'}`
   }
 
   return (
@@ -180,7 +185,7 @@ export default function Hero() {
           <span>{isAltLang ? 'Welcome to my portfolio' : 'Bienvenue sur mon portfolio'}</span>
         </StyledCaptions>
       </StyledHeroContainer>
-      <StyledIconContainer>
+      <StyledIconContainer style={scrollButtonStyle}>
         <ScrollButton />
       </StyledIconContainer>
     </StyledHeroSection>

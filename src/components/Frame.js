@@ -73,8 +73,7 @@ const StyledNavLink = styled.li`
   } */
 `
 
-const StyledFooter = styled.footer`
-`
+const StyledFooter = styled.footer``
 
 const StyledButtonContainer = styled.div`
   display: flex;

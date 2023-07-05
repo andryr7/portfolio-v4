@@ -116,6 +116,7 @@ const StyledInterlude = styled.section`
   justify-content: center;
   align-items: center;
   transition: all 0.5s;
+  pointer-events: none;
 `
 
 const StyledSectionTitle = styled.span`
@@ -124,7 +125,7 @@ const StyledSectionTitle = styled.span`
 `
 
 export default function About({ infoData, skillData }) {
-  const { aboutSectionRef, isAltLang, aboutSectionScroll, setAboutSectionScroll } = useContext(PortfolioContext);
+  const { aboutSectionRef, isAltLang, setAboutSectionScroll } = useContext(PortfolioContext);
   const imageProps = useNextSanityImage(sanityClient, infoData.picture);
 
   const frontendSkills = skillData.filter(skill => skill.skilltype === 'frontend');
@@ -140,13 +141,9 @@ export default function About({ infoData, skillData }) {
     setAboutSectionScroll(clampedRatio);
   });
 
-  const interludeStyle = {
-    opacity: `${aboutSectionScroll >= 0.8 ? 1 : 0}`
-  }
-
   return (
     <StyledAboutSection ref={aboutSectionRef}>
-      <StyledInterlude style={interludeStyle}>
+      <StyledInterlude>
         <StyledSectionTitle>
           {isAltLang ? 'about' : 'à propos'}
         </StyledSectionTitle>

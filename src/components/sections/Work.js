@@ -128,6 +128,7 @@ function ProjectCard({ project }) {
 export default function Work({ projectData }) {
   const { workSectionRef, setWorkSectionScroll, isAltLang } = useContext(PortfolioContext);
   const [paddingSlideNb, setPaddingSlideNb] = useState(2);
+  const workSliderRef = useRef(null);
 
   useLenis(() => {
     const sectionRectTop = workSectionRef.current.getBoundingClientRect().top;
@@ -160,8 +161,8 @@ export default function Work({ projectData }) {
     return (() => {
       window.removeEventListener('resize', handleResize);
     })
-  }, [])
-
+  }, []);
+  
   return (
     <StyledWorkSection ref={workSectionRef}>
       <StyledInterlude >
@@ -172,6 +173,7 @@ export default function Work({ projectData }) {
       <StyledContainer>
         <StyledCarouselContainer>
           <Splide
+            ref={workSliderRef}
             aria-label="Projects carousel" 
             hasTrack={ false }
             options={ {
@@ -181,13 +183,13 @@ export default function Work({ projectData }) {
               perPage: 5,
               lazyLoad: false,
               focus: 'center',
+              snap: true,
               breakpoints: {
                 2160: {
                   perPage: 3
                 },
                 768: {
                   perPage: 1,
-                  snap: true,
                 }
               }
             } }
