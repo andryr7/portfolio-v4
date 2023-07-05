@@ -1,14 +1,17 @@
-import { createContext, useState, useRef } from "react";
+import { createContext, useState, useRef, useEffect } from "react";
 
 export const PortfolioContext = createContext();
 
 export const PortfolioProvider = (({children}) => {
+  const [isMobile, setIsMobile] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [isAltLang, setIsAltLang] = useState(false);
   const [contactMenuIsOpened, setContactMenuIsOpened] = useState(false);
   const [currentSection, setCurrentSection] = useState('hero');
   const aboutSectionRef = useRef(null);
   const workSectionRef = useRef(null);
+  const [aboutSectionScroll, setAboutSectionScroll] = useState(0);
+  const [workSectionScroll, setWorkSectionScroll] = useState(0);
 
   // Checking navigator language and saving theme and language preferences
   // useEffect(()=>{
@@ -17,8 +20,26 @@ export const PortfolioProvider = (({children}) => {
   //   localStorage.getItem('theme') === 'light' && setTheme('light');
   // },[]);
 
+  // Handling animation disabling on mobile
+  useEffect(() => {
+    window.innerWidth <= 768 && setIsMobile(true);
+    const handleResize = () => {
+      if (window.innerWidth <= 768 && isMobile === false) {
+        setIsMobile(true);
+      }
+      else {
+        setIsMobile(false);
+      }
+    }
+    
+    window.addEventListener('resize', handleResize);
+
+    return (() => window.removeEventListener('resize', handleResize))
+  }, [])
+
   return (
     <PortfolioContext.Provider value={{ 
+      isMobile,
       isDarkMode,
       setIsDarkMode,
       contactMenuIsOpened,
@@ -29,6 +50,10 @@ export const PortfolioProvider = (({children}) => {
       currentSection,
       aboutSectionRef,
       workSectionRef,
+      aboutSectionScroll,
+      setAboutSectionScroll,
+      workSectionScroll,
+      setWorkSectionScroll
     }}>
       {children}
     </PortfolioContext.Provider>

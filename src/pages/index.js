@@ -6,11 +6,10 @@ import Hero from '@/components/sections/Hero'
 import About from '@/components/sections/About'
 import Work from '@/components/sections/Work'
 import GrainFilter from '@/components/GrainFilter'
-import { useContext, useEffect, useRef } from 'react'
+import { useContext } from 'react'
 import { PortfolioContext } from '@/utils/Context'
 import { useLenis } from '@studio-freight/react-lenis'
 import { sanityClient } from '../../sanity'
-import Interlude from '@/components/sections/Interlude'
 
 const StyledAppContainer = styled.div``
 
@@ -23,7 +22,7 @@ const StyledMain = styled.main`
 `
 
 export default function Home({ infoData, projectData, skillData }) {
-  const { aboutSectionRef, workSectionRef, setCurrentSection } = useContext(PortfolioContext);
+  const { aboutSectionRef, workSectionRef, setCurrentSection, isAltLang, isMobile } = useContext(PortfolioContext);
   
   // Finding the current section
   useLenis(() => {
@@ -57,11 +56,10 @@ export default function Home({ infoData, projectData, skillData }) {
         <StyledMain className={`${playfairDisplay.className}`}>
           <Hero />
           <About infoData={infoData} skillData={skillData}/>
-          <Interlude />
           <Work projectData={projectData}/>
         </StyledMain>
         <Frame infoData={infoData}/>
-        <GrainFilter />
+        {!isMobile && <GrainFilter />}
       </StyledAppContainer>
     </>
   )

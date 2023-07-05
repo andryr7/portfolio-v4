@@ -8,6 +8,12 @@ import { useNextSanityImage } from "next-sanity-image"
 import { sanityClient } from "../../../sanity"
 import SkillContainer from "../composables/SkillContainer"
 
+//Background images
+import lines from '../../assets/backgrounds/lines.svg'
+import labyrinth from '../../assets/backgrounds/labyrinth.svg'
+import hexagons from '../../assets/backgrounds/hexagons.svg'
+import { useLenis } from "@studio-freight/react-lenis"
+
 const StyledAboutSection = styled.section`
   width: 100%;
   display: flex;
@@ -15,8 +21,6 @@ const StyledAboutSection = styled.section`
   align-items: center;
   z-index: 1;
   display: flex;
-  background-color: ${props => props.theme.background};
-  border-top: 1px solid ${props => props.theme.main};
   border-bottom: 1px solid ${props => props.theme.main};
   //TODO Margin for hero section
   margin-top: 100vh;
@@ -28,6 +32,8 @@ const StyledTopContainer = styled.div`
   align-items: center;
   padding: 15vh 0;
   width: 100%;
+  border-top: 1px solid ${props => props.theme.main};
+  background-color: ${props => props.theme.background};
   @media (max-width: 768px) {
     flex-direction: column;
     gap: 20vw;
@@ -45,6 +51,7 @@ const StyledBottomContainer = styled.div`
   padding: 15vh 0;
   width: 100%;
   border-top: 1px dashed ${props => props.theme.main};
+  background-color: ${props => props.theme.background};
 `
 
 const StyledImageContainer = styled.div`
@@ -102,16 +109,48 @@ const StyledItemContainer = styled.ul`
   };
 `
 
+const StyledInterlude = styled.section`
+  width: 100%;
+  height: 25vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s;
+`
+
+const StyledSectionTitle = styled.span`
+  font-size: clamp(2rem, 5vw, 10rem);
+  letter-spacing: 1vw;
+`
+
 export default function About({ infoData, skillData }) {
-  const { aboutSectionRef, isAltLang } = useContext(PortfolioContext);
+  const { aboutSectionRef, isAltLang, aboutSectionScroll, setAboutSectionScroll } = useContext(PortfolioContext);
   const imageProps = useNextSanityImage(sanityClient, infoData.picture);
 
   const frontendSkills = skillData.filter(skill => skill.skilltype === 'frontend');
   const backendSkills = skillData.filter(skill => skill.skilltype === 'backend');
   const projectmgmtSkills = skillData.filter(skill => skill.skilltype === 'projectmgmt');
 
+  useLenis(() => {
+    const sectionRectTop = aboutSectionRef.current.getBoundingClientRect().top;
+    const min = window.innerHeight;
+    const max = window.innerHeight * 1;
+    const ratio = - (sectionRectTop - min) / max;
+    const clampedRatio = Math.min(ratio, 1);
+    setAboutSectionScroll(clampedRatio);
+  });
+
+  const interludeStyle = {
+    opacity: `${aboutSectionScroll >= 0.8 ? 1 : 0}`
+  }
+
   return (
     <StyledAboutSection ref={aboutSectionRef}>
+      <StyledInterlude style={interludeStyle}>
+        <StyledSectionTitle>
+          {isAltLang ? 'about' : 'à propos'}
+        </StyledSectionTitle>
+      </StyledInterlude>
       <StyledTopContainer>
         <StyledImageContainer>
           <Image
@@ -139,16 +178,19 @@ export default function About({ infoData, skillData }) {
             title={isAltLang ? 'Frontend web development' : 'Développement web frontend'}
             skills={frontendSkills}
             delay={0}
+            backgroundImage={lines}
           />
           <SkillContainer 
             title={isAltLang ? 'Backend web development' : 'Développement web backend'}
             skills={backendSkills}
             delay={0.5}
+            backgroundImage={labyrinth}
           />
           <SkillContainer 
             title={isAltLang ? 'Project management' : 'Gestion de projet'}
             skills={projectmgmtSkills}
             delay={1}
+            backgroundImage={hexagons}
           />
         </StyledItemContainer>
       </StyledBottomContainer>

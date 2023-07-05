@@ -6,13 +6,34 @@ import { PortfolioContext } from "@/utils/Context"
 import Image from "next/image"
 import { useNextSanityImage } from "next-sanity-image"
 import { sanityClient } from "../../../sanity"
+import { useLenis } from "@studio-freight/react-lenis";
+
+const StyledInterlude = styled.section`
+  width: 100%;
+  height: 25vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
+const StyledSectionTitle = styled.span`
+  font-size: clamp(2rem, 5vw, 10rem);
+  letter-spacing: 1vw;
+`
 
 const StyledWorkSection = styled.section`
-  height: 100lvh;
   display: flex;
   align-items: center;
+  flex-direction: column;
+`
+
+const StyledContainer = styled.div`
+  height: 100lvh;
+  width: 100%;
   border-top: 1px solid ${props => props.theme.main};
   background-color: ${props => props.theme.background};
+  display: flex;
+  align-items: center;
 `
 
 const StyledCarouselContainer = styled.div`
@@ -105,8 +126,17 @@ function ProjectCard({ project }) {
 }
  
 export default function Work({ projectData }) {
-  const { workSectionRef } = useContext(PortfolioContext);
+  const { workSectionRef, setWorkSectionScroll, isAltLang } = useContext(PortfolioContext);
   const [paddingSlideNb, setPaddingSlideNb] = useState(2);
+
+  useLenis(() => {
+    const sectionRectTop = workSectionRef.current.getBoundingClientRect().top;
+    const min = window.innerHeight;
+    const max = window.innerHeight * 1;
+    const ratio = - (sectionRectTop - min) / max;
+    const clampedRatio = Math.min(ratio, 1);
+    setWorkSectionScroll(clampedRatio);
+  });
 
   useEffect(() => {
     const handleResize = () => {
@@ -134,43 +164,50 @@ export default function Work({ projectData }) {
 
   return (
     <StyledWorkSection ref={workSectionRef}>
-      <StyledCarouselContainer>
-        <Splide
-          aria-label="Projects carousel" 
-          hasTrack={ false }
-          options={ {
-            drag: 'free',
-            arrows: false,
-            pagination: false,
-            perPage: 5,
-            lazyLoad: false,
-            focus: 'center',
-            breakpoints: {
-              2160: {
-                perPage: 3
-              },
-              768: {
-                perPage: 1,
-                snap: true,
+      <StyledInterlude >
+        <StyledSectionTitle>
+          {isAltLang ? 'work' : 'projets'}
+        </StyledSectionTitle>
+      </StyledInterlude>
+      <StyledContainer>
+        <StyledCarouselContainer>
+          <Splide
+            aria-label="Projects carousel" 
+            hasTrack={ false }
+            options={ {
+              drag: 'free',
+              arrows: false,
+              pagination: false,
+              perPage: 5,
+              lazyLoad: false,
+              focus: 'center',
+              breakpoints: {
+                2160: {
+                  perPage: 3
+                },
+                768: {
+                  perPage: 1,
+                  snap: true,
+                }
               }
-            }
-          } }
-        >
-          <SplideTrack>
-            {[...Array(paddingSlideNb)].map((e, i) => (
-              <SplideSlide key={i} />
-            ))}
-            {projectData.map((project, index) => (
-              <SplideSlide key={project._id}>
-                <ProjectCard project={project} />
-              </SplideSlide>
-            ))}
-            {[...Array(paddingSlideNb)].map((e, i) => (
-              <SplideSlide key={i} />
-            ))}
-          </SplideTrack>
-        </Splide>
-      </StyledCarouselContainer>
+            } }
+          >
+            <SplideTrack>
+              {[...Array(paddingSlideNb)].map((e, i) => (
+                <SplideSlide key={i} />
+              ))}
+              {projectData.map((project, index) => (
+                <SplideSlide key={project._id}>
+                  <ProjectCard project={project} />
+                </SplideSlide>
+              ))}
+              {[...Array(paddingSlideNb)].map((e, i) => (
+                <SplideSlide key={i} />
+              ))}
+            </SplideTrack>
+          </Splide>
+        </StyledCarouselContainer>
+      </StyledContainer>
     </StyledWorkSection>
   )
 }

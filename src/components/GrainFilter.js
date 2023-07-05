@@ -96,7 +96,9 @@ export default function GrainFilter({
   
   // Handling window resizing
   useEffect(() => {
-    if (canvasRef === null) {
+    const canvas = canvasRef.current;
+  
+    if (canvas === null) {
       return
     }
 
@@ -105,8 +107,8 @@ export default function GrainFilter({
         return
       };
       
-      canvasRef.current.width = window.innerWidth;
-      canvasRef.current.height = window.innerHeight;
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     }
 
     window.addEventListener('resize', handleResize)

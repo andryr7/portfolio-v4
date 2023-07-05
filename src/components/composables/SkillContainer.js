@@ -9,6 +9,8 @@ const StyledHexContent = styled.li`
   justify-content: center;
   align-items: center;
   background-color: ${props => props.theme.background};
+  background-position: center;
+  background-size: cover;
   width: calc(100% - 2px);
   height: calc(100% - 2px);
   max-width: 498px;
@@ -20,6 +22,7 @@ const StyledHexContent = styled.li`
   &.displayed {
     width: calc(100% - 6px);
     height: calc(100% - 6px);
+    background: ${props => props.theme.background};
   }
 `
 
@@ -81,7 +84,7 @@ const StyledSkillItem = styled.article`
   font-size: clamp(1rem, 1.5vw, 1.5rem);
 `
 
-export default function SkillContainer({ title, skills, delay }) {
+export default function SkillContainer({ title, skills, delay, backgroundImage }) {
   const sliderRef = useRef(null);
   const containerRef = useRef(null);
   const { isAltLang } = useContext(PortfolioContext);
@@ -98,6 +101,10 @@ export default function SkillContainer({ title, skills, delay }) {
     sliderRef.current.splide.Components.Autoplay.pause();
   }
 
+  const HexContentStyle = {
+    backgroundImage: `url(${backgroundImage.src})`
+  }
+
   return (
     <StyledHexContainer 
       ref={containerRef} 
@@ -106,7 +113,7 @@ export default function SkillContainer({ title, skills, delay }) {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     > 
-      <StyledHexContent className={sliderIsDiplayed && 'displayed'}>
+      <StyledHexContent className={sliderIsDiplayed && 'displayed'} style={HexContentStyle}>
         <StyledHexTitle className={sliderIsDiplayed && 'displayed'}>
           {title}
         </StyledHexTitle>

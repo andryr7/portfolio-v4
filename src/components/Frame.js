@@ -68,6 +68,9 @@ const StyledNavLink = styled.li`
   &.current {
     color: ${props => props.theme.accent};
   }
+  /* &:last-child.current{
+    color: ${props => props.theme.altaccent};
+  } */
 `
 
 const StyledFooter = styled.footer`
@@ -85,7 +88,15 @@ const StyledSiteOptionsContainer = styled.div`
 `
 
 export default function Frame({ infoData }) {
-  const { contactMenuIsOpened, setContactMenuIsOpened, aboutSectionRef, workSectionRef, currentSection, isAltLang } = useContext(PortfolioContext);
+  const { 
+    contactMenuIsOpened, 
+    setContactMenuIsOpened, 
+    aboutSectionRef, 
+    workSectionRef, 
+    currentSection, 
+    isAltLang 
+  } = useContext(PortfolioContext);
+  
   const lenis = useLenis();
 
   const handleAboutLinkClick = () => {
