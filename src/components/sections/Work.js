@@ -194,6 +194,7 @@ export default function Work({ projectData }) {
                 },
                 768: {
                   perPage: 1,
+                  arrows: true
                 }
               }
             } }

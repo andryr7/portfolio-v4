@@ -113,7 +113,7 @@ const StyledContactIcon = styled.img`
 `
 
 export default function ContactMenu({ infoData }) {
-  const { contactMenuIsOpened, isDarkMode } = useContext(PortfolioContext);
+  const { contactMenuIsOpened, isDarkMode, isAltLang } = useContext(PortfolioContext);
 
   return(
     <StyledContactMenu className={contactMenuIsOpened && 'opened'}>
@@ -125,7 +125,7 @@ export default function ContactMenu({ infoData }) {
             </StyledContactLinkTitle>
             <StyledContactIcon src={isDarkMode ? linkedinlight.src : linkedindark.src}/>
             <StyledContactLinkSpan>
-              Consultez mon profil professionnel
+              {isAltLang ? 'Consult my professionnal profile' : 'Consultez mon profil professionnel'}
             </StyledContactLinkSpan>
           </StyledContactLinkContent>
         </StyledContactLinkShape>
@@ -136,7 +136,7 @@ export default function ContactMenu({ infoData }) {
             </StyledContactLinkTitle>
             <StyledContactIcon src={isDarkMode ? githublight.src : githubdark.src}/>
             <StyledContactLinkSpan>
-              Jetez un oeil à mon code
+              {isAltLang ? 'Take a look at my code' : 'Jetez un oeil à mon code'}
             </StyledContactLinkSpan>
           </StyledContactLinkContent>
         </StyledContactLinkShape>
@@ -147,7 +147,7 @@ export default function ContactMenu({ infoData }) {
             </StyledContactLinkTitle>
             <StyledContactIcon src={isDarkMode ? emaillight.src : emaildark.src}/>
             <StyledContactLinkSpan>
-              Contactez-moi directement
+              {isAltLang ? 'Contact me directly' : 'Contactez-moi directement'}
             </StyledContactLinkSpan>
           </StyledContactLinkContent>
         </StyledContactLinkShape>
