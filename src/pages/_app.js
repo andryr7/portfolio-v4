@@ -24,6 +24,8 @@ function AppWithPortfolioContext({ children }) {
 
   const options = {
     lerp: 0.1,
+    smoothWheel: true,
+    smoothTouch: false
   }
 
   return (
