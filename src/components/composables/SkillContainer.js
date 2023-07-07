@@ -65,6 +65,9 @@ const StyledHexContainer = styled.article`
   ;
   @media (max-width: 768px) {
     width: 61vw;
+    transition: 
+      background-color 0.5s ease 0s,
+      opacity 0.5s ease 0.5s;
   };
   opacity: 0;
   &.displayed {
@@ -84,7 +87,7 @@ const StyledSkillItem = styled.article`
   font-size: clamp(1rem, 1.5vw, 1.5rem);
 `
 
-export default function SkillContainer({ title, skills, delay, backgroundImage }) {
+export default function SkillContainer({ title, skills, delay }) {
   const sliderRef = useRef(null);
   const containerRef = useRef(null);
   const { isAltLang } = useContext(PortfolioContext);
@@ -101,10 +104,6 @@ export default function SkillContainer({ title, skills, delay, backgroundImage }
     sliderRef.current.splide.Components.Autoplay.pause();
   }
 
-  const HexContentStyle = {
-    backgroundImage: `url(${backgroundImage.src})`
-  }
-
   return (
     <StyledHexContainer 
       ref={containerRef} 
@@ -113,7 +112,7 @@ export default function SkillContainer({ title, skills, delay, backgroundImage }
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     > 
-      <StyledHexContent className={sliderIsDiplayed && 'displayed'} style={HexContentStyle}>
+      <StyledHexContent className={sliderIsDiplayed && 'displayed'}>
         <StyledHexTitle className={sliderIsDiplayed && 'displayed'}>
           {title}
         </StyledHexTitle>

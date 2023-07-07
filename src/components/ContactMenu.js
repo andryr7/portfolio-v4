@@ -1,18 +1,12 @@
 import { PortfolioContext } from "@/utils/Context"
-import { useContext, useEffect, useRef, useState } from "react"
+import { useContext } from "react"
 import { styled } from "styled-components"
-import { playfairDisplay } from "@/styles/fonts"
-
-// Assets imports
-import linkedindarklogo from '../assets/contact/linkedindark.png'
-import linkedinlightlogo from '../assets/contact/linkedinlight.png'
-import githubdarklogo from '../assets/contact/githubdark.png'
-import githublightlogo from '../assets/contact/githublight.png'
-
-// Form handling imports
-import ReCAPTCHA from "react-google-recaptcha"
-import emailjs from '@emailjs/browser'
-import { emailJSSettings } from '../../emailjs'
+import githubdark from '../assets/contact/githubdark.png'
+import githublight from '../assets/contact/githublight.png'
+import linkedindark from '../assets/contact/linkedindark.png'
+import linkedinlight from '../assets/contact/linkedinlight.png'
+import emaildark from '../assets/contact/emaildark.png'
+import emaillight from '../assets/contact/emaillight.png'
 
 const StyledContactMenu = styled.div`
   width: 100%;
@@ -30,228 +24,129 @@ const StyledContactMenu = styled.div`
     opacity: 1;
     pointer-events: all;
   };
-  backdrop-filter: blur(100px);
-  -webkit-backdrop-filter: blur(100px);
+  backdrop-filter: blur(50px);
+  -webkit-backdrop-filter: blur(50px);
   @media (max-width: 768px) {
     background-color: ${props => props.theme.background};
-    transition: none;
+    backdrop-filter: none;
   };
-`
-
-const StyledSectionTitle = styled.div`
-  position: absolute;
-  top: 0;
-  font-size: 2rem;
-  transform: translateX(-100%) rotate(-90deg);
 `
 
 const StyledContactContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  width: 100%;
-  max-width: min(600px, 90vw);
-  position: relative;
-`
-
-const StyledContactLinksContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
   align-items: center;
-`
-
-const StyledContactLink = styled.a`
-  width: 30%;
-`
-
-const StyledContactLogo = styled.img`
-  width: 100%;
-  transition: all 0.5s;
-  filter: drop-shadow(0px 0px ${props => props.theme.accent});
-  &:hover {
-    filter: drop-shadow(3px 3px ${props => props.theme.accent});
+  @media (max-width: 768px) {
+    flex-direction: column;
   };
 `
 
-const StyledFormContainer = styled.div`
-  position: relative;
+const StyledContactLinkTitle = styled.span`
+  font-size: 2rem;
+  opacity: 0;
+  transition: all 0.5s;
+  transform: translateY(100%);
+  @media (max-width: 768px) {
+    display: none;
+  };
 `
 
-const StyledForm = styled.form`
+const StyledContactLinkSpan = styled.span`
+  font-size: 1.25rem;
+  opacity: 0;
+  transition: all 0.5s;
+  transform: translateY(-100%);
+  @media (max-width: 768px) {
+    display: none;
+  };
+`
+
+const StyledContactLinkShape = styled.a`
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  aspect-ratio: 1;
+  width: min(25vw, 50vh);
+  background-color: ${props => props.theme.main};
+  margin-left: -5vw;
+  transition: width 0.5s;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:hover {
+    width: min(40vw, 80vh);
+    background-color: ${props => props.theme.accent};
+    & span {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  };
+  @media (max-width: 768px) {
+    margin-left: 0;
+    margin-top: -10vw;
+    width: 50vw;
+    &:hover {
+      width: 50vw;
+    };
+  };
+`
+
+const StyledContactLinkContent = styled.div`
+  position: absolute;
+  width: calc(100% - 4px);
+  height: calc(100% - 4px);
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  background-color: ${props => props.theme.background};
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-`
-
-const StyledSeparator = styled.hr`
-  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 7.5%;
+  shape-outside: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
   color: ${props => props.theme.main};
 `
 
-const StyledInput = styled.input`
-  width: 100%;
-  padding: 0.75rem;
-  font-size: 1rem;
-  letter-spacing: 1.2px;
-  box-sizing: border-box;
-  border: none;
-  border: 1px solid ${props => props.theme.main};
-  background-color: ${props => props.theme.background};
-  color: ${props => props.theme.main};
-  &:focus {
-    outline: none !important;
-    border-color: ${props => props.theme.accent};
-  };
-`
-
-const StyledTextArea = styled.textarea`
-  width: 100%;
-  height: 10rem;
-  max-width: 1500px;
-  padding: 1rem;
-  font-size: 1rem;
-  letter-spacing: 1.2px;
-  box-sizing: border-box;
-  margin: 0;
-  resize: vertical;
-  border: 1px solid ${props => props.theme.main};
-  background-color: ${props => props.theme.background};
-  color: ${props => props.theme.main};
-  &:focus {
-    outline: none !important;
-    border-color: ${props => props.theme.accent};
-  }
-  @media (max-width: 768px) {
-    height: 5rem;
-  };
-`
-
-const StyledFormActionsContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  max-height: 0px;
-  transition: all 0.5s;
-  flex-wrap: wrap;
-  overflow: hidden;
-  &.displayed {
-    max-height: 150px;
-    overflow: unset;
-  }
-`
-
-const StyledSendButton = styled.button`
-  height: 100%;
-  background-color: ${props => props.theme.main};
-  padding: 1rem 2rem;
-  box-sizing: border-box;
-  color: ${props => props.theme.background};
-  font-size: 2rem;
-  border: 1px solid ${props => props.theme.main};
-  cursor: pointer;
-  transition: all 0.52s;
-  &:hover {
-    background-color: ${props => props.theme.accent};
-    border-color: ${props => props.theme.background};
-  };
+const StyledContactIcon = styled.img`
+  width: max(3rem, 5vw);
 `
 
 export default function ContactMenu({ infoData }) {
-  const { contactMenuIsOpened } = useContext(PortfolioContext);
-  const [formName, setFormName] = useState('');
-  const [formEmail, setFormEmail] = useState('');
-  const [formMessage, setFormMessage] = useState('');
-  const { isDarkMode } = useContext(PortfolioContext);
-  const recaptchaRef = useRef(null);
-  const formIsValid = formName && /\S+@\S+\.\S+/.test(formEmail) && formMessage;
-  
-  const getTemplateParams = () => {
-    return {
-      name: formName,
-      email: formEmail,
-      message: formMessage,
-      'g-recaptcha-response': recaptchaRef.current.getValue(),
-    };
-  };
-  
-  const handleNameChange = (event) => {
-    setFormName(event.target.value);
-  };
-
-  const handleEmailChange = (event) => {
-    setFormEmail(event.target.value);
-  };
-
-  const handleMessageChange = (event) => {
-    setFormMessage(event.target.value);
-  };
-
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    if (formIsValid) {
-      emailjs.send(emailJSSettings.serviceId, emailJSSettings.templateId, getTemplateParams(), emailJSSettings.publicKey)
-        .then(() => {
-          setFormName('');
-          setFormEmail('');
-          setFormMessage('');
-          recaptchaRef.current.reset();
-        }, (err) => {
-          window.alert("Oups ! Une erreur est survenue. Je vais tenter d'y remédier au plus vite");
-        });
-    }
-  }
+  const { contactMenuIsOpened, isDarkMode, isAltLang } = useContext(PortfolioContext);
 
   return(
     <StyledContactMenu className={contactMenuIsOpened && 'opened'}>
       <StyledContactContainer>
-        <StyledContactLinksContainer>
-          <StyledContactLink href={infoData.linkedin} target="_blank" rel="noopener noreferrer">
-            <StyledContactLogo src={isDarkMode ? linkedinlightlogo.src : linkedindarklogo.src} />
-          </StyledContactLink>
-          <StyledContactLink href={infoData.github}>
-            <StyledContactLogo src={isDarkMode ? githublightlogo.src : githubdarklogo.src} />
-          </StyledContactLink>
-        </StyledContactLinksContainer>
-        <StyledSeparator />
-        <StyledFormContainer>
-          <StyledSectionTitle >
-            contact
-          </StyledSectionTitle>
-          <StyledForm>
-            <StyledInput 
-              type="text" 
-              name="name" 
-              value={formName} 
-              placeholder='Votre nom *' 
-              onChange={handleNameChange}
-              className={`${playfairDisplay.className}`}
-            />
-            <StyledInput 
-              type="text" 
-              name="email" 
-              value={formEmail} 
-              placeholder='Votre e-mail *' 
-              onChange={handleEmailChange}
-              className={`${playfairDisplay.className}`}
-            />
-            <StyledTextArea 
-              type="text" 
-              name="message" 
-              value={formMessage} 
-              placeholder='Votre message *' 
-              onChange={handleMessageChange}
-              className={`${playfairDisplay.className}`}
-            />
-            <StyledFormActionsContainer className={formIsValid && 'displayed'}>
-              <ReCAPTCHA
-                sitekey={emailJSSettings.reCaptchaSiteKey}
-                ref={recaptchaRef}
-              />
-              <StyledSendButton onClick={handleFormSubmit} className={`${playfairDisplay.className}`}>
-                Envoyer
-              </StyledSendButton>
-            </StyledFormActionsContainer>
-          </StyledForm>
-        </StyledFormContainer>
+        <StyledContactLinkShape href={infoData.linkedin} target="_blank" rel="roopener noreferer">
+          <StyledContactLinkContent>
+            <StyledContactLinkTitle>
+              LinkedIn
+            </StyledContactLinkTitle>
+            <StyledContactIcon src={isDarkMode ? linkedinlight.src : linkedindark.src}/>
+            <StyledContactLinkSpan>
+              {isAltLang ? 'Consult my professionnal profile' : 'Consultez mon profil professionnel'}
+            </StyledContactLinkSpan>
+          </StyledContactLinkContent>
+        </StyledContactLinkShape>
+        <StyledContactLinkShape href={infoData.github} target="_blank" rel="roopener noreferer">
+          <StyledContactLinkContent>
+            <StyledContactLinkTitle>
+              GitHub
+            </StyledContactLinkTitle>
+            <StyledContactIcon src={isDarkMode ? githublight.src : githubdark.src}/>
+            <StyledContactLinkSpan>
+              {isAltLang ? 'Take a look at my code' : 'Jetez un oeil à mon code'}
+            </StyledContactLinkSpan>
+          </StyledContactLinkContent>
+        </StyledContactLinkShape>
+        <StyledContactLinkShape href={'mailto:contact@andryratsimba.com'} target="_blank" rel="roopener noreferer">
+          <StyledContactLinkContent>
+            <StyledContactLinkTitle>
+              Email
+            </StyledContactLinkTitle>
+            <StyledContactIcon src={isDarkMode ? emaillight.src : emaildark.src}/>
+            <StyledContactLinkSpan>
+              {isAltLang ? 'Contact me directly' : 'Contactez-moi directement'}
+            </StyledContactLinkSpan>
+          </StyledContactLinkContent>
+        </StyledContactLinkShape>
       </StyledContactContainer>
     </StyledContactMenu>
   )

@@ -8,9 +8,15 @@ import { useNextSanityImage } from "next-sanity-image"
 import { sanityClient } from "../../../sanity"
 import { useLenis } from "@studio-freight/react-lenis";
 
+const StyledWorkSection = styled.section`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+`
+
 const StyledInterlude = styled.section`
   width: 100%;
-  height: 25vh;
+  height: 20vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -19,12 +25,6 @@ const StyledInterlude = styled.section`
 const StyledSectionTitle = styled.span`
   font-size: clamp(2rem, 5vw, 10rem);
   letter-spacing: 1vw;
-`
-
-const StyledWorkSection = styled.section`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
 `
 
 const StyledContainer = styled.div`
@@ -126,7 +126,7 @@ function ProjectCard({ project }) {
 }
  
 export default function Work({ projectData }) {
-  const { workSectionRef, setWorkSectionScroll, isAltLang } = useContext(PortfolioContext);
+  const { workSectionRef, workSectionScroll, setWorkSectionScroll, isAltLang } = useContext(PortfolioContext);
   const [paddingSlideNb, setPaddingSlideNb] = useState(2);
   const workSliderRef = useRef(null);
 
@@ -162,11 +162,15 @@ export default function Work({ projectData }) {
       window.removeEventListener('resize', handleResize);
     })
   }, []);
+
+  const sectionTitleStyle = {
+    letterSpacing: `${1 + workSectionScroll}vw`
+  };
   
   return (
     <StyledWorkSection ref={workSectionRef}>
       <StyledInterlude >
-        <StyledSectionTitle>
+        <StyledSectionTitle style={sectionTitleStyle}>
           {isAltLang ? 'work' : 'projets'}
         </StyledSectionTitle>
       </StyledInterlude>

@@ -27,16 +27,16 @@ export default function Home({ infoData, projectData, skillData }) {
   // Finding the current section
   useLenis(() => {
     const aboutSectionTop = aboutSectionRef.current.getBoundingClientRect().top;
-    const workSectionTop = workSectionRef.current.getBoundingClientRect().top;
+    const aboutSectionBottom = aboutSectionRef.current.getBoundingClientRect().bottom;
     if (aboutSectionTop > (window.innerHeight / 2)) {
       setCurrentSection('hero');
     }
     else {
-      if(Math.abs(aboutSectionTop) < Math.abs(workSectionTop)) {
-        setCurrentSection('about');
+      if (aboutSectionBottom < (window.innerHeight / 2)) {
+        setCurrentSection('work');
       }
       else {
-        setCurrentSection('work')
+        setCurrentSection('about');
       }
     }
   })
