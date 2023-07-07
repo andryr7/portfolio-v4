@@ -35,7 +35,9 @@ const StyledFirstCircle = styled.div`
     linear-gradient(180deg, ${props => props.theme.accent}, rgba(217,217,217,0) 50%);
   filter: blur(25px);
   mask-image: url(${noisefilter.src});
+  -webkit-mask-image: url(${noisefilter.src});
   mask-size: 200px 200px;
+  -webkit-mask-size: 200px 200px;
   left: 35%;
 `
 
@@ -50,7 +52,9 @@ const StyledSecondCircle = styled.div`
     linear-gradient(0deg, ${props => props.theme.altaccent}, rgba(217,217,217,0) 50%);
   filter: blur(25px);
   mask-image: url(${noisefilter.src});
+  -webkit-mask-image: url(${noisefilter.src});
   mask-size: 200px 200px;
+  -webkit-mask-size: 200px 200px;
   left: 65%;
 `
 

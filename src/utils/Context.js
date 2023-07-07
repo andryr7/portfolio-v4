@@ -4,14 +4,14 @@ export const PortfolioContext = createContext();
 
 export const PortfolioProvider = (({children}) => {
   const [isMobile, setIsMobile] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const [isAltLang, setIsAltLang] = useState(false);
   const [contactMenuIsOpened, setContactMenuIsOpened] = useState(false);
   const [currentSection, setCurrentSection] = useState('hero');
-  const aboutSectionRef = useRef(null);
-  const workSectionRef = useRef(null);
   const [aboutSectionScroll, setAboutSectionScroll] = useState(0);
   const [workSectionScroll, setWorkSectionScroll] = useState(0);
+  const aboutSectionRef = useRef(null);
+  const workSectionRef = useRef(null);
 
   // Checking navigator language and saving theme and language preferences
   // useEffect(()=>{

@@ -6,7 +6,7 @@ import Hero from '@/components/sections/Hero'
 import About from '@/components/sections/About'
 import Work from '@/components/sections/Work'
 import GrainFilter from '@/components/GrainFilter'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { PortfolioContext } from '@/utils/Context'
 import { useLenis } from '@studio-freight/react-lenis'
 import { sanityClient } from '../../sanity'
@@ -22,7 +22,7 @@ const StyledMain = styled.main`
 `
 
 export default function Home({ infoData, projectData, skillData }) {
-  const { aboutSectionRef, workSectionRef, setCurrentSection, isAltLang, isMobile } = useContext(PortfolioContext);
+  const { aboutSectionRef, setCurrentSection, isAltLang, isMobile } = useContext(PortfolioContext);
   
   // Finding the current section
   useLenis(() => {

@@ -7,7 +7,6 @@ import linkedindark from '../assets/contact/linkedindark.png'
 import linkedinlight from '../assets/contact/linkedinlight.png'
 import emaildark from '../assets/contact/emaildark.png'
 import emaillight from '../assets/contact/emaillight.png'
-import noisefilter from '../assets/noise.svg'
 
 const StyledContactMenu = styled.div`
   width: 100%;

@@ -173,7 +173,7 @@ export default function Work({ projectData }) {
     <StyledWorkSection ref={workSectionRef}>
       <StyledInterlude >
         <StyledSectionTitle style={sectionTitleStyle}>
-          {isAltLang ? 'work' : 'projets'}
+          {isAltLang ? '{ work }' : '{ projets }'}
         </StyledSectionTitle>
       </StyledInterlude>
       <StyledContainer>
@@ -196,6 +196,7 @@ export default function Work({ projectData }) {
                 },
                 768: {
                   perPage: 1,
+                  arrows: true
                 }
               }
             } }

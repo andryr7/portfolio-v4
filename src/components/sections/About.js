@@ -63,6 +63,7 @@ const StyledBottomContainer = styled.div`
   width: 100%;
   border-top: 1px dashed ${props => props.theme.main};
   background-color: ${props => props.theme.background};
+  z-index: 1;
 `
 
 const StyledImageContainer = styled.div`
@@ -146,7 +147,7 @@ export default function About({ infoData, skillData }) {
     <StyledAboutSection ref={aboutSectionRef}>
       <StyledInterlude>
         <StyledSectionTitle style={sectionTitleStyle}>
-          {isAltLang ? 'about' : 'à propos'}
+          {isAltLang ? '{ about} ' : '{ à propos }'}
         </StyledSectionTitle>
       </StyledInterlude>
       <StyledTopContainer>
