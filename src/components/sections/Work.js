@@ -62,6 +62,7 @@ function ProjectCard({ project }) {
   const animated = useRef(false);
   const cardRef = useRef(null);
   const imageProps = useNextSanityImage(sanityClient, project.image);
+  const { isMobile } = useContext(PortfolioContext);
 
   const projectImageStyle = {
     objectPosition: `${shift}% center`,
@@ -107,8 +108,9 @@ function ProjectCard({ project }) {
 
     return (() => {
       window.cancelAnimationFrame(animationId);
-    })
-  }, []);
+    });
+    
+  },[]);
 
   return (
     <StyledProjectCard target="_blank" rel="noopener noreferrer" href={project.url}>

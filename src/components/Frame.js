@@ -65,6 +65,7 @@ const StyledNavLink = styled.li`
   font-size: clamp(1.25rem, 1.75vw, 2rem);
   cursor: pointer;
   transition: all 0.5s;
+  position: relative;
   &.current {
     color: ${props => props.theme.accent};
   }

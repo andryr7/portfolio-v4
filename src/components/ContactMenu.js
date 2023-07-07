@@ -7,6 +7,7 @@ import linkedindark from '../assets/contact/linkedindark.png'
 import linkedinlight from '../assets/contact/linkedinlight.png'
 import emaildark from '../assets/contact/emaildark.png'
 import emaillight from '../assets/contact/emaillight.png'
+import noisefilter from '../assets/noise.svg'
 
 const StyledContactMenu = styled.div`
   width: 100%;
@@ -24,12 +25,9 @@ const StyledContactMenu = styled.div`
     opacity: 1;
     pointer-events: all;
   };
-  backdrop-filter: blur(50px);
-  -webkit-backdrop-filter: blur(50px);
-  @media (max-width: 768px) {
-    background-color: ${props => props.theme.background};
-    backdrop-filter: none;
-  };
+  background-color: ${props => props.theme.background+'DD'};
+  /* backdrop-filter: blur(50px);
+  -webkit-backdrop-filter: blur(50px); */
 `
 
 const StyledContactContainer = styled.div`
@@ -72,7 +70,7 @@ const StyledContactLinkShape = styled.a`
   justify-content: center;
   align-items: center;
   &:hover {
-    width: min(40vw, 80vh);
+    width: max(40vw, 500px);
     background-color: ${props => props.theme.accent};
     & span {
       opacity: 1;
