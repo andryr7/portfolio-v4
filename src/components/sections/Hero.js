@@ -1,9 +1,9 @@
-import { styled } from "styled-components"
+import { styled, useTheme } from "styled-components"
 import { useContext, useRef } from "react"
 import { PortfolioContext } from "@/utils/Context"
 import { playfairDisplaySC } from "@/styles/fonts"
 import noisefilter from '../../assets/noise.svg'
-import ScrollButton from "../interactivity/ScrollButton"
+import ScrollButton from "../Interactivity/scrollButton"
 
 const StyledHeroSection = styled.section`
   height: 100vh;
@@ -15,7 +15,6 @@ const StyledHeroSection = styled.section`
   position: fixed;
   z-index: -1;
   top: 0;
-  background-color: ${props => props.theme.background};
 `
 
 const StyledBackground = styled.div`
@@ -135,6 +134,11 @@ const StyledIconContainer = styled.div`
 export default function Hero() {
   const { heroSectionRef, isAltLang, isMobile, aboutSectionScroll, workSectionScroll } = useContext(PortfolioContext);
   const helloThere = useRef(null);
+  const theme = useTheme();
+
+  const sectionStyle = {
+    backgroundColor: `${theme.background}`
+  }
 
   const backgroundStyle = {
     transform: `rotate(${workSectionScroll > 0 ? '180deg' : '0deg'})`
@@ -168,7 +172,7 @@ export default function Hero() {
   };
 
   return (
-    <StyledHeroSection ref={heroSectionRef}>
+    <StyledHeroSection ref={heroSectionRef} style={sectionStyle}>
       <StyledBackground style={backgroundStyle}>
         <StyledFirstCircle style={isMobile ? {} : firstCircleStyle}/>
         <StyledSecondCircle style={isMobile ? {} : secondCircleStyle}/>
