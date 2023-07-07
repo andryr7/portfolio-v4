@@ -17,7 +17,6 @@ const StyledAboutSection = styled.section`
   z-index: 1;
   display: flex;
   border-bottom: 1px solid ${props => props.theme.main};
-  //TODO Margin for hero section
   margin-top: 100vh;
 `
 
@@ -124,7 +123,7 @@ const StyledItemContainer = styled.ul`
 export default function About({ infoData, skillData }) {
   const { aboutSectionRef, isAltLang, aboutSectionScroll, setAboutSectionScroll } = useContext(PortfolioContext);
   const imageProps = useNextSanityImage(sanityClient, infoData.picture);
-
+  
   const frontendSkills = skillData.filter(skill => skill.skilltype === 'frontend');
   const backendSkills = skillData.filter(skill => skill.skilltype === 'backend');
   const projectmgmtSkills = skillData.filter(skill => skill.skilltype === 'projectmgmt');

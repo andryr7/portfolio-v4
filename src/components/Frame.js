@@ -2,11 +2,11 @@ import { playfairDisplay } from "@/styles/fonts"
 import { PortfolioContext } from "@/utils/Context"
 import { useContext } from "react"
 import styled from "styled-components"
-import ThemeButton from "./interactivity/ThemeButton"
-import ContactCTA from "./interactivity/ContactCTA"
-import ContactMenu from "./ContactMenu"
 import { useLenis } from "@studio-freight/react-lenis"
-import LangButton from "./interactivity/LangButton"
+import ThemeButton from "./Interactivity/ThemeButton"
+import ContactCTA from "./Interactivity/ContactCTA"
+import ContactMenu from "./ContactMenu"
+import LangButton from "./Interactivity/LangButton"
 
 const StyledFrame = styled.div`
   position: fixed;

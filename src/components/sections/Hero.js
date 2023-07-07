@@ -138,34 +138,34 @@ export default function Hero() {
 
   const backgroundStyle = {
     transform: `rotate(${workSectionScroll > 0 ? '180deg' : '0deg'})`
-  }
+  };
 
   const firstCircleStyle = {
     left: `${Math.min((35 + 30 * aboutSectionScroll), 50)}%`,
     maskPosition: `${Math.max((100 - aboutSectionScroll * 100), 50)}% 50%`
-  }
+  };
 
   const secondCircleStyle = {
     left: `${Math.max((65 - 30 * aboutSectionScroll), 50)}%`,
     maskPosition: `${Math.min(0 + aboutSectionScroll * 100, 50)}% 50%`
-  }
+  };
   
   const textAnimationStyle = {
     letterSpacing: `${2.5 - 3 * aboutSectionScroll}vw`,
     opacity: `${aboutSectionScroll >= 0.5 ? 0 : 1}`
-  }
+  };
   
   const captionAnimationStyle = {
     opacity: `${1 - aboutSectionScroll * 3}`
-  }
+  };
 
   const mobileAnimation = {
     opacity: `${aboutSectionScroll === 1 ? 0 : 1}`
-  }
+  };
 
   const scrollButtonStyle = {
     display: `${aboutSectionScroll !== 0 ? 'none' : 'block'}`
-  }
+  };
 
   return (
     <StyledHeroSection ref={heroSectionRef}>

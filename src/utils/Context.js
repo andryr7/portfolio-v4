@@ -13,12 +13,10 @@ export const PortfolioProvider = (({children}) => {
   const aboutSectionRef = useRef(null);
   const workSectionRef = useRef(null);
 
-  // Checking navigator language and saving theme and language preferences
-  // useEffect(()=>{
-  //   localStorage.getItem('lang') === 'en' && setLanguage('en');
-  //   window.navigator.language === 'en' && setLanguage('en') && localStorage.setItem('lang', 'en');
-  //   localStorage.getItem('theme') === 'light' && setTheme('light');
-  // },[]);
+  // Switching to english if the navigator language isn't french
+  useEffect(()=>{
+    window.navigator.language !== 'fr' && setIsAltLang(true);
+  },[]);
 
   // Handling animation disabling on mobile
   useEffect(() => {
@@ -30,12 +28,12 @@ export const PortfolioProvider = (({children}) => {
       else {
         setIsMobile(false);
       }
-    }
+    };
     
     window.addEventListener('resize', handleResize);
 
     return (() => window.removeEventListener('resize', handleResize))
-  }, [])
+  }, [isMobile])
 
   return (
     <PortfolioContext.Provider value={{ 
