@@ -23,7 +23,7 @@ const StyledAboutSection = styled.section`
 
 const StyledInterlude = styled.section`
   width: 100%;
-  height: 25vh;
+  height: 20vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -33,7 +33,7 @@ const StyledInterlude = styled.section`
 
 const StyledSectionTitle = styled.span`
   font-size: clamp(2rem, 5vw, 10rem);
-  letter-spacing: 2vw;
+  letter-spacing: 1vw;
   transition: opacity 0.5s;
 `
 
@@ -120,6 +120,7 @@ const StyledItemContainer = styled.ul`
     gap: 7.5vh;
   };
 `
+
 export default function About({ infoData, skillData }) {
   const { aboutSectionRef, isAltLang, aboutSectionScroll, setAboutSectionScroll } = useContext(PortfolioContext);
   const imageProps = useNextSanityImage(sanityClient, infoData.picture);
@@ -140,7 +141,7 @@ export default function About({ infoData, skillData }) {
   const sectionTitleStyle = {
     letterSpacing: `${1 + aboutSectionScroll}vw`,
     opacity: `${aboutSectionScroll >= 0.5 ? 1 : 0}`
-  }
+  };
 
   return (
     <StyledAboutSection ref={aboutSectionRef}>

@@ -24,12 +24,9 @@ const StyledContactMenu = styled.div`
     opacity: 1;
     pointer-events: all;
   };
-  backdrop-filter: blur(50px);
-  -webkit-backdrop-filter: blur(100px);
-  @media (max-width: 768px) {
-    background-color: ${props => props.theme.background};
-    backdrop-filter: none;
-  };
+  background-color: ${props => props.theme.background+'DD'};
+  /* backdrop-filter: blur(50px);
+  -webkit-backdrop-filter: blur(50px); */
 `
 
 const StyledContactContainer = styled.div`
@@ -72,13 +69,9 @@ const StyledContactLinkShape = styled.a`
   justify-content: center;
   align-items: center;
   &:hover {
-    width: min(40vw, 80vh);
+    width: max(40vw, 500px);
     background-color: ${props => props.theme.accent};
-    & ${StyledContactLinkTitle} {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    & ${StyledContactLinkSpan} {
+    & span {
       opacity: 1;
       transform: translateY(0);
     }

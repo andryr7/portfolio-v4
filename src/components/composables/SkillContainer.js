@@ -67,7 +67,7 @@ const StyledHexContainer = styled.article`
     width: 61vw;
     transition: 
       background-color 0.5s ease 0s,
-      opacity 0.5s ease 0.5s
+      opacity 0.5s ease 0.5s;
   };
   opacity: 0;
   &.displayed {

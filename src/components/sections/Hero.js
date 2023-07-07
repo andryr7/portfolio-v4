@@ -3,7 +3,7 @@ import { useContext, useRef } from "react"
 import { PortfolioContext } from "@/utils/Context"
 import { playfairDisplaySC } from "@/styles/fonts"
 import noisefilter from '../../assets/noise.svg'
-import ScrollButton from "../interactivity/scrollButton"
+import ScrollButton from "../interactivity/ScrollButton"
 
 const StyledHeroSection = styled.section`
   height: 100vh;
@@ -152,7 +152,6 @@ export default function Hero() {
   
   const textAnimationStyle = {
     letterSpacing: `${2.5 - 3 * aboutSectionScroll}vw`,
-    // transform: `translateY(-${aboutSectionScroll * 300}%)`,
     opacity: `${aboutSectionScroll >= 0.5 ? 0 : 1}`
   }
   

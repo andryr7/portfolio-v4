@@ -16,7 +16,7 @@ const StyledWorkSection = styled.section`
 
 const StyledInterlude = styled.section`
   width: 100%;
-  height: 25vh;
+  height: 20vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -62,6 +62,7 @@ function ProjectCard({ project }) {
   const animated = useRef(false);
   const cardRef = useRef(null);
   const imageProps = useNextSanityImage(sanityClient, project.image);
+  const { isMobile } = useContext(PortfolioContext);
 
   const projectImageStyle = {
     objectPosition: `${shift}% center`,
@@ -107,8 +108,9 @@ function ProjectCard({ project }) {
 
     return (() => {
       window.cancelAnimationFrame(animationId);
-    })
-  }, []);
+    });
+    
+  },[]);
 
   return (
     <StyledProjectCard target="_blank" rel="noopener noreferrer" href={project.url}>
@@ -165,7 +167,7 @@ export default function Work({ projectData }) {
 
   const sectionTitleStyle = {
     letterSpacing: `${1 + workSectionScroll}vw`
-  }
+  };
   
   return (
     <StyledWorkSection ref={workSectionRef}>
