@@ -33,7 +33,7 @@ export default function Home() {
       <StyledAppContainer className={`${playfairDisplay.className}`}>
         {/* <StyledImageContainer> */}
           <Image alt={`Image animée d'Obi-wan kenobi`} src={obiwan} />
-          <span>This isn't the page you are looking for</span>
+          <span>This isn&apos;t the page you are looking for</span>
           <Link href="/">Home</Link>
         {/* </StyledImageContainer> */}
       </StyledAppContainer>

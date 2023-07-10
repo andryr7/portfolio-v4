@@ -152,7 +152,7 @@ export default function Hero() {
   const helloThere = useRef(null);
   const theme = useTheme();
   const [hackerString, setHackerString] = useState('développeur web');
-  const isFirstRender = useRef(true);
+  const [isFirstRender, setIsFirstRender] = useState(true);
 
   const sectionStyle = {
     backgroundColor: `${theme.background}`
@@ -213,17 +213,17 @@ export default function Hero() {
     }, 30)
   }, [isAltLang]);
 
-  // Disabling the animation on first render
-  useEffect(() => {
-    isFirstRender.current === false;
-  },[])
-
   // Triggering the text animation in case the language is changed
   useEffect(() => {
-    if(isFirstRender.current === false) {
+    if(isFirstRender === false) {
       handleAnimateText();
     }
-  },[isAltLang, handleAnimateText])
+  },[isAltLang, handleAnimateText]);
+
+  // Enabling the animation for the next renders
+  useEffect(() => {
+    setIsFirstRender(false);
+  },[])
 
   return (
     <StyledHeroSection ref={heroSectionRef} style={sectionStyle}>
