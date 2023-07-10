@@ -33,22 +33,14 @@ const StyledHeader = styled.div`
   justify-content: space-between;
 `
 
-const StyledFullName = styled.div`
-  overflow: hidden;
-  max-width: 0px;
-  transition: all 1s;
-`
-
 const StyledLogo = styled.div`
   display: flex;
   font-size: clamp(2rem, 10vw, 4.5rem);
   pointer-events: all;
   cursor: pointer;
-  line-height: 7vh;
+  transition: all 0.5s;
   &:hover {
-    ${StyledFullName} {
-      max-width: 500px;
-    }
+    text-shadow: 3px 3px ${props => props.theme.altaccent}
   }
 `
 
@@ -68,10 +60,27 @@ const StyledNavLink = styled.li`
   position: relative;
   &.current {
     color: ${props => props.theme.accent};
+    &::after {
+      opacity: 0;
+    }
   }
-  /* &:last-child.current{
-    color: ${props => props.theme.altaccent};
-  } */
+  &::after {
+    content: '';
+    position: absolute;
+    transition: all 0.5s;
+    top: 175%;
+    right: 0;
+    width: 0%;
+    height: 2px;
+    background-color: ${props => props.theme.accent};
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+  &:hover::after {
+    width: 100%;
+    left: 0;
+  }
 `
 
 const StyledFooter = styled.footer``
@@ -84,7 +93,9 @@ const StyledButtonContainer = styled.div`
 
 const StyledSiteOptionsContainer = styled.div`
   display: flex;
+  gap: 1rem;
   flex-direction: column;
+  align-items: center;
 `
 
 export default function Frame({ infoData }) {
@@ -128,10 +139,7 @@ export default function Frame({ infoData }) {
       <StyledFrame className={`${playfairDisplay.className}`}>
         <StyledHeader>
           <StyledLogo onClick={handleHomeLinkClick}>
-            <div>A</div>
-            <StyledFullName>ndry&nbsp;</StyledFullName>
-            <div>R</div>
-            <StyledFullName>atsimba</StyledFullName>
+            AR
           </StyledLogo>
           <StyledNav>
             <StyledNavLinkList>

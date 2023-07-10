@@ -12,7 +12,6 @@ const StyledThemeButton = styled.button`
   pointer-events: all;
   cursor: pointer;
   position: relative;
-  top: 0;
 `
 
 const StyledSvg = styled.svg`

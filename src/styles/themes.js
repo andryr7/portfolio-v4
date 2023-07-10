@@ -28,6 +28,6 @@ export const lightTheme = {
 export const darkTheme = {
   background: '#141820',
   main: '#f0efe6',
-  accent: "#f85b3b",
+  accent: "#D34D32",
   altaccent: '#12588c'
 }

@@ -169,7 +169,7 @@ export default function About({ infoData, skillData }) {
       </StyledTopContainer>
       <StyledBottomContainer>
         <StyledItemCaption>
-          Domaines de compétence :
+          {isAltLang ? 'Skills :' : 'Compétences :'}
         </StyledItemCaption>
         <StyledItemContainer>
           <SkillContainer 

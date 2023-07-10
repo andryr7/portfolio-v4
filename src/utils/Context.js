@@ -4,7 +4,7 @@ export const PortfolioContext = createContext();
 
 export const PortfolioProvider = (({children}) => {
   const [isMobile, setIsMobile] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true);
   const [isAltLang, setIsAltLang] = useState(false);
   const [contactMenuIsOpened, setContactMenuIsOpened] = useState(false);
   const [currentSection, setCurrentSection] = useState('hero');

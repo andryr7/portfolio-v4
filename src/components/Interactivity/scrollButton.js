@@ -5,15 +5,16 @@ import { useLenis } from "@studio-freight/react-lenis"
 
 const flash = keyframes`
   from {
+    cursor: pointer;
     opacity: 0;
   }
   to {
+    cursor: pointer;
     opacity: 1;
   }
 `
 
 const StyledSvg = styled.svg`
-  cursor: pointer;
   opacity: 0;
   animation: ${flash} 2s ease 7s infinite;
 `

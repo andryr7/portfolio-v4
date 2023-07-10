@@ -24,9 +24,12 @@ const StyledContactMenu = styled.div`
     opacity: 1;
     pointer-events: all;
   };
-  background-color: ${props => props.theme.background+'DD'};
-  /* backdrop-filter: blur(50px);
-  -webkit-backdrop-filter: blur(50px); */
+  backdrop-filter: blur(50px);
+  -webkit-backdrop-filter: blur(50px);
+  @media (max-width: 768px) {
+    background-color: ${props => props.theme.background+'DD'};
+    backdrop-filter: none;
+  };
 `
 
 const StyledContactContainer = styled.div`

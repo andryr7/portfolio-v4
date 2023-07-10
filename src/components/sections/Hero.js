@@ -3,7 +3,7 @@ import { useContext, useRef } from "react"
 import { PortfolioContext } from "@/utils/Context"
 import { playfairDisplaySC } from "@/styles/fonts"
 import noisefilter from '../../assets/noise.svg'
-import ScrollButton from "../Interactivity/scrollButton"
+import ScrollButton from '../Interactivity/ScrollButton'
 
 const StyledHeroSection = styled.section`
   height: 100vh;
@@ -31,7 +31,7 @@ const StyledFirstCircle = styled.div`
   border-radius: 50%;
   transform: translate(-50%, -50%);
   background: 
-    linear-gradient(180deg, ${props => props.theme.accent}, rgba(217,217,217,0) 50%);
+    linear-gradient(180deg, #f85b3b, rgba(217,217,217,0) 50%);
   filter: blur(25px);
   mask-image: url(${noisefilter.src});
   -webkit-mask-image: url(${noisefilter.src});
@@ -89,7 +89,6 @@ const StyledHeaderPart = styled.div`
     letter-spacing: 3vw;
   }
   &.interactive:hover {
-    cursor: help;
     @media (min-width: 768px) {
       ${StyledFirstWord} {
         transform: translateY(-100%);
@@ -118,6 +117,15 @@ const StyledCaptions = styled.div`
     align-items: center;
     width: 100%;
   };
+  & span:first-of-type::after {
+    content: 'Ratsimba';
+    margin-left: 1rem;
+    opacity: 0;
+    transition: all 0.5s;
+  }
+  & span:first-of-type:hover::after{
+    opacity: 1;
+  }
 `
 
 const StyledIconContainer = styled.div`
