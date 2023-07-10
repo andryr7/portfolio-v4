@@ -40,7 +40,7 @@ const StyledLogo = styled.div`
   cursor: pointer;
   transition: all 0.5s;
   &:hover {
-    text-shadow: 3px 3px ${props => props.theme.altaccent}
+    text-shadow: 3px 3px ${props => props.theme.accent}
   }
 `
 
@@ -59,10 +59,19 @@ const StyledNavLink = styled.li`
   transition: all 0.5s;
   position: relative;
   &.current {
-    color: ${props => props.theme.accent};
+    &::before {
+      opacity: 1;
+    }
     &::after {
       opacity: 0;
     }
+  }
+  &::before {
+    content: '. ';
+    opacity: 0;
+    position: absolute;
+    left: -0.5rem;
+    transition: opacity 0.5s;
   }
   &::after {
     content: '';

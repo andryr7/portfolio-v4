@@ -5,9 +5,12 @@ import { PortfolioContext } from '@/utils/Context';
 const StyledLanguageButton = styled.div`
   cursor: pointer;
   pointer-events: all;
-  width: clamp(1.5rem, 2.5vw, 3.5rem);
+  width: clamp(1.75rem, 2.75vw, 3.75rem);
   aspect-ratio: 1;
   position: relative;
+  &:hover {
+    transform: scale(0.9);
+  }
 `;
 
 const StyledSvg = styled.svg`

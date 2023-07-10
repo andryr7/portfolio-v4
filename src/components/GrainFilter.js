@@ -36,6 +36,10 @@ export default function GrainFilter({
     canvasRef.current.height = window.innerHeight;
 
     const drawNewGrain = (ctx, canvasWidth, canvasHeight, patternWidth, patternHeight) => {
+      if (!canvasRef.current) {
+        return
+      };
+
       // Clearing the canvas
       ctx.clearRect(0, 0, canvasWidth, canvasHeight);
   
@@ -73,6 +77,10 @@ export default function GrainFilter({
     }
 
     const loop = () => {
+      if (!canvasRef.current) {
+        return
+      };
+      
       if(frameCount++ % frameInterval === 0) {
         drawNewGrain(ctx, canvasRef.current.width, canvasRef.current.height, patternWidth, patternHeight);
       };

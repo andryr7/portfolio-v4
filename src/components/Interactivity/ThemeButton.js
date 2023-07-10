@@ -12,6 +12,9 @@ const StyledThemeButton = styled.button`
   pointer-events: all;
   cursor: pointer;
   position: relative;
+  &:hover {
+    transform: scale(0.9);
+  }
 `
 
 const StyledSvg = styled.svg`

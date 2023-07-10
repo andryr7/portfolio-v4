@@ -1,5 +1,5 @@
 import { styled, useTheme } from "styled-components"
-import { useContext, useRef } from "react"
+import { useCallback, useContext, useEffect, useRef, useState } from "react"
 import { PortfolioContext } from "@/utils/Context"
 import { playfairDisplaySC } from "@/styles/fonts"
 import noisefilter from '../../assets/noise.svg'
@@ -109,7 +109,7 @@ const StyledCaptions = styled.div`
   position: absolute;
   top: 100%;
   left: clamp(1rem, 3.5vw, 5rem);
-  width: 50%;
+  width: fit-content;
   @media (max-width: 768px) {
     margin-top: 0.5rem;
     position: static;
@@ -117,14 +117,22 @@ const StyledCaptions = styled.div`
     align-items: center;
     width: 100%;
   };
-  & span:first-of-type::after {
-    content: 'Ratsimba';
-    margin-left: 1rem;
-    opacity: 0;
-    transition: all 0.5s;
-  }
-  & span:first-of-type:hover::after{
-    opacity: 1;
+`
+
+const StyledCaptionContainer = styled.div`
+  display: flex;
+  gap: 1rem;
+  &:first-of-type {
+    & span:last-of-type {
+      opacity: 0;
+      transition: opacity 0.5s;
+      @media (max-width: 768px) {
+        opacity: 1;
+      };
+    }
+    &:hover span:last-of-type {
+      opacity: 1;
+    }
   }
 `
 
@@ -143,6 +151,8 @@ export default function Hero() {
   const { heroSectionRef, isAltLang, isMobile, aboutSectionScroll, workSectionScroll } = useContext(PortfolioContext);
   const helloThere = useRef(null);
   const theme = useTheme();
+  const [hackerString, setHackerString] = useState('développeur web');
+  const isFirstRender = useRef(true);
 
   const sectionStyle = {
     backgroundColor: `${theme.background}`
@@ -179,6 +189,42 @@ export default function Hero() {
     display: `${aboutSectionScroll !== 0 ? 'none' : 'block'}`
   };
 
+  // Handling the job text animation
+  const handleAnimateText = useCallback(() => {
+    const letters = isAltLang ? "abcdefghijklmnopqrstuvwxyz " : "abcdéfghijklmnopqrstuvwxyz ";
+    const targetWord = isAltLang ? 'web developer' : 'développeur web';
+    let iteration = 0
+    const maxIterations = targetWord.length;
+    const interval = setInterval(() => {
+      if(iteration >= maxIterations) {
+        clearInterval(interval);
+        return
+      }
+      const randomizedWord = 
+      targetWord.split("")
+        .map((letter, index) => {
+          if(index < iteration) {
+            return targetWord[index]
+          }
+          return letters[Math.floor(Math.random() * 27)]})
+        .join('');
+      setHackerString(randomizedWord);
+      iteration += 1 / 2;
+    }, 30)
+  }, [isAltLang]);
+
+  // Disabling the animation on first render
+  useEffect(() => {
+    isFirstRender.current === false;
+  },[])
+
+  // Triggering the text animation in case the language is changed
+  useEffect(() => {
+    if(isFirstRender.current === false) {
+      handleAnimateText();
+    }
+  },[isAltLang, handleAnimateText])
+
   return (
     <StyledHeroSection ref={heroSectionRef} style={sectionStyle}>
       <StyledBackground style={backgroundStyle}>
@@ -195,8 +241,15 @@ export default function Hero() {
           <audio src={'hellothere.mp3'} ref={helloThere}/>
         </StyledHeaderPart>
         <StyledCaptions style={isMobile ? mobileAnimation : captionAnimationStyle}>
-          <span>{isAltLang ? 'My name is Andry' : "Je m'appelle Andry"}</span>
-          <span>{isAltLang ? 'I am a web developer' : 'Je suis développeur web'}</span>
+          <StyledCaptionContainer>
+            <span>{isAltLang ? 'My name is' : "Je m'appelle"}</span>
+            <span>Andry</span>
+            <span>Ratsimba</span>
+          </StyledCaptionContainer>
+          <StyledCaptionContainer onMouseEnter={() => handleAnimateText()}>
+            <span>{isAltLang ? 'I am a ' : 'Je suis '}</span>
+            <span>{hackerString}</span>
+          </StyledCaptionContainer>
           <span>{isAltLang ? 'Welcome to my portfolio' : 'Bienvenue sur mon portfolio'}</span>
         </StyledCaptions>
       </StyledHeroContainer>
