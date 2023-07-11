@@ -148,11 +148,10 @@ const StyledIconContainer = styled.div`
 `
 
 export default function Hero() {
-  const { heroSectionRef, isAltLang, isMobile, aboutSectionScroll, workSectionScroll } = useContext(PortfolioContext);
+  const { heroSectionRef, isAltLang, aboutSectionScroll, workSectionScroll } = useContext(PortfolioContext);
   const helloThere = useRef(null);
   const theme = useTheme();
   const [hackerString, setHackerString] = useState('développeur web');
-  const [isFirstRender, setIsFirstRender] = useState(true);
 
   const sectionStyle = {
     backgroundColor: `${theme.background}`
@@ -179,10 +178,6 @@ export default function Hero() {
   
   const captionAnimationStyle = {
     opacity: `${1 - aboutSectionScroll * 3}`
-  };
-
-  const mobileAnimation = {
-    opacity: `${aboutSectionScroll === 1 ? 0 : 1}`
   };
 
   const scrollButtonStyle = {
@@ -217,24 +212,24 @@ export default function Hero() {
   useEffect(() => {
     const newHackerString = isAltLang ? 'web developer' : 'développeur web';
     setHackerString(newHackerString)
-  },[isAltLang])
+  },[isAltLang]);
 
   return (
     <StyledHeroSection ref={heroSectionRef} style={sectionStyle}>
       <StyledBackground style={backgroundStyle}>
-        <StyledFirstCircle style={isMobile ? {} : firstCircleStyle}/>
-        <StyledSecondCircle style={isMobile ? {} : secondCircleStyle}/>
+        <StyledFirstCircle style={firstCircleStyle}/>
+        <StyledSecondCircle style={secondCircleStyle}/>
       </StyledBackground>
       <StyledHeroContainer className={playfairDisplaySC.className}>
-        <StyledHeaderPart style={isMobile ? mobileAnimation : textAnimationStyle}>
+        <StyledHeaderPart style={textAnimationStyle}>
           <h3>Hello</h3>
         </StyledHeaderPart>
-        <StyledHeaderPart className="interactive" style={isMobile ? mobileAnimation : textAnimationStyle}>
+        <StyledHeaderPart className="interactive" style={textAnimationStyle}>
           <StyledFirstWord>World</StyledFirstWord>
           <StyledSecondWord onClick={() => helloThere.current.play()}>There</StyledSecondWord>
           <audio src={'hellothere.mp3'} ref={helloThere}/>
         </StyledHeaderPart>
-        <StyledCaptions style={isMobile ? mobileAnimation : captionAnimationStyle}>
+        <StyledCaptions style={captionAnimationStyle}>
           <StyledCaptionContainer>
             <span>{isAltLang ? 'My name is' : "Je m'appelle"}</span>
             <span>Andry</span>

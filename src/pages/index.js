@@ -6,11 +6,10 @@ import Hero from '@/components/sections/Hero'
 import About from '@/components/sections/About'
 import Work from '@/components/sections/Work'
 import GrainFilter from '@/components/GrainFilter'
-import { Suspense, useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import { PortfolioContext } from '@/utils/Context'
 import { useLenis } from '@studio-freight/react-lenis'
 import { sanityClient } from '../../sanity'
-import Loading from '@/components/Loading'
 
 const StyledAppContainer = styled.div``
 
@@ -23,24 +22,24 @@ const StyledMain = styled.main`
 `
 
 export default function Home({ infoData, projectData, skillData }) {
-  const { aboutSectionRef, setCurrentSection, isAltLang, isMobile } = useContext(PortfolioContext);
+  const { aboutSectionRef, setCurrentSection } = useContext(PortfolioContext);
   
   // Finding the current section
-  // useLenis(() => {
-  //   const aboutSectionTop = aboutSectionRef.current.getBoundingClientRect().top;
-  //   const aboutSectionBottom = aboutSectionRef.current.getBoundingClientRect().bottom;
-  //   if (aboutSectionTop > (window.innerHeight / 2)) {
-  //     setCurrentSection('hero');
-  //   }
-  //   else {
-  //     if (aboutSectionBottom < (window.innerHeight / 2)) {
-  //       setCurrentSection('work');
-  //     }
-  //     else {
-  //       setCurrentSection('about');
-  //     }
-  //   }
-  // })
+  useLenis(() => {
+    const aboutSectionTop = aboutSectionRef.current.getBoundingClientRect().top;
+    const aboutSectionBottom = aboutSectionRef.current.getBoundingClientRect().bottom;
+    if (aboutSectionTop > (window.innerHeight / 2)) {
+      setCurrentSection('hero');
+    }
+    else {
+      if (aboutSectionBottom < (window.innerHeight / 2)) {
+        setCurrentSection('work');
+      }
+      else {
+        setCurrentSection('about');
+      }
+    }
+  })
 
   return (
     <>
@@ -53,17 +52,15 @@ export default function Home({ infoData, projectData, skillData }) {
           <span>Merci d&apos;activer Javascript pour consulter ce site.</span>
         </noscript>
       </Head>
-      <Suspense fallback={<Loading />}>
-        <StyledAppContainer>
-          <StyledMain className={`${playfairDisplay.className}`}>
-            <Hero />
-            <About infoData={infoData} skillData={skillData}/>
-            <Work projectData={projectData}/>
-          </StyledMain>
-          <Frame infoData={infoData}/>
-          {!isMobile && <GrainFilter />}
-        </StyledAppContainer>
-      </Suspense>
+      <StyledAppContainer>
+        <StyledMain className={`${playfairDisplay.className}`}>
+          <Hero />
+          <About infoData={infoData} skillData={skillData}/>
+          <Work projectData={projectData}/>
+        </StyledMain>
+        <Frame infoData={infoData}/>
+        <GrainFilter />
+      </StyledAppContainer>
     </>
   )
 }
