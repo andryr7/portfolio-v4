@@ -63,7 +63,7 @@ const StyledHeroContainer = styled.header`
   width: 100%;
   z-index: 1;
   position: relative;
-  @media (max-width: 768px) {
+  @media (max-width: 1000px) {
     flex-direction: column;
     align-items: center;
   };
@@ -84,8 +84,8 @@ const StyledHeaderPart = styled.div`
   font-size: 10vw;
   overflow: hidden;
   transition: opacity 0.5s;
-  @media (max-width: 768px) {
-    font-size: 20vw;
+  @media (max-width: 1000px) {
+    font-size: min(10rem, 20vw);
     letter-spacing: 3vw;
   }
   &.interactive:hover {
@@ -110,7 +110,7 @@ const StyledCaptions = styled.div`
   top: 100%;
   left: clamp(1rem, 3.5vw, 5rem);
   width: fit-content;
-  @media (max-width: 768px) {
+  @media (max-width: 1000px) {
     margin-top: 0.5rem;
     position: static;
     flex-direction: column;
@@ -126,7 +126,7 @@ const StyledCaptionContainer = styled.div`
     & span:last-of-type {
       opacity: 0;
       transition: opacity 0.5s;
-      @media (max-width: 768px) {
+      @media (max-width: 1000px) {
         opacity: 1;
       };
     }
@@ -210,20 +210,14 @@ export default function Hero() {
         .join('');
       setHackerString(randomizedWord);
       iteration += 1 / 2;
-    }, 30)
+    }, 35)
   }, [isAltLang]);
-
-  // Triggering the text animation in case the language is changed
-  useEffect(() => {
-    if(isFirstRender === false) {
-      handleAnimateText();
-    }
-  },[isAltLang, handleAnimateText]);
 
   // Enabling the animation for the next renders
   useEffect(() => {
-    setIsFirstRender(false);
-  },[])
+    const newHackerString = isAltLang ? 'web developer' : 'développeur web';
+    setHackerString(newHackerString)
+  },[isAltLang])
 
   return (
     <StyledHeroSection ref={heroSectionRef} style={sectionStyle}>

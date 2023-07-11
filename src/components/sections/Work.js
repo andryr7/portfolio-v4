@@ -54,7 +54,29 @@ const StyledProjectCard = styled.a`
   };
   &:hover {
     filter: grayscale(0);
+    & div {
+      opacity: 1;
+    }
   }
+`
+
+const StyledProjectTitle = styled.div`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 0;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  font-size: 1.5rem;
+  color: white;
+  text-shadow: 1px 1px black;
+  background-color: ${props => props.theme.background};
+  width: 100%;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.5s;
 `
 
 function ProjectCard({ project }) {
@@ -123,6 +145,9 @@ function ProjectCard({ project }) {
         quality={100}
         sizes="(max-width: 768px) 150vw, 100vw"
       />
+      <StyledProjectTitle>
+        {project.title}
+      </StyledProjectTitle>
     </StyledProjectCard>
   )
 }

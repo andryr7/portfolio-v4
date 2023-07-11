@@ -5,6 +5,8 @@ import Link from 'next/link'
 import obiwan from '../assets/obiwan.gif'
 import { playfairDisplay } from '@/styles/fonts'
 import GrainFilter from '@/components/GrainFilter'
+import { useContext } from 'react'
+import { PortfolioContext } from '@/utils/Context'
 
 const StyledAppContainer = styled.div`
   width: 100;
@@ -19,6 +21,8 @@ const StyledAppContainer = styled.div`
 `
 
 export default function Home() {
+  const { isAltLang } = useContext(PortfolioContext);
+
   return (
     <>
       <Head>
@@ -31,11 +35,9 @@ export default function Home() {
         </noscript>
       </Head>
       <StyledAppContainer className={`${playfairDisplay.className}`}>
-        {/* <StyledImageContainer> */}
           <Image alt={`Image animée d'Obi-wan kenobi`} src={obiwan} />
-          <span>This isn&apos;t the page you are looking for</span>
-          <Link href="/">Home</Link>
-        {/* </StyledImageContainer> */}
+          <span>{isAltLang ? `This isn't the page you are looking for` : `Ceci n'est pas la page que vous recherchez`}</span>
+          <Link href="/">{isAltLang ? `Let's go home` : `Retour à l'accueil`}</Link>
       </StyledAppContainer>
       <GrainFilter />
     </>

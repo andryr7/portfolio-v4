@@ -126,7 +126,7 @@ export default function About({ infoData, skillData }) {
   
   const frontendSkills = skillData.filter(skill => skill.skilltype === 'frontend');
   const backendSkills = skillData.filter(skill => skill.skilltype === 'backend');
-  const projectmgmtSkills = skillData.filter(skill => skill.skilltype === 'projectmgmt');
+  const projectmgmtSkills = skillData.filter(skill => skill.skilltype === 'other');
 
   useLenis(() => {
     const sectionRectTop = aboutSectionRef.current.getBoundingClientRect().top;

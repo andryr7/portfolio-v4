@@ -6,10 +6,11 @@ import Hero from '@/components/sections/Hero'
 import About from '@/components/sections/About'
 import Work from '@/components/sections/Work'
 import GrainFilter from '@/components/GrainFilter'
-import { useContext, useEffect } from 'react'
+import { Suspense, useContext, useEffect } from 'react'
 import { PortfolioContext } from '@/utils/Context'
 import { useLenis } from '@studio-freight/react-lenis'
 import { sanityClient } from '../../sanity'
+import Loading from '@/components/Loading'
 
 const StyledAppContainer = styled.div``
 
@@ -25,21 +26,21 @@ export default function Home({ infoData, projectData, skillData }) {
   const { aboutSectionRef, setCurrentSection, isAltLang, isMobile } = useContext(PortfolioContext);
   
   // Finding the current section
-  useLenis(() => {
-    const aboutSectionTop = aboutSectionRef.current.getBoundingClientRect().top;
-    const aboutSectionBottom = aboutSectionRef.current.getBoundingClientRect().bottom;
-    if (aboutSectionTop > (window.innerHeight / 2)) {
-      setCurrentSection('hero');
-    }
-    else {
-      if (aboutSectionBottom < (window.innerHeight / 2)) {
-        setCurrentSection('work');
-      }
-      else {
-        setCurrentSection('about');
-      }
-    }
-  })
+  // useLenis(() => {
+  //   const aboutSectionTop = aboutSectionRef.current.getBoundingClientRect().top;
+  //   const aboutSectionBottom = aboutSectionRef.current.getBoundingClientRect().bottom;
+  //   if (aboutSectionTop > (window.innerHeight / 2)) {
+  //     setCurrentSection('hero');
+  //   }
+  //   else {
+  //     if (aboutSectionBottom < (window.innerHeight / 2)) {
+  //       setCurrentSection('work');
+  //     }
+  //     else {
+  //       setCurrentSection('about');
+  //     }
+  //   }
+  // })
 
   return (
     <>
@@ -52,15 +53,17 @@ export default function Home({ infoData, projectData, skillData }) {
           <span>Merci d&apos;activer Javascript pour consulter ce site.</span>
         </noscript>
       </Head>
-      <StyledAppContainer>
-        <StyledMain className={`${playfairDisplay.className}`}>
-          <Hero />
-          <About infoData={infoData} skillData={skillData}/>
-          <Work projectData={projectData}/>
-        </StyledMain>
-        <Frame infoData={infoData}/>
-        {!isMobile && <GrainFilter />}
-      </StyledAppContainer>
+      <Suspense fallback={<Loading />}>
+        <StyledAppContainer>
+          <StyledMain className={`${playfairDisplay.className}`}>
+            <Hero />
+            <About infoData={infoData} skillData={skillData}/>
+            <Work projectData={projectData}/>
+          </StyledMain>
+          <Frame infoData={infoData}/>
+          {!isMobile && <GrainFilter />}
+        </StyledAppContainer>
+      </Suspense>
     </>
   )
 }
@@ -70,7 +73,7 @@ export async function getStaticProps() {
     `{
       "infoData": *[_type == "info"][0],
       "projectData": *[_type == "project"] | order(releaseDate asc),
-      "skillData": *[_type == "skill"],
+      "skillData": *[_type == "skill"]{_id, enName, frName, "skilltype": type->slug},
     }`
   );
 
