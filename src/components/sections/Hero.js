@@ -3,7 +3,7 @@ import { useCallback, useContext, useEffect, useRef, useState } from "react"
 import { PortfolioContext } from "@/utils/Context"
 import { playfairDisplaySC } from "@/styles/fonts"
 import noisefilter from '../../assets/noise.svg'
-import ScrollButton from '../Interactivity/ScrollButton'
+import ScrollButton from "../interactivity/ScrollButton"
 
 const StyledHeroSection = styled.section`
   height: 100vh;

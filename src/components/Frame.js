@@ -3,10 +3,10 @@ import { PortfolioContext } from "@/utils/Context"
 import { useContext } from "react"
 import styled from "styled-components"
 import { useLenis } from "@studio-freight/react-lenis"
-import ThemeButton from "./Interactivity/ThemeButton"
-import ContactCTA from "./Interactivity/ContactCTA"
+import ThemeButton from "./interactivity/ThemeButton"
+import ContactCTA from "./interactivity/ContactCTA"
 import ContactMenu from "./ContactMenu"
-import LangButton from "./Interactivity/LangButton"
+import LangButton from "./interactivity/LangButton"
 
 const StyledFrame = styled.div`
   position: fixed;
