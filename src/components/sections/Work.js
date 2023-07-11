@@ -77,6 +77,9 @@ const StyledProjectTitle = styled.div`
   justify-content: center;
   align-items: center;
   transition: opacity 0.5s;
+  @media (max-width: 768px) {
+    opacity: 1;
+  };
 `
 
 function ProjectCard({ project }) {
@@ -84,7 +87,6 @@ function ProjectCard({ project }) {
   const animated = useRef(false);
   const cardRef = useRef(null);
   const imageProps = useNextSanityImage(sanityClient, project.image);
-  const { isMobile } = useContext(PortfolioContext);
 
   const projectImageStyle = {
     objectPosition: `${shift}% center`,
