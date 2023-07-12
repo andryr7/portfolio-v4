@@ -1,4 +1,14 @@
 import { useEffect, useRef } from "react";
+import { styled } from "styled-components";
+
+const StyledCanvas = styled.canvas`
+  position: fixed;
+  top: 0;
+  z-index: 10;
+  pointer-events: none;
+  width: 100%;
+  height: 100lvh;
+`
 
 export default function GrainFilter({
   opacity = 0.05,
@@ -10,17 +20,8 @@ export default function GrainFilter({
   const canvasRef = useRef(null);
   const pixelAlpha = 255 * opacity;
 
-  const canvasStyle = {
-    position: 'fixed',
-    zIndex: '10',
-    pointerEvents: 'none',
-    top: '0',
-    width: '100%',
-    height: '100lvh',
-  }
-
   useEffect(() => {
-    if (!canvasRef) {
+    if (!canvasRef.current) {
       return
     };
 
@@ -108,7 +109,7 @@ export default function GrainFilter({
   
     if (canvas === null) {
       return
-    }
+    };
 
     const handleResize = () => {
       if (canvasRef === null) {
@@ -117,12 +118,16 @@ export default function GrainFilter({
       
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-    }
+    };
 
-    window.addEventListener('resize', handleResize)
+    window.addEventListener('resize', handleResize);
+
+    return (() => {
+      window.removeEventListener('resize', handleResize);
+    })
   },[]);
 
   return (
-    <canvas style={canvasStyle} ref={canvasRef} />
+    <StyledCanvas ref={canvasRef} />
   )
 }

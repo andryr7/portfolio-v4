@@ -31,7 +31,7 @@ export default function LangButton() {
 
   const handleLanguageButtonClick = () => {
     setIsAltLang(current => !current)
-  }
+  };
 
   return (
     <StyledLanguageButton onClick={handleLanguageButtonClick}>

@@ -1,17 +1,15 @@
 import Head from 'next/head'
 import styled from 'styled-components'
+import { useContext } from 'react'
 import { playfairDisplay } from '@/styles/fonts'
+import { PortfolioContext } from '@/utils/Context'
+import { useLenis } from '@studio-freight/react-lenis'
+import { sanityClient } from '../../sanity'
 import Frame from '@/components/Frame'
 import Hero from '@/components/sections/Hero'
 import About from '@/components/sections/About'
 import Work from '@/components/sections/Work'
 import GrainFilter from '@/components/GrainFilter'
-import { useContext } from 'react'
-import { PortfolioContext } from '@/utils/Context'
-import { useLenis } from '@studio-freight/react-lenis'
-import { sanityClient } from '../../sanity'
-
-const StyledAppContainer = styled.div``
 
 const StyledMain = styled.main`
   color: ${props => props.theme.main};
@@ -52,15 +50,13 @@ export default function Home({ infoData, projectData, skillData }) {
           <span>Merci d&apos;activer Javascript pour consulter ce site.</span>
         </noscript>
       </Head>
-      <StyledAppContainer>
-        <StyledMain className={`${playfairDisplay.className}`}>
-          <Hero />
-          <About infoData={infoData} skillData={skillData}/>
-          <Work projectData={projectData}/>
-        </StyledMain>
-        <Frame infoData={infoData}/>
-        <GrainFilter />
-      </StyledAppContainer>
+      <StyledMain className={`${playfairDisplay.className}`}>
+        <Hero />
+        <About infoData={infoData} skillData={skillData}/>
+        <Work projectData={projectData}/>
+      </StyledMain>
+      <Frame infoData={infoData}/>
+      <GrainFilter />
     </>
   )
 }

@@ -20,13 +20,13 @@ const StyledSvg = styled.svg`
 `
 
 export default function ScrollButton() {
-  const theme = useTheme();
   const { aboutSectionRef } = useContext(PortfolioContext);
+  const theme = useTheme();
   const lenis = useLenis();
 
   const handleClick = () => {
     lenis.scrollTo(aboutSectionRef.current, {lerp: 0.05});
-  }
+  };
 
   return(
     <StyledSvg xmlns="http://www.w3.org/2000/svg" fill={theme.main} height="48" viewBox="0 -960 960 960" width="48" onClick={handleClick}>

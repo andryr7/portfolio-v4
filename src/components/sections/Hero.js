@@ -163,12 +163,12 @@ export default function Hero() {
 
   const firstCircleStyle = {
     left: `${Math.min((35 + 30 * aboutSectionScroll), 50)}%`,
-    maskPosition: `${Math.max((100 - aboutSectionScroll * 100), 50)}% 50%`
+    // maskPosition: `${Math.max((100 - aboutSectionScroll * 100), 50)}% 50%`
   };
 
   const secondCircleStyle = {
     left: `${Math.max((65 - 30 * aboutSectionScroll), 50)}%`,
-    maskPosition: `${Math.min(0 + aboutSectionScroll * 100, 50)}% 50%`
+    // maskPosition: `${Math.min(0 + aboutSectionScroll * 100, 50)}% 50%`
   };
   
   const textAnimationStyle = {
@@ -195,20 +195,20 @@ export default function Hero() {
         clearInterval(interval);
         return
       }
-      const randomizedWord = 
-      targetWord.split("")
-        .map((letter, index) => {
-          if(index < iteration) {
-            return targetWord[index]
-          }
-          return letters[Math.floor(Math.random() * 27)]})
-        .join('');
+      const randomizedWord = targetWord
+          .split("")
+          .map((letter, index) => {
+            if(index < iteration) {
+              return targetWord[index]
+            }
+            return letters[Math.floor(Math.random() * 27)]})
+          .join('');
       setHackerString(randomizedWord);
       iteration += 1 / 2;
     }, 35)
   }, [isAltLang]);
 
-  // Enabling the animation for the next renders
+  // Changing the default string on language change
   useEffect(() => {
     const newHackerString = isAltLang ? 'web developer' : 'développeur web';
     setHackerString(newHackerString)

@@ -102,15 +102,17 @@ export default function ContactCTA() {
     setContactMenuIsOpened(current => !current);
   }
 
-  const handleKeyPress = (e) => {
-    if(e.key === 'Escape' && contactMenuIsOpened) {
-      lenis.start();
-      setContactMenuIsOpened(false);
-    }
-  }
-
   useEffect(() => {
+    //Handling escape key press to close menu
+    const handleKeyPress = (e) => {
+      if(e.key === 'Escape' && contactMenuIsOpened) {
+        lenis.start();
+        setContactMenuIsOpened(false);
+      }
+    }
+
     document.addEventListener('keydown', handleKeyPress);
+    
     return (() => {
       document.removeEventListener('keydown', handleKeyPress)
     })

@@ -146,6 +146,7 @@ function ProjectCard({ project }) {
         style={projectImageStyle}
         quality={100}
         sizes="(max-width: 768px) 150vw, 100vw"
+        priority
       />
       <StyledProjectTitle>
         {project.title}
