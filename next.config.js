@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'export',
   reactStrictMode: true,
   // compiler: {
   //   styledComponents: true,
@@ -8,12 +9,13 @@ const nextConfig = {
     styledComponents: { displayName: true, ssr: true }
   },
   images: {
-		domains: ['cdn.sanity.io']
+		domains: ['cdn.sanity.io'],
+    unoptimized: true,
 	},
-  i18n: {
-    locales: ['fr'],
-    defaultLocale: 'fr',
-  },
+  // i18n: {
+  //   locales: ['fr'],
+  //   defaultLocale: 'fr',
+  // },
 }
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({

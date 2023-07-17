@@ -68,8 +68,8 @@ const StyledProjectTitle = styled.div`
   transform: translate(-50%, -50%);
   opacity: 0;
   font-size: 1.5rem;
-  color: white;
-  text-shadow: 1px 1px black;
+  color: ${props => props.theme.main};
+  text-shadow: 1px 1px ${props => props.theme.background};
   background-color: ${props => props.theme.background};
   width: 100%;
   height: 3rem;

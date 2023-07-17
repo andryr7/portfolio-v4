@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && next-export-optimize-images",
     "start": "next start",
     "lint": "next lint"
   },
@@ -23,5 +23,6 @@
     "react-portable-text": "^0.6.0",
     "sharp": "^0.32.1",
     "styled-components": "^6.0.0-rc.3"
-  }
+  },
+  "devDependencies": {}
 }
