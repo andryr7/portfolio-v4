@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import styled from 'styled-components'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { playfairDisplay } from '@/styles/fonts'
 import { PortfolioContext } from '@/utils/Context'
 import { useLenis } from '@studio-freight/react-lenis'
@@ -21,10 +21,26 @@ const StyledMain = styled.main`
 `
 
 export default function Home({ infoData, projectData, skillData }) {
-  const { aboutSectionRef, workSectionRef } = useContext(PortfolioContext);
+  const { aboutSectionRef, workSectionRef, isAltLang } = useContext(PortfolioContext);
   const [currentSection, setCurrentSection] = useState('hero');
   const [aboutSectionScroll, setAboutSectionScroll] = useState(0);
   const [workSectionScroll, setWorkSectionScroll] = useState(0);
+
+  //Adding the lang attribute to html
+  useEffect(() => {
+    if(!document) {
+      return
+    }
+
+    const htmlElement = document.querySelector('html');
+
+    if(isAltLang) {
+      htmlElement.lang = 'en';
+    }
+    else {
+      htmlElement.lang = 'fr';
+    }
+  },[isAltLang]);
   
   // Scroll and current section updating
   useLenis(() => {
@@ -84,8 +100,8 @@ export default function Home({ infoData, projectData, skillData }) {
 export async function getStaticProps() {
   const { infoData, projectData, skillData } = await sanityClient.fetch(
     `{
-      "infoData": *[_type == "info"][0],
-      "projectData": *[_type == "project"] | order(releaseDate asc),
+      "infoData": *[_type == "info"][0]{picture, enPresentationText, frPresentationText, linkedin, github},
+      "projectData": *[_type == "project"] | order(releaseDate asc){_id, title, image, url},
       "skillData": *[_type == "skill"]{_id, enName, frName, "skilltype": type->slug},
     }`
   );

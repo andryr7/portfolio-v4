@@ -187,6 +187,14 @@ export default function Work({ projectData, workSectionScroll }) {
   };
 
   const noStyle = {};
+
+  const move = () => {
+    console.log('MOVE')
+  }
+
+  const moved = () => {
+    console.log('MOVED')
+  }
   
   return (
     <StyledWorkSection ref={workSectionRef}>
@@ -200,7 +208,9 @@ export default function Work({ projectData, workSectionScroll }) {
           <Splide
             ref={workSliderRef}
             aria-label="Projects carousel" 
-            hasTrack={ false }
+            hasTrack={false}
+            onDraggi={() => move()}
+            on
             options={ {
               drag: 'free',
               arrows: false,

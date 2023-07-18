@@ -6,7 +6,7 @@ const nextConfig = {
   //   styledComponents: true,
   // },
   compiler: {
-    styledComponents: { displayName: true, ssr: true }
+    styledComponents: { displayName: false, ssr: true }
   },
   images: {
 		domains: ['cdn.sanity.io'],

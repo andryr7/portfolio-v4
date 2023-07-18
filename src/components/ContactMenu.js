@@ -5,8 +5,8 @@ import githubdark from '../assets/contact/githubdark.png'
 import githublight from '../assets/contact/githublight.png'
 import linkedindark from '../assets/contact/linkedindark.png'
 import linkedinlight from '../assets/contact/linkedinlight.png'
-import emaildark from '../assets/contact/emaildark.png'
-import emaillight from '../assets/contact/emaillight.png'
+import emaildark from '../assets/contact/emaildark.svg'
+import emaillight from '../assets/contact/emaillight.svg'
 
 const StyledContactMenu = styled.div`
   width: 100%;
