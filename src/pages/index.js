@@ -10,6 +10,7 @@ import Hero from '@/components/sections/Hero'
 import About from '@/components/sections/About'
 import Work from '@/components/sections/Work'
 import GrainFilter from '@/components/GrainFilter'
+import NoiseFilter from '@/components/NoiseFilter'
 
 const StyledMain = styled.main`
   color: ${props => props.theme.main};
@@ -74,7 +75,8 @@ export default function Home({ infoData, projectData, skillData }) {
         <Work projectData={projectData} workSectionScroll={workSectionScroll}/>
       </StyledMain>
       <Frame infoData={infoData} currentSection={currentSection}/>
-      <GrainFilter />
+      {/* <GrainFilter /> */}
+      <NoiseFilter />
     </>
   )
 }
