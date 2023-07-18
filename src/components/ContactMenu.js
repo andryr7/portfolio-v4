@@ -119,7 +119,7 @@ export default function ContactMenu({ infoData }) {
             <StyledContactLinkTitle>
               LinkedIn
             </StyledContactLinkTitle>
-            <StyledContactIcon src={isDarkMode ? linkedinlight.src : linkedindark.src}/>
+            <StyledContactIcon src={isDarkMode ? linkedinlight.src : linkedindark.src} alt="LinkedIn Logo" />
             <StyledContactLinkSpan>
               {isAltLang ? 'Consult my professionnal profile' : 'Consultez mon profil professionnel'}
             </StyledContactLinkSpan>
@@ -130,7 +130,7 @@ export default function ContactMenu({ infoData }) {
             <StyledContactLinkTitle>
               GitHub
             </StyledContactLinkTitle>
-            <StyledContactIcon src={isDarkMode ? githublight.src : githubdark.src}/>
+            <StyledContactIcon src={isDarkMode ? githublight.src : githubdark.src} alt="GitHub Logo" />
             <StyledContactLinkSpan>
               {isAltLang ? 'Take a look at my code' : 'Jetez un oeil à mon code'}
             </StyledContactLinkSpan>
@@ -141,7 +141,7 @@ export default function ContactMenu({ infoData }) {
             <StyledContactLinkTitle>
               Email
             </StyledContactLinkTitle>
-            <StyledContactIcon src={isDarkMode ? emaillight.src : emaildark.src}/>
+            <StyledContactIcon src={isDarkMode ? emaillight.src : emaildark.src} alt="Email Icon" />
             <StyledContactLinkSpan>
               {isAltLang ? 'Contact me directly' : 'Contactez-moi directement'}
             </StyledContactLinkSpan>
