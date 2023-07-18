@@ -101,15 +101,11 @@ export default function GrainFilter({
     grainFinesse,
     greyMode,
     pixelAlpha
-  ],[]);
+  ]);
   
   // Handling window resizing
   useEffect(() => {
     const canvas = canvasRef.current;
-  
-    if (canvas === null) {
-      return
-    };
 
     const handleResize = () => {
       if (canvasRef === null) {

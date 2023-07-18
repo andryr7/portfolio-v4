@@ -122,7 +122,6 @@ const StyledCaptions = styled.div`
 
 const StyledCaptionContainer = styled.div`
   display: flex;
-  /* gap: 1rem; */
   &:first-of-type {
     & span:last-of-type {
       opacity: 0;
@@ -221,7 +220,6 @@ export default function Hero({ aboutSectionScroll }) {
     const newHackerString = isAltLang ? 'web developer' : 'développeur web';
     setHackerString(newHackerString)
   },[isAltLang]);
-
 
   return (
     <StyledHeroSection ref={heroSectionRef} style={sectionStyle}>

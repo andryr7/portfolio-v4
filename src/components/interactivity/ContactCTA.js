@@ -1,5 +1,5 @@
 import { PortfolioContext } from "@/utils/Context"
-import { useContext, useEffect } from "react"
+import { useCallback, useContext, useEffect } from "react"
 import { styled, keyframes } from "styled-components"
 import { useLenis } from "@studio-freight/react-lenis";
 
@@ -92,7 +92,7 @@ export default function ContactCTA() {
   const { contactMenuIsOpened, setContactMenuIsOpened } = useContext(PortfolioContext);
   const lenis = useLenis();
 
-  const handleClick = () => {
+  const handleClick = useCallback(() => {
     if(contactMenuIsOpened) {
       lenis.start();
     }
@@ -100,7 +100,7 @@ export default function ContactCTA() {
       lenis.stop();
     }
     setContactMenuIsOpened(current => !current);
-  }
+  },[contactMenuIsOpened, lenis, setContactMenuIsOpened]);
 
   useEffect(() => {
     //Handling escape key press to close menu

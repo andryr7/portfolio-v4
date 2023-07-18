@@ -1,6 +1,6 @@
 import { playfairDisplay } from "@/styles/fonts"
 import { PortfolioContext } from "@/utils/Context"
-import { useContext } from "react"
+import { useCallback, useContext } from "react"
 import styled from "styled-components"
 import { useLenis } from "@studio-freight/react-lenis"
 import ThemeButton from "./interactivity/ThemeButton"
@@ -118,29 +118,29 @@ export default function Frame({ infoData, currentSection }) {
   
   const lenis = useLenis();
 
-  const handleAboutLinkClick = () => {
+  const handleAboutLinkClick = useCallback(() => {
     if(contactMenuIsOpened) {
       lenis.start();
       setContactMenuIsOpened(false);
     }
     lenis.scrollTo(aboutSectionRef.current);
-  };
+  },[contactMenuIsOpened, setContactMenuIsOpened, lenis, aboutSectionRef]);
 
-  const handleWorkLinkClick = () => {
+  const handleWorkLinkClick = useCallback(() => {
     if(contactMenuIsOpened) {
       lenis.start();
       setContactMenuIsOpened(false);
     }
     lenis.scrollTo(workSectionRef.current);
-  };
+  },[contactMenuIsOpened, setContactMenuIsOpened, lenis, workSectionRef]);
 
-  const handleHomeLinkClick = () => {
+  const handleHomeLinkClick = useCallback(() => {
     if(contactMenuIsOpened) {
       lenis.start();
       setContactMenuIsOpened(false);
     }
     lenis.scrollTo(0);
-  };
+  },[contactMenuIsOpened, setContactMenuIsOpened, lenis]);
   
   return (
     <>

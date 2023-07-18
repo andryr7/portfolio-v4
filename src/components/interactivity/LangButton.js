@@ -1,5 +1,5 @@
 import { styled, useTheme } from 'styled-components';
-import { useContext } from 'react';
+import { useCallback, useContext } from 'react';
 import { PortfolioContext } from '@/utils/Context';
 
 const StyledLanguageButton = styled.div`
@@ -29,9 +29,9 @@ export default function LangButton() {
   const { isAltLang, setIsAltLang } = useContext(PortfolioContext);
   const theme = useTheme();
 
-  const handleLanguageButtonClick = () => {
+  const handleLanguageButtonClick = useCallback(() => {
     setIsAltLang(current => !current)
-  };
+  },[setIsAltLang]);
 
   return (
     <StyledLanguageButton onClick={handleLanguageButtonClick}>

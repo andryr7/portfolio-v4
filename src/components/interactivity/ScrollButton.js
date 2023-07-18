@@ -1,5 +1,5 @@
 import { PortfolioContext } from "@/utils/Context";
-import { useContext } from "react";
+import { useCallback, useContext } from "react";
 import { styled, useTheme, keyframes } from "styled-components"
 import { useLenis } from "@studio-freight/react-lenis"
 
@@ -24,9 +24,9 @@ export default function ScrollButton() {
   const theme = useTheme();
   const lenis = useLenis();
 
-  const handleClick = () => {
+  const handleClick = useCallback(() => {
     lenis.scrollTo(aboutSectionRef.current, {lerp: 0.05});
-  };
+  },[lenis, aboutSectionRef]);
 
   return(
     <StyledSvg xmlns="http://www.w3.org/2000/svg" fill={theme.main} height="48" viewBox="0 -960 960 960" width="48" onClick={handleClick}>

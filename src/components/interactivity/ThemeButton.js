@@ -1,5 +1,5 @@
 import { PortfolioContext } from "@/utils/Context"
-import { useContext } from "react"
+import { useCallback, useContext } from "react"
 import { styled } from "styled-components"
 import { useTheme } from "styled-components"
 
@@ -37,9 +37,9 @@ export default function ThemeButton() {
   const { isDarkMode, setIsDarkMode } = useContext(PortfolioContext);
   const theme = useTheme();
 
-  const handleClick = () => {
+  const handleClick = useCallback(() => {
     setIsDarkMode(current => !current);
-  };
+  },[setIsDarkMode]);
 
   return(
     <StyledThemeButton onClick={handleClick}>

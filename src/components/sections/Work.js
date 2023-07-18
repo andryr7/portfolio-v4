@@ -165,15 +165,12 @@ export default function Work({ projectData, workSectionScroll }) {
     const handleResize = () => {
       if (window.innerWidth <= 768) {
         setPaddingSlideNb(0);
-        return
       }
       else if (window.innerWidth <= 2160) {
         setPaddingSlideNb(1);
-        return
       }
       else {
         setPaddingSlideNb(2);
-        return
       }
     }
     handleResize();

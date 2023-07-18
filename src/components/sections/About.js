@@ -1,5 +1,5 @@
 import { styled } from "styled-components"
-import { useContext } from "react"
+import { useContext, useMemo } from "react"
 import { PortfolioContext } from "@/utils/Context"
 import '@splidejs/react-splide/css'
 import Image from "next/image"
@@ -124,10 +124,21 @@ export default function About({ infoData, skillData, aboutSectionScroll }) {
   const { aboutSectionRef, isAltLang } = useContext(PortfolioContext);
   const imageProps = useNextSanityImage(sanityClient, infoData.picture);
   const isMobile = useMediaQuery('(max-width: 768px)');
-  
-  const frontendSkills = skillData.filter(skill => skill.skilltype === 'frontend');
-  const backendSkills = skillData.filter(skill => skill.skilltype === 'backend');
-  const projectmgmtSkills = skillData.filter(skill => skill.skilltype === 'other');
+
+  const frontendSkills = useMemo(
+    () => skillData.filter(skill => skill.skilltype === 'frontend'),
+    [skillData]
+  );
+
+  const backendSkills = useMemo(
+    () => skillData.filter(skill => skill.skilltype === 'backend'),
+    [skillData]
+  );
+
+  const projectmgmtSkills = useMemo(
+    () => skillData.filter(skill => skill.skilltype === 'other'),
+    [skillData]
+  );
 
   const sectionTitleStyle = {
     letterSpacing: `${1 + aboutSectionScroll}vw`,

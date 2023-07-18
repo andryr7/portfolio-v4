@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
 import { Splide, SplideSlide } from '@splidejs/react-splide'
-import { useContext, useRef, useState } from 'react'
+import { useCallback, useContext, useRef, useState } from 'react'
 import { PortfolioContext } from '@/utils/Context'
 import useInView from '@/utils/useInView'
 
@@ -83,15 +83,15 @@ export default function SkillContainer({ title, skills, delay }) {
   const isInView = useInView(containerRef, {once: true, threshold: 0.25});
   const [sliderIsDiplayed, setSliderIsDisplayed] = useState(false);
 
-  const handleMouseEnter = () => {
+  const handleMouseEnter = useCallback(() => {
     setSliderIsDisplayed(true);
     sliderRef.current.splide.Components.Autoplay.play();
-  }
+  },[]);
 
-  const handleMouseLeave = () => {
+  const handleMouseLeave = useCallback(() => {
     setSliderIsDisplayed(false);
     sliderRef.current.splide.Components.Autoplay.pause();
-  }
+  },[]);
 
   return (
     <StyledHexContainer 

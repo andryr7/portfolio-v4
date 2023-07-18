@@ -6,8 +6,6 @@ import { Lenis as ReactLenis } from '@studio-freight/react-lenis'
 import '@/styles/reset.css'
 import '@/styles/globals.css'
 
-//TODO if not a react component Next.js error import React from "react"
-
 export default function App({ Component, pageProps }) {
   return (
     <PortfolioProvider>
@@ -20,7 +18,7 @@ export default function App({ Component, pageProps }) {
 
 function AppWithPortfolioContext({ children }) {
   const { isDarkMode } = useContext(PortfolioContext);
-  const usedTheme = isDarkMode ? darkTheme : lightTheme;
+  const theme = isDarkMode ? darkTheme : lightTheme;
 
   const options = {
     lerp: 0.1,
@@ -29,7 +27,7 @@ function AppWithPortfolioContext({ children }) {
   }
 
   return (
-    <ThemeProvider theme={usedTheme}>
+    <ThemeProvider theme={theme}>
       <ReactLenis root options={{ ...options }}>
         {children}
       </ReactLenis>
