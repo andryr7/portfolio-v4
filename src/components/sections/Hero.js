@@ -147,8 +147,8 @@ const StyledIconContainer = styled.div`
   align-items: center;
 `
 
-export default function Hero() {
-  const { heroSectionRef, isAltLang, aboutSectionScroll, workSectionScroll } = useContext(PortfolioContext);
+export default function Hero({ aboutSectionScroll }) {
+  const { heroSectionRef, isAltLang, workSectionScroll } = useContext(PortfolioContext);
   const helloThere = useRef(null);
   const theme = useTheme();
   const [hackerString, setHackerString] = useState('développeur web');

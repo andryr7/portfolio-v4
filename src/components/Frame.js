@@ -107,13 +107,12 @@ const StyledSiteOptionsContainer = styled.div`
   align-items: center;
 `
 
-export default function Frame({ infoData }) {
+export default function Frame({ infoData, currentSection }) {
   const { 
     contactMenuIsOpened, 
     setContactMenuIsOpened, 
     aboutSectionRef, 
-    workSectionRef, 
-    currentSection, 
+    workSectionRef,
     isAltLang 
   } = useContext(PortfolioContext);
   

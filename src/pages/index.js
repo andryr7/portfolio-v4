@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import styled from 'styled-components'
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { playfairDisplay } from '@/styles/fonts'
 import { PortfolioContext } from '@/utils/Context'
 import { useLenis } from '@studio-freight/react-lenis'
@@ -20,10 +20,14 @@ const StyledMain = styled.main`
 `
 
 export default function Home({ infoData, projectData, skillData }) {
-  const { aboutSectionRef, setCurrentSection } = useContext(PortfolioContext);
+  const { aboutSectionRef, workSectionRef } = useContext(PortfolioContext);
+  const [currentSection, setCurrentSection] = useState('hero');
+  const [aboutSectionScroll, setAboutSectionScroll] = useState(0);
+  const [workSectionScroll, setWorkSectionScroll] = useState(0);
   
-  // Finding the current section
+  // Scroll and current section updating
   useLenis(() => {
+    // Current section updating
     const aboutSectionTop = aboutSectionRef.current.getBoundingClientRect().top;
     const aboutSectionBottom = aboutSectionRef.current.getBoundingClientRect().bottom;
     if (aboutSectionTop > (window.innerHeight / 2)) {
@@ -37,7 +41,21 @@ export default function Home({ infoData, projectData, skillData }) {
         setCurrentSection('about');
       }
     }
-  })
+
+    // About section scroll updating
+    const aboutSectionRectTop = aboutSectionRef.current.getBoundingClientRect().top;
+    const min = window.innerHeight;
+    const max = window.innerHeight * 1;
+    const aboutRatio = - (aboutSectionRectTop - min) / max;
+    const clampedAboutRatio = Math.min(aboutRatio, 1);
+    setAboutSectionScroll(clampedAboutRatio);
+
+    // Work section scroll updating
+    const workSectionRectTop = workSectionRef.current.getBoundingClientRect().top;
+    const workRatio = - (workSectionRectTop - min) / max;
+    const clampedWorkRatio = Math.min(workRatio, 1);
+    setWorkSectionScroll(clampedWorkRatio);
+  });
 
   return (
     <>
@@ -51,11 +69,11 @@ export default function Home({ infoData, projectData, skillData }) {
         </noscript>
       </Head>
       <StyledMain className={`${playfairDisplay.className}`}>
-        <Hero />
-        <About infoData={infoData} skillData={skillData}/>
-        <Work projectData={projectData}/>
+        <Hero aboutSectionScroll={aboutSectionScroll}/>
+        <About infoData={infoData} skillData={skillData} aboutSectionScroll={aboutSectionScroll}/>
+        <Work projectData={projectData} workSectionScroll={workSectionScroll}/>
       </StyledMain>
-      <Frame infoData={infoData}/>
+      <Frame infoData={infoData} currentSection={currentSection}/>
       <GrainFilter />
     </>
   )

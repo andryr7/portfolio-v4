@@ -6,9 +6,6 @@ export const PortfolioProvider = (({children}) => {
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [isAltLang, setIsAltLang] = useState(false);
   const [contactMenuIsOpened, setContactMenuIsOpened] = useState(false);
-  const [currentSection, setCurrentSection] = useState('hero');
-  const [aboutSectionScroll, setAboutSectionScroll] = useState(0);
-  const [workSectionScroll, setWorkSectionScroll] = useState(0);
   const aboutSectionRef = useRef(null);
   const workSectionRef = useRef(null);
 
@@ -40,16 +37,10 @@ export const PortfolioProvider = (({children}) => {
       setIsDarkMode,
       contactMenuIsOpened,
       setContactMenuIsOpened,
-      setCurrentSection,
       isAltLang,
       setIsAltLang,
-      currentSection,
       aboutSectionRef,
       workSectionRef,
-      aboutSectionScroll,
-      setAboutSectionScroll,
-      workSectionScroll,
-      setWorkSectionScroll
     }}>
       {children}
     </PortfolioContext.Provider>

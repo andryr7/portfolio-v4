@@ -120,22 +120,22 @@ const StyledItemContainer = styled.ul`
   };
 `
 
-export default function About({ infoData, skillData }) {
-  const { aboutSectionRef, isAltLang, aboutSectionScroll, setAboutSectionScroll } = useContext(PortfolioContext);
+export default function About({ infoData, skillData, aboutSectionScroll }) {
+  const { aboutSectionRef, isAltLang } = useContext(PortfolioContext);
   const imageProps = useNextSanityImage(sanityClient, infoData.picture);
   
   const frontendSkills = skillData.filter(skill => skill.skilltype === 'frontend');
   const backendSkills = skillData.filter(skill => skill.skilltype === 'backend');
   const projectmgmtSkills = skillData.filter(skill => skill.skilltype === 'other');
 
-  useLenis(() => {
-    const sectionRectTop = aboutSectionRef.current.getBoundingClientRect().top;
-    const min = window.innerHeight;
-    const max = window.innerHeight * 1;
-    const ratio = - (sectionRectTop - min) / max;
-    const clampedRatio = Math.min(ratio, 1);
-    setAboutSectionScroll(clampedRatio);
-  });
+  // useLenis(() => {
+  //   const sectionRectTop = aboutSectionRef.current.getBoundingClientRect().top;
+  //   const min = window.innerHeight;
+  //   const max = window.innerHeight * 1;
+  //   const ratio = - (sectionRectTop - min) / max;
+  //   const clampedRatio = Math.min(ratio, 1);
+  //   setAboutSectionScroll(clampedRatio);
+  // });
 
   const sectionTitleStyle = {
     letterSpacing: `${1 + aboutSectionScroll}vw`,

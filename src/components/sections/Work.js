@@ -155,19 +155,19 @@ function ProjectCard({ project }) {
   )
 }
  
-export default function Work({ projectData }) {
-  const { workSectionRef, workSectionScroll, setWorkSectionScroll, isAltLang } = useContext(PortfolioContext);
+export default function Work({ projectData, workSectionScroll }) {
+  const { workSectionRef, isAltLang } = useContext(PortfolioContext);
   const [paddingSlideNb, setPaddingSlideNb] = useState(2);
   const workSliderRef = useRef(null);
 
-  useLenis(() => {
-    const sectionRectTop = workSectionRef.current.getBoundingClientRect().top;
-    const min = window.innerHeight;
-    const max = window.innerHeight * 1;
-    const ratio = - (sectionRectTop - min) / max;
-    const clampedRatio = Math.min(ratio, 1);
-    setWorkSectionScroll(clampedRatio);
-  });
+  // useLenis(() => {
+  //   const sectionRectTop = workSectionRef.current.getBoundingClientRect().top;
+  //   const min = window.innerHeight;
+  //   const max = window.innerHeight * 1;
+  //   const ratio = - (sectionRectTop - min) / max;
+  //   const clampedRatio = Math.min(ratio, 1);
+  //   setWorkSectionScroll(clampedRatio);
+  // });
 
   useEffect(() => {
     const handleResize = () => {
