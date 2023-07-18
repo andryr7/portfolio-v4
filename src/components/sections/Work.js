@@ -6,7 +6,6 @@ import { PortfolioContext } from "@/utils/Context"
 import Image from "next/image"
 import { useNextSanityImage } from "next-sanity-image"
 import { sanityClient } from "../../../sanity"
-import { useLenis } from "@studio-freight/react-lenis";
 
 const StyledWorkSection = styled.section`
   display: flex;
@@ -159,15 +158,6 @@ export default function Work({ projectData, workSectionScroll }) {
   const { workSectionRef, isAltLang } = useContext(PortfolioContext);
   const [paddingSlideNb, setPaddingSlideNb] = useState(2);
   const workSliderRef = useRef(null);
-
-  // useLenis(() => {
-  //   const sectionRectTop = workSectionRef.current.getBoundingClientRect().top;
-  //   const min = window.innerHeight;
-  //   const max = window.innerHeight * 1;
-  //   const ratio = - (sectionRectTop - min) / max;
-  //   const clampedRatio = Math.min(ratio, 1);
-  //   setWorkSectionScroll(clampedRatio);
-  // });
 
   useEffect(() => {
     const handleResize = () => {

@@ -7,7 +7,6 @@ import PortableText from "react-portable-text"
 import { useNextSanityImage } from "next-sanity-image"
 import { sanityClient } from "../../../sanity"
 import SkillContainer from "../composables/SkillContainer"
-import { useLenis } from "@studio-freight/react-lenis"
 
 const StyledAboutSection = styled.section`
   width: 100%;
@@ -127,15 +126,6 @@ export default function About({ infoData, skillData, aboutSectionScroll }) {
   const frontendSkills = skillData.filter(skill => skill.skilltype === 'frontend');
   const backendSkills = skillData.filter(skill => skill.skilltype === 'backend');
   const projectmgmtSkills = skillData.filter(skill => skill.skilltype === 'other');
-
-  // useLenis(() => {
-  //   const sectionRectTop = aboutSectionRef.current.getBoundingClientRect().top;
-  //   const min = window.innerHeight;
-  //   const max = window.innerHeight * 1;
-  //   const ratio = - (sectionRectTop - min) / max;
-  //   const clampedRatio = Math.min(ratio, 1);
-  //   setAboutSectionScroll(clampedRatio);
-  // });
 
   const sectionTitleStyle = {
     letterSpacing: `${1 + aboutSectionScroll}vw`,

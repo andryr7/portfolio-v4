@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import styled from 'styled-components'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import { playfairDisplay } from '@/styles/fonts'
 import { PortfolioContext } from '@/utils/Context'
 import { useLenis } from '@studio-freight/react-lenis'
@@ -93,7 +93,6 @@ export async function getStaticProps() {
       infoData,
       projectData,
       skillData
-    },
-    // revalidate: 60,
+    }
   };
 }

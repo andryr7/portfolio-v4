@@ -188,10 +188,10 @@ export default function Hero({ aboutSectionScroll }) {
   const handleAnimateText = useCallback(() => {
     const letters = isAltLang ? "abcdefghijklmnopqrstuvwxyz " : "abcdéfghijklmnopqrstuvwxyz ";
     const targetWord = isAltLang ? 'web developer' : 'développeur web';
-    let iteration = 0
+    let iteration = 0;
     const maxIterations = targetWord.length;
     const interval = setInterval(() => {
-      if(iteration >= maxIterations) {
+      if(iteration > maxIterations) {
         clearInterval(interval);
         return
       }
@@ -204,7 +204,7 @@ export default function Hero({ aboutSectionScroll }) {
             return letters[Math.floor(Math.random() * 27)]})
           .join('');
       setHackerString(randomizedWord);
-      iteration += 1 / 2;
+      iteration += 1;
     }, 35)
   }, [isAltLang]);
 
