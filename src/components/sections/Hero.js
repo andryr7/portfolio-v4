@@ -4,6 +4,7 @@ import { PortfolioContext } from "@/utils/Context"
 import { playfairDisplaySC } from "@/styles/fonts"
 import noisefilter from '../../assets/noise.svg'
 import ScrollButton from "../interactivity/ScrollButton"
+import { useMediaQuery } from "@studio-freight/hamo"
 
 const StyledHeroSection = styled.section`
   height: 100vh;
@@ -121,7 +122,7 @@ const StyledCaptions = styled.div`
 
 const StyledCaptionContainer = styled.div`
   display: flex;
-  gap: 1rem;
+  /* gap: 1rem; */
   &:first-of-type {
     & span:last-of-type {
       opacity: 0;
@@ -152,6 +153,7 @@ export default function Hero({ aboutSectionScroll }) {
   const helloThere = useRef(null);
   const theme = useTheme();
   const [hackerString, setHackerString] = useState('développeur web');
+  const isMobile = useMediaQuery('(max-width: 768px)');
 
   const sectionStyle = {
     backgroundColor: `${theme.background}`
@@ -175,6 +177,10 @@ export default function Hero({ aboutSectionScroll }) {
     letterSpacing: `${2.5 - 3 * aboutSectionScroll}vw`,
     opacity: `${aboutSectionScroll >= 0.5 ? 0 : 1}`
   };
+
+  const mobileTextAnimationStyle = {
+    opacity: `${aboutSectionScroll >= 0.5 ? 0 : 1}`
+  };
   
   const captionAnimationStyle = {
     opacity: `${1 - aboutSectionScroll * 3}`
@@ -183,6 +189,8 @@ export default function Hero({ aboutSectionScroll }) {
   const scrollButtonStyle = {
     display: `${aboutSectionScroll !== 0 ? 'none' : 'block'}`
   };
+
+  const noStyle = {};
 
   // Handling the job text animation
   const handleAnimateText = useCallback(() => {
@@ -214,29 +222,30 @@ export default function Hero({ aboutSectionScroll }) {
     setHackerString(newHackerString)
   },[isAltLang]);
 
+
   return (
     <StyledHeroSection ref={heroSectionRef} style={sectionStyle}>
       <StyledBackground style={backgroundStyle}>
-        <StyledFirstCircle style={firstCircleStyle}/>
-        <StyledSecondCircle style={secondCircleStyle}/>
+        <StyledFirstCircle style={isMobile ? noStyle : firstCircleStyle}/>
+        <StyledSecondCircle style={isMobile ? noStyle : secondCircleStyle}/>
       </StyledBackground>
       <StyledHeroContainer className={playfairDisplaySC.className}>
-        <StyledHeaderPart style={textAnimationStyle}>
+        <StyledHeaderPart style={isMobile ? mobileTextAnimationStyle : textAnimationStyle}>
           <h3>Hello</h3>
         </StyledHeaderPart>
-        <StyledHeaderPart className="interactive" style={textAnimationStyle}>
+        <StyledHeaderPart className="interactive" style={isMobile ? mobileTextAnimationStyle : textAnimationStyle}>
           <StyledFirstWord>World</StyledFirstWord>
           <StyledSecondWord onClick={() => helloThere.current.play()}>There</StyledSecondWord>
           <audio src={'hellothere.mp3'} ref={helloThere}/>
         </StyledHeaderPart>
-        <StyledCaptions style={captionAnimationStyle}>
+        <StyledCaptions style={isMobile ? mobileTextAnimationStyle : captionAnimationStyle}>
           <StyledCaptionContainer>
             <span>{isAltLang ? 'My name is' : "Je m'appelle"}</span>
-            <span>Andry</span>
-            <span>Ratsimba</span>
+            <span>&nbsp;Andry</span>
+            <span>&nbsp;Ratsimba</span>
           </StyledCaptionContainer>
           <StyledCaptionContainer onMouseEnter={() => handleAnimateText()}>
-            <span>{isAltLang ? 'I am a ' : 'Je suis '}</span>
+            <span>{isAltLang ? 'I am a' : 'Je suis'}&nbsp;</span>
             <span>{hackerString}</span>
           </StyledCaptionContainer>
           <span>{isAltLang ? 'Welcome to my portfolio' : 'Bienvenue sur mon portfolio'}</span>

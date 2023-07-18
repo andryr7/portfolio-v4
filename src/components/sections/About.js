@@ -7,6 +7,7 @@ import PortableText from "react-portable-text"
 import { useNextSanityImage } from "next-sanity-image"
 import { sanityClient } from "../../../sanity"
 import SkillContainer from "../composables/SkillContainer"
+import { useMediaQuery } from "@studio-freight/hamo"
 
 const StyledAboutSection = styled.section`
   width: 100%;
@@ -122,6 +123,7 @@ const StyledItemContainer = styled.ul`
 export default function About({ infoData, skillData, aboutSectionScroll }) {
   const { aboutSectionRef, isAltLang } = useContext(PortfolioContext);
   const imageProps = useNextSanityImage(sanityClient, infoData.picture);
+  const isMobile = useMediaQuery('(max-width: 768px)');
   
   const frontendSkills = skillData.filter(skill => skill.skilltype === 'frontend');
   const backendSkills = skillData.filter(skill => skill.skilltype === 'backend');
@@ -132,10 +134,12 @@ export default function About({ infoData, skillData, aboutSectionScroll }) {
     opacity: `${aboutSectionScroll >= 0.5 ? 1 : 0}`
   };
 
+  const noStyle = {};
+
   return (
     <StyledAboutSection ref={aboutSectionRef}>
       <StyledInterlude>
-        <StyledSectionTitle style={sectionTitleStyle}>
+        <StyledSectionTitle style={isMobile ? noStyle : sectionTitleStyle}>
           {isAltLang ? '{ about} ' : '{ à propos }'}
         </StyledSectionTitle>
       </StyledInterlude>

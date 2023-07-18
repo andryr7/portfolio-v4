@@ -10,9 +10,9 @@ export const PortfolioProvider = (({children}) => {
   const workSectionRef = useRef(null);
 
   // Switching to english if the navigator language isn't french
-  useEffect(()=>{
-    window.navigator.language !== 'fr' && setIsAltLang(true);
-  },[]);
+  // useEffect(()=>{
+  //   window.navigator.language !== 'fr' && setIsAltLang(true);
+  // },[]);
 
   // Handling animation disabling on mobile
   // useEffect(() => {

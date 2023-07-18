@@ -6,6 +6,7 @@ import { PortfolioContext } from "@/utils/Context"
 import Image from "next/image"
 import { useNextSanityImage } from "next-sanity-image"
 import { sanityClient } from "../../../sanity"
+import { useMediaQuery } from "@studio-freight/hamo";
 
 const StyledWorkSection = styled.section`
   display: flex;
@@ -158,6 +159,7 @@ export default function Work({ projectData, workSectionScroll }) {
   const { workSectionRef, isAltLang } = useContext(PortfolioContext);
   const [paddingSlideNb, setPaddingSlideNb] = useState(2);
   const workSliderRef = useRef(null);
+  const isMobile = useMediaQuery('(max-width: 768px)');
 
   useEffect(() => {
     const handleResize = () => {
@@ -186,11 +188,13 @@ export default function Work({ projectData, workSectionScroll }) {
   const sectionTitleStyle = {
     letterSpacing: `${1 + workSectionScroll}vw`
   };
+
+  const noStyle = {};
   
   return (
     <StyledWorkSection ref={workSectionRef}>
       <StyledInterlude >
-        <StyledSectionTitle style={sectionTitleStyle}>
+        <StyledSectionTitle style={isMobile ? noStyle : sectionTitleStyle}>
           {isAltLang ? '{ work }' : '{ projets }'}
         </StyledSectionTitle>
       </StyledInterlude>

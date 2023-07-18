@@ -1379,6 +1379,15 @@
     rimraf "^5.0.1"
     throttle-debounce "^5.0.0"
 
+"@studio-freight/hamo@^0.6.19":
+  version "0.6.19"
+  resolved "https://registry.yarnpkg.com/@studio-freight/hamo/-/hamo-0.6.19.tgz#da8435e484b1f1ebf4f3d7d52d71b4fcd13e898c"
+  integrity sha512-tU8QLbYEuo7AFhne90JhGY2DH1zfmyxDiB30QqIwoRt+Po/w8TbiLdigcWb946W0Vhyfm2rjI7eDRyQN1Oh3HQ==
+  dependencies:
+    "@studio-freight/tempus" "^0.0.38"
+    rimraf "^5.0.1"
+    throttle-debounce "^5.0.0"
+
 "@studio-freight/lenis@^1.0.14":
   version "1.0.16"
   resolved "https://registry.yarnpkg.com/@studio-freight/lenis/-/lenis-1.0.16.tgz#3a284461e1e252228bca544ce7191afede1af4ec"
@@ -1398,6 +1407,11 @@
   version "0.0.37"
   resolved "https://registry.yarnpkg.com/@studio-freight/tempus/-/tempus-0.0.37.tgz#587cc8a1a98a1f052d5bfda6d66204e67ee664fc"
   integrity sha512-UNK2i27qs+/cPi0C2dO3uXVSVlime8NQYuPPtLO6qGoEdXTMo3ORRlgq+X50AacQNdWMoSMr0Dmo69W6zIup3w==
+
+"@studio-freight/tempus@^0.0.38":
+  version "0.0.38"
+  resolved "https://registry.yarnpkg.com/@studio-freight/tempus/-/tempus-0.0.38.tgz#170e0b3de4b123917b04943dd95e7c452ec63e39"
+  integrity sha512-AO1O2fEmfUqWGjEofmPNMQRlwgZ96eB5OFsVJjeH8/RKd1/Yf4zbPnXO+r2TD4aueA6X9JRCJU2GUprI9+m8uQ==
 
 "@swc/helpers@0.5.1":
   version "0.5.1"
