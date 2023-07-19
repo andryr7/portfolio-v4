@@ -14,6 +14,7 @@ const StyledHexContainer = styled.article`
   background-color: ${props => props.theme.main};
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
   -webkit-clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  overflow: hidden;
   transition: 
     background-color 0.5s ease 0s,
     opacity 0.5s ease ${props => props.delay+'s'};
@@ -70,9 +71,12 @@ const StyledSlidercontainer = styled.div`
 
 const StyledSlide = styled.article`
   height: 100%;
+  width: 20vw;
+  max-width: 500px;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: auto;
   font-size: clamp(1rem, 1.25vw, 1.5rem);
 `
 
@@ -116,7 +120,6 @@ export default function SkillContainer({ title, skills, delay }) {
               interval: 1000,
               pagination: false,
               arrows: false,
-              width: '19vw',
               breakpoints: {
                 768: {
                   width: '60vw'

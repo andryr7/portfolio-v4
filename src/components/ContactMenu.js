@@ -51,7 +51,7 @@ const StyledContactLinkTitle = styled.span`
 `
 
 const StyledContactLinkSpan = styled.span`
-  font-size: 1.25rem;
+  font-size: min(1.3vw, 1.5rem);
   opacity: 0;
   transition: all 0.5s;
   transform: translateY(-100%);
@@ -63,16 +63,18 @@ const StyledContactLinkSpan = styled.span`
 const StyledContactLinkShape = styled.a`
   clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
   aspect-ratio: 1;
-  width: min(25vw, 50vh);
+  width: 30vw;
+  max-width: 600px;
   background-color: ${props => props.theme.main};
   margin-left: -5vw;
-  transition: width 0.5s;
+  transition: all 0.5s;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   &:hover {
-    width: max(40vw, 500px);
+    width: 40vw;
+    max-width: 750px;
     background-color: ${props => props.theme.accent};
     & span {
       opacity: 1;
@@ -106,6 +108,7 @@ const StyledContactLinkContent = styled.div`
 
 const StyledContactIcon = styled.img`
   width: max(3rem, 5vw);
+  max-width: 125px;
 `
 
 export default function ContactMenu({ infoData }) {
