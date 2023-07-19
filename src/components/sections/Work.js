@@ -111,7 +111,7 @@ function ProjectCard({ project }) {
           window.cancelAnimationFrame(animationId);
         }
       })
-    })
+    });
 
     observer.observe(cardRef.current);
 
@@ -157,44 +157,13 @@ function ProjectCard({ project }) {
  
 export default function Work({ projectData, workSectionScroll }) {
   const { workSectionRef, isAltLang } = useContext(PortfolioContext);
-  const [paddingSlideNb, setPaddingSlideNb] = useState(2);
-  const workSliderRef = useRef(null);
   const isMobile = useMediaQuery('(max-width: 768px)');
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth <= 768) {
-        setPaddingSlideNb(0);
-      }
-      else if (window.innerWidth <= 2160) {
-        setPaddingSlideNb(1);
-      }
-      else {
-        setPaddingSlideNb(2);
-      }
-    }
-    handleResize();
-
-    window.addEventListener('resize', handleResize)
-
-    return (() => {
-      window.removeEventListener('resize', handleResize);
-    })
-  }, []);
 
   const sectionTitleStyle = {
     letterSpacing: `${1 + workSectionScroll}vw`
   };
 
   const noStyle = {};
-
-  const move = () => {
-    console.log('MOVE')
-  }
-
-  const moved = () => {
-    console.log('MOVED')
-  }
   
   return (
     <StyledWorkSection ref={workSectionRef}>
@@ -206,22 +175,26 @@ export default function Work({ projectData, workSectionScroll }) {
       <StyledContainer>
         <StyledCarouselContainer>
           <Splide
-            ref={workSliderRef}
             aria-label="Projects carousel" 
             hasTrack={false}
-            onDraggi={() => move()}
-            on
             options={ {
               drag: 'free',
-              arrows: false,
+              arrows: true,
               pagination: false,
               perPage: 5,
               lazyLoad: false,
               focus: 'center',
               snap: true,
+              trimSpace: false,
               breakpoints: {
-                2160: {
+                2560: {
+                  perPage: 4
+                },
+                1920: {
                   perPage: 3
+                },
+                1280: {
+                  perPage: 2
                 },
                 768: {
                   perPage: 1,
@@ -231,16 +204,10 @@ export default function Work({ projectData, workSectionScroll }) {
             } }
           >
             <SplideTrack>
-              {[...Array(paddingSlideNb)].map((e, i) => (
-                <SplideSlide key={i} />
-              ))}
               {projectData.map((project, index) => (
                 <SplideSlide key={project._id}>
-                  <ProjectCard project={project} />
+                  <ProjectCard project={project}/>
                 </SplideSlide>
-              ))}
-              {[...Array(paddingSlideNb)].map((e, i) => (
-                <SplideSlide key={i} />
               ))}
             </SplideTrack>
           </Splide>
