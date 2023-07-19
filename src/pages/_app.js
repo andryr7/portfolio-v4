@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import { PortfolioProvider, PortfolioContext } from '@/utils/Context'
 import { ThemeProvider } from 'styled-components'
 import { lightTheme, darkTheme } from '@/styles/themes'
