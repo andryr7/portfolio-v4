@@ -6,6 +6,7 @@ const nextConfig = {
     styledComponents: { displayName: false, ssr: true }
   },
   images: {
+    loader: 'custom',
 		domains: ['cdn.sanity.io'],
 	},
 }
