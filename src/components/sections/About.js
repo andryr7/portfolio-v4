@@ -158,11 +158,12 @@ export default function About({ infoData, skillData, aboutSectionScroll }) {
         <StyledImageContainer>
           <Image
             src={imageProps.src}
+            loader={imageProps.loader}
             fill
             alt="Photographie de Andry Ratsimba"
             style={{objectFit: "cover"}}
-            quality={100}
-            sizes="(max-width: 768px) 70vw, 35vw"
+            quality={75}
+            sizes="(max-width: 768px) 80vw, 35vw"
             priority={true}
           />
         </StyledImageContainer>

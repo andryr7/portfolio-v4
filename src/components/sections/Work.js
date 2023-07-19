@@ -141,11 +141,12 @@ function ProjectCard({ project }) {
       <Image
         ref={cardRef}
         src={imageProps.src}
+        loader={imageProps.loader}
         fill
         alt={`Image of the ${project.title} project`}
         style={projectImageStyle}
-        quality={100}
-        sizes="(max-width: 768px) 150vw, 100vw"
+        quality={75}
+        sizes="(max-width: 768px) 125vw, (max-width: 1280px) 100vw, (max-width: 1920px) 75vw, 50vw"
         priority
       />
       <StyledProjectTitle>
