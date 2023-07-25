@@ -72,6 +72,7 @@ const StyledNavLink = styled.li`
     position: absolute;
     left: -0.5rem;
     transition: opacity 0.5s;
+    color: ${props => props.theme.accent}
   }
   &::after {
     content: '';
