@@ -194,12 +194,11 @@ export default function Work({ projectData, workSectionScroll }) {
                 1920: {
                   perPage: 3
                 },
-                1280: {
+                1440: {
                   perPage: 2
                 },
-                768: {
-                  perPage: 1,
-                  arrows: true
+                1024: {
+                  perPage: 1
                 }
               }
             } }
