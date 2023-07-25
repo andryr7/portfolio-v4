@@ -23,7 +23,7 @@ const StyledInterlude = styled.section`
 `
 
 const StyledSectionTitle = styled.span`
-  font-size: clamp(1.5rem, 4vw, 7.5rem);
+  font-size: clamp(1.5rem, 4vw, 5rem);
   letter-spacing: 1vw;
 `
 

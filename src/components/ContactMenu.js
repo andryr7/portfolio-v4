@@ -12,11 +12,13 @@ const StyledContactMenu = styled.div`
   width: 100%;
   height: 100vh;
   position: absolute;
-  display: flex;
   top:0;
   left: 0;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 7.5vh;
   z-index: -1;
   opacity: 0;
   transition: all 0.5s;
@@ -30,6 +32,15 @@ const StyledContactMenu = styled.div`
     background-color: ${props => props.theme.background+'DD'};
     backdrop-filter: none;
   };
+`
+
+const StyledSectionTitle = styled.span`
+  font-size: clamp(1.5rem, 4vw, 5rem);
+  letter-spacing: 1vw;
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
 `
 
 const StyledContactContainer = styled.div`
@@ -66,7 +77,8 @@ const StyledContactLinkShape = styled.a`
   width: 30vw;
   max-width: 600px;
   background-color: ${props => props.theme.main};
-  margin-left: -5vw;
+  margin-left: -2.5vw;
+  margin-right: -2.5vw;
   transition: all 0.5s;
   position: relative;
   display: flex;
@@ -83,6 +95,7 @@ const StyledContactLinkShape = styled.a`
   };
   @media (max-width: 768px) {
     margin-left: 0;
+    margin-right: 0;
     margin-top: -10vw;
     width: 50vw;
     &:hover {
@@ -116,6 +129,9 @@ export default function ContactMenu({ infoData }) {
 
   return(
     <StyledContactMenu className={contactMenuIsOpened && 'opened'}>
+      <StyledSectionTitle>
+        {'{ contact }'}
+      </StyledSectionTitle>
       <StyledContactContainer>
         <StyledContactLinkShape href={infoData.linkedin} target="_blank" rel="roopener noreferer">
           <StyledContactLinkContent>
