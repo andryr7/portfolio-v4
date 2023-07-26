@@ -87,7 +87,7 @@ export default function Home({ infoData, projectData, skillData }) {
         <title>Andry Ratsimba - Développeur web</title>
         <meta name="description" content="Portfolio de Andry Ratsimba, développeur web fullstack basé à Toulouse" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.png" />
         <noscript>
           <span>Merci d&apos;activer Javascript pour consulter ce site.</span>
         </noscript>
