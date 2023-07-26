@@ -36,7 +36,6 @@ export default function NoiseFilter() {
 
   const filterStyle = {
     backgroundImage: isDarkMode ? 'url(/darknoise.png)' : 'url(/lightnoise.png)'
-    // backgroundColor: `${isDarkMode ? 'red' : 'blue'}`,
   }
 
   return (

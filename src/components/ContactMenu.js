@@ -7,21 +7,23 @@ import linkedindark from '../assets/contact/linkedindark.png'
 import linkedinlight from '../assets/contact/linkedinlight.png'
 import emaildark from '../assets/contact/emaildark.svg'
 import emaillight from '../assets/contact/emaillight.svg'
+import { playfairDisplay } from "@/styles/fonts"
 
 const StyledContactMenu = styled.div`
   width: 100%;
   height: 100vh;
-  position: absolute;
-  top:0;
+  position: fixed;
+  top: 0;
   left: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 7.5vh;
-  z-index: -1;
+  z-index: 1;
   opacity: 0;
   transition: all 0.5s;
+  pointer-events: none;
   &.opened {
     opacity: 1;
     pointer-events: all;
@@ -41,6 +43,7 @@ const StyledSectionTitle = styled.span`
   top: 15%;
   left: 50%;
   transform: translateX(-50%);
+  color: ${props => props.theme.main};
 `
 
 const StyledContactContainer = styled.div`
@@ -128,7 +131,7 @@ export default function ContactMenu({ infoData }) {
   const { contactMenuIsOpened, isDarkMode, isAltLang } = useContext(PortfolioContext);
 
   return(
-    <StyledContactMenu className={contactMenuIsOpened && 'opened'}>
+    <StyledContactMenu className={`${contactMenuIsOpened && 'opened'} ${playfairDisplay.className}`}>
       <StyledSectionTitle>
         {'{ contact }'}
       </StyledSectionTitle>

@@ -10,6 +10,14 @@ import Hero from '@/components/sections/Hero'
 import About from '@/components/sections/About'
 import Work from '@/components/sections/Work'
 import NoiseFilter from '@/components/NoiseFilter'
+import ContactMenu from '@/components/ContactMenu'
+import { createGlobalStyle } from 'styled-components'
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    background-color: ${props => props.theme.background};
+  }
+`
 
 const StyledMain = styled.main`
   color: ${props => props.theme.main};
@@ -84,12 +92,14 @@ export default function Home({ infoData, projectData, skillData }) {
           <span>Merci d&apos;activer Javascript pour consulter ce site.</span>
         </noscript>
       </Head>
+      <GlobalStyle/>
       <StyledMain className={`${playfairDisplay.className}`}>
         <Hero aboutSectionScroll={aboutSectionScroll}/>
         <About infoData={infoData} skillData={skillData} aboutSectionScroll={aboutSectionScroll}/>
         <Work projectData={projectData} workSectionScroll={workSectionScroll}/>
       </StyledMain>
-      <Frame infoData={infoData} currentSection={currentSection}/>
+      <ContactMenu infoData={infoData}/>
+      <Frame currentSection={currentSection}/>
       {/* <GrainFilter /> */}
       <NoiseFilter />
     </>

@@ -5,7 +5,6 @@ import styled from "styled-components"
 import { useLenis } from "@studio-freight/react-lenis"
 import ThemeButton from "./interactivity/ThemeButton"
 import ContactCTA from "./interactivity/ContactCTA"
-import ContactMenu from "./ContactMenu"
 import LangButton from "./interactivity/LangButton"
 
 const StyledFrame = styled.div`
@@ -108,7 +107,7 @@ const StyledSiteOptionsContainer = styled.div`
   align-items: center;
 `
 
-export default function Frame({ infoData, currentSection }) {
+export default function Frame({ currentSection }) {
   const { 
     contactMenuIsOpened, 
     setContactMenuIsOpened, 
@@ -170,7 +169,6 @@ export default function Frame({ infoData, currentSection }) {
             <ContactCTA />
           </StyledButtonContainer>
         </StyledFooter>
-        <ContactMenu infoData={infoData}/>
       </StyledFrame>
     </>
   )
