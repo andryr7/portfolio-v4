@@ -94,7 +94,7 @@ export default function Home({ infoData, projectData, skillData }) {
       </Head>
       <GlobalStyle/>
       <StyledMain className={`${playfairDisplay.className}`}>
-        <Hero aboutSectionScroll={aboutSectionScroll}/>
+        <Hero aboutSectionScroll={aboutSectionScroll} workSectionScroll={workSectionScroll}/>
         <About infoData={infoData} skillData={skillData} aboutSectionScroll={aboutSectionScroll}/>
         <Work projectData={projectData} workSectionScroll={workSectionScroll}/>
       </StyledMain>

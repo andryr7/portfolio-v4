@@ -147,12 +147,13 @@ const StyledIconContainer = styled.div`
   align-items: center;
 `
 
-export default function Hero({ aboutSectionScroll }) {
-  const { heroSectionRef, isAltLang, workSectionScroll } = useContext(PortfolioContext);
+export default function Hero({ aboutSectionScroll, workSectionScroll }) {
+  const { heroSectionRef, isAltLang } = useContext(PortfolioContext);
   const helloThere = useRef(null);
   const theme = useTheme();
   const [hackerString, setHackerString] = useState('développeur web');
   const isMobile = useMediaQuery('(max-width: 768px)');
+  console.log(workSectionScroll)
 
   const sectionStyle = {
     backgroundColor: `${theme.background}`
@@ -164,12 +165,12 @@ export default function Hero({ aboutSectionScroll }) {
 
   const firstCircleStyle = {
     left: `${Math.min((35 + 30 * aboutSectionScroll), 50)}%`,
-    // maskPosition: `${Math.max((100 - aboutSectionScroll * 100), 50)}% 50%`
+    maskPosition: `${Math.max((100 - aboutSectionScroll * 100), 50)}% 50%`
   };
 
   const secondCircleStyle = {
     left: `${Math.max((65 - 30 * aboutSectionScroll), 50)}%`,
-    // maskPosition: `${Math.min(0 + aboutSectionScroll * 100, 50)}% 50%`
+    maskPosition: `${Math.min(0 + aboutSectionScroll * 100, 50)}% 50%`
   };
   
   const textAnimationStyle = {
