@@ -39,10 +39,8 @@ const StyledContactMenu = styled.div`
 const StyledSectionTitle = styled.span`
   font-size: clamp(1.5rem, 4vw, 5rem);
   letter-spacing: 1vw;
-  position: absolute;
-  top: 15%;
-  left: 50%;
-  transform: translateX(-50%);
+  margin-left: auto;
+  margin-right: auto;
   color: ${props => props.theme.main};
 `
 
