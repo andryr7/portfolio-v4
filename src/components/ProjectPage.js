@@ -29,7 +29,7 @@ const StyledProjectPage = styled.div`
 `
 
 const StyledProjectTitle = styled.h3`
-  font-size: clamp(1.5rem, 4vw, 5rem);
+  font-size: clamp(1rem, 4vw, 5rem);
   letter-spacing: 1vw;
   margin: auto;
   color: ${props => props.theme.main};
@@ -51,7 +51,7 @@ const StyledTextContainer = styled.div`
   width: 50vw;
   max-width: 1000px;
   text-align: justify;
-  font-size: clamp(1rem, 1.25vw, 2rem);
+  font-size: clamp(0.8rem, 1.5vw, 2rem);
   line-height: normal;
   @media (max-width: 768px) {
     width: 80vw;
@@ -61,6 +61,7 @@ const StyledTextContainer = styled.div`
 const StyledCloseButton = styled.a`
   padding: 1rem;
   border: 1px solid ${props => props.theme.main};
+  font-size: clamp(0.8rem, 1.5vw, 2rem);
   &:hover {
     color: ${props => props.theme.accent};
     border-color: ${props => props.theme.accent};
@@ -72,7 +73,7 @@ const StyledCloseButton = styled.a`
 
 const StyledTechContainer = styled.div`
   display: flex;
-  font-size: clamp(1rem, 1.25vw, 2rem);
+  font-size: clamp(0.8rem, 1.5vw, 2rem);
   line-height: normal;
   flex-direction: column;
   align-items: center;
