@@ -12,6 +12,7 @@ import Work from '@/components/sections/Work'
 import NoiseFilter from '@/components/NoiseFilter'
 import ContactMenu from '@/components/ContactMenu'
 import { createGlobalStyle } from 'styled-components'
+import ProjectPage from '@/components/ProjectPage'
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -32,6 +33,7 @@ export default function Home({ infoData, projectData, skillData }) {
   const [currentSection, setCurrentSection] = useState('hero');
   const [aboutSectionScroll, setAboutSectionScroll] = useState(0);
   const [workSectionScroll, setWorkSectionScroll] = useState(0);
+  const [currentProject, setCurrentProject] = useState(projectData[0]);
 
   //Adding the lang attribute to html
   useEffect(() => {
@@ -96,9 +98,10 @@ export default function Home({ infoData, projectData, skillData }) {
       <StyledMain className={`${playfairDisplay.className}`}>
         <Hero aboutSectionScroll={aboutSectionScroll} workSectionScroll={workSectionScroll}/>
         <About infoData={infoData} skillData={skillData} aboutSectionScroll={aboutSectionScroll}/>
-        <Work projectData={projectData} workSectionScroll={workSectionScroll}/>
+        <Work projectData={projectData} workSectionScroll={workSectionScroll} setCurrentProject={setCurrentProject}/>
       </StyledMain>
       <ContactMenu infoData={infoData}/>
+      <ProjectPage currentProject={currentProject} />
       <Frame currentSection={currentSection}/>
       {/* <GrainFilter /> */}
       <NoiseFilter />
@@ -110,7 +113,7 @@ export async function getStaticProps() {
   const { infoData, projectData, skillData } = await sanityClient.fetch(
     `{
       "infoData": *[_type == "info"][0]{picture, enPresentationText, frPresentationText, linkedin, github},
-      "projectData": *[_type == "project"] | order(releaseDate asc){_id, title, image, url},
+      "projectData": *[_type == "project"] | order(releaseDate asc){_id, title, image, url, tech[]->{name, url}, frDescription, enDescription},
       "skillData": *[_type == "skill"]{_id, enName, frName, "skilltype": type->slug},
     }`
   );

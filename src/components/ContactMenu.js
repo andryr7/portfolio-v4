@@ -20,7 +20,7 @@ const StyledContactMenu = styled.div`
   justify-content: center;
   align-items: center;
   gap: 7.5vh;
-  z-index: 1;
+  z-index: 2;
   opacity: 0;
   transition: all 0.5s;
   pointer-events: none;

@@ -7,6 +7,7 @@ import Image from "next/image"
 import { useNextSanityImage } from "next-sanity-image"
 import { sanityClient } from "../../../sanity"
 import { useMediaQuery } from "@studio-freight/hamo";
+import { useLenis } from "@studio-freight/react-lenis";
 
 const StyledWorkSection = styled.section`
   display: flex;
@@ -82,11 +83,13 @@ const StyledProjectTitle = styled.div`
   };
 `
 
-function ProjectCard({ project }) {
+function ProjectCard({ project, setCurrentProject }) {
   const [shift, setShift] = useState(50);
   const animated = useRef(false);
   const cardRef = useRef(null);
   const imageProps = useNextSanityImage(sanityClient, project.image);
+  const { setProjectPageIsOpened } = useContext(PortfolioContext);
+  const lenis = useLenis();
 
   const projectImageStyle = {
     objectPosition: `${shift}% center`,
@@ -136,8 +139,14 @@ function ProjectCard({ project }) {
     
   },[]);
 
+  const handleProjectClick = () => {
+    setProjectPageIsOpened(true);
+    setCurrentProject(project);
+    lenis.stop();
+  }
+
   return (
-    <StyledProjectCard target="_blank" rel="noopener noreferrer" href={project.url}>
+    <StyledProjectCard onClick={handleProjectClick}>
       <Image
         ref={cardRef}
         src={imageProps.src}
@@ -156,7 +165,7 @@ function ProjectCard({ project }) {
   )
 }
  
-export default function Work({ projectData, workSectionScroll }) {
+export default function Work({ projectData, workSectionScroll, setCurrentProject }) {
   const { workSectionRef, isAltLang } = useContext(PortfolioContext);
   const isMobile = useMediaQuery('(max-width: 768px)');
 
@@ -206,7 +215,7 @@ export default function Work({ projectData, workSectionScroll }) {
             <SplideTrack>
               {projectData.map((project, index) => (
                 <SplideSlide key={project._id}>
-                  <ProjectCard project={project}/>
+                  <ProjectCard project={project} setCurrentProject={setCurrentProject}/>
                 </SplideSlide>
               ))}
             </SplideTrack>

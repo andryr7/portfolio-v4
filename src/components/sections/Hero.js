@@ -153,7 +153,6 @@ export default function Hero({ aboutSectionScroll, workSectionScroll }) {
   const theme = useTheme();
   const [hackerString, setHackerString] = useState('développeur web');
   const isMobile = useMediaQuery('(max-width: 768px)');
-  console.log(workSectionScroll)
 
   const sectionStyle = {
     backgroundColor: `${theme.background}`

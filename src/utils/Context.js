@@ -6,6 +6,7 @@ export const PortfolioProvider = (({children}) => {
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [isAltLang, setIsAltLang] = useState(false);
   const [contactMenuIsOpened, setContactMenuIsOpened] = useState(false);
+  const [projectPageIsOpened, setProjectPageIsOpened] = useState(false);
   const aboutSectionRef = useRef(null);
   const workSectionRef = useRef(null);
 
@@ -41,6 +42,8 @@ export const PortfolioProvider = (({children}) => {
       setIsAltLang,
       aboutSectionRef,
       workSectionRef,
+      projectPageIsOpened,
+      setProjectPageIsOpened
     }}>
       {children}
     </PortfolioContext.Provider>

@@ -113,34 +113,48 @@ export default function Frame({ currentSection }) {
     setContactMenuIsOpened, 
     aboutSectionRef, 
     workSectionRef,
-    isAltLang 
+    isAltLang,
+    projectPageIsOpened,
+    setProjectPageIsOpened
   } = useContext(PortfolioContext);
   
   const lenis = useLenis();
 
   const handleAboutLinkClick = useCallback(() => {
+    if(projectPageIsOpened) {
+      lenis.start();
+      setProjectPageIsOpened(false);
+    }
     if(contactMenuIsOpened) {
       lenis.start();
       setContactMenuIsOpened(false);
     }
     lenis.scrollTo(aboutSectionRef.current);
-  },[contactMenuIsOpened, setContactMenuIsOpened, lenis, aboutSectionRef]);
+  },[contactMenuIsOpened, setContactMenuIsOpened, lenis, aboutSectionRef, projectPageIsOpened, setProjectPageIsOpened]);
 
   const handleWorkLinkClick = useCallback(() => {
+    if(projectPageIsOpened) {
+      lenis.start();
+      setProjectPageIsOpened(false);
+    }
     if(contactMenuIsOpened) {
       lenis.start();
       setContactMenuIsOpened(false);
     }
     lenis.scrollTo(workSectionRef.current);
-  },[contactMenuIsOpened, setContactMenuIsOpened, lenis, workSectionRef]);
+  },[contactMenuIsOpened, setContactMenuIsOpened, lenis, workSectionRef, projectPageIsOpened, setProjectPageIsOpened]);
 
   const handleHomeLinkClick = useCallback(() => {
+    if(projectPageIsOpened) {
+      lenis.start();
+      setProjectPageIsOpened(false);
+    }
     if(contactMenuIsOpened) {
       lenis.start();
       setContactMenuIsOpened(false);
     }
     lenis.scrollTo(0);
-  },[contactMenuIsOpened, setContactMenuIsOpened, lenis]);
+  },[contactMenuIsOpened, setContactMenuIsOpened, lenis, projectPageIsOpened, setProjectPageIsOpened]);
   
   return (
     <>

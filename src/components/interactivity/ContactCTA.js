@@ -95,7 +95,7 @@ const StyledPath = styled.path`
 `
 
 export default function ContactCTA() {
-  const { contactMenuIsOpened, setContactMenuIsOpened } = useContext(PortfolioContext);
+  const { contactMenuIsOpened, setContactMenuIsOpened, setProjectPageIsOpened } = useContext(PortfolioContext);
   const lenis = useLenis();
 
   const handleClick = useCallback(() => {
@@ -105,8 +105,9 @@ export default function ContactCTA() {
     else {
       lenis.stop();
     }
+    setProjectPageIsOpened(false);
     setContactMenuIsOpened(current => !current);
-  },[contactMenuIsOpened, lenis, setContactMenuIsOpened]);
+  },[contactMenuIsOpened, lenis, setContactMenuIsOpened, setProjectPageIsOpened]);
 
   useEffect(() => {
     //Handling escape key press to close menu
