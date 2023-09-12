@@ -126,7 +126,7 @@ export default function ProjectPage({ currentProject }) {
             </StyledTechList>
           </StyledTechContainer>
           <StyledCloseButton onClick={handleCloseClick}>
-            Fermer
+            {isAltLang ? 'Close' : 'Fermer'}
           </StyledCloseButton>
         </StyledContainer>
       </StyledProjectPage>
