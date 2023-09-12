@@ -93,17 +93,19 @@ const StyledTechLabel = styled.a`
 export default function ProjectPage({ currentProject }) {
   const { projectPageIsOpened, setProjectPageIsOpened, isAltLang } = useContext(PortfolioContext);
   const lenis = useLenis();
-  const handleCloseClick = () => {
+  const handleCloseClick = (e) => {
+    console.log(e)
+    e.stopPropagation();
     lenis.start();
     setProjectPageIsOpened(false);
   }
-  
+
   const projectDescription = isAltLang ? currentProject.enDescription : currentProject.frDescription;
 
   return (
-      <StyledProjectPage className={`${projectPageIsOpened && 'opened'} ${playfairDisplay.className}`}>
+      <StyledProjectPage className={`${projectPageIsOpened && 'opened'} ${playfairDisplay.className}`} onClick={handleCloseClick}>
         <StyledContainer>
-          <StyledProjectTitle as={'a'} href={currentProject.url} target="_blank" rel="noopener noreferrer">
+          <StyledProjectTitle as={'a'} href={currentProject.url} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}>
             {`{ ${currentProject.title} }`}
           </StyledProjectTitle>
           <StyledTextContainer>
@@ -117,7 +119,7 @@ export default function ProjectPage({ currentProject }) {
             </span>
             <StyledTechList>
               {currentProject.tech.map(tech => (
-                <StyledTechLabel key={tech.name} target="_blank" rel="noopener noreferrer" href={tech.url}>
+                <StyledTechLabel key={tech.name} target="_blank" rel="noopener noreferrer" href={tech.url} onClick={e => e.stopPropagation()}>
                   {tech.name}
                 </StyledTechLabel>
               ))}
