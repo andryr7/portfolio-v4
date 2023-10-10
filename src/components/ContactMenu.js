@@ -1,6 +1,6 @@
 import { PortfolioContext } from "@/utils/Context"
-import { useContext } from "react"
-import { styled } from "styled-components"
+import { useContext, useState } from "react"
+import { keyframes, styled } from "styled-components"
 import githubdark from '../assets/contact/githubdark.png'
 import githublight from '../assets/contact/githublight.png'
 import linkedindark from '../assets/contact/linkedindark.png'
@@ -62,6 +62,15 @@ const StyledContactLinkTitle = styled.span`
   };
 `
 
+const flickerAnimation = keyframes`
+  0% {opacity:0;}
+  9% {opacity:0;}
+  10% {opacity:.5;}
+  13% {opacity:0;}
+  20% {opacity:.5;}
+  25% {opacity:1;}
+`
+
 const StyledContactLinkSpan = styled.span`
   font-size: min(1.3vw, 1.5rem);
   opacity: 0;
@@ -70,6 +79,9 @@ const StyledContactLinkSpan = styled.span`
   @media (max-width: 768px) {
     display: none;
   };
+  &.animated {
+    animation: ${flickerAnimation} 1s linear;
+  }
 `
 
 const StyledContactLinkShape = styled.a`
@@ -85,6 +97,7 @@ const StyledContactLinkShape = styled.a`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
   &:hover {
     width: 40vw;
     max-width: 750px;
@@ -127,6 +140,13 @@ const StyledContactIcon = styled.img`
 
 export default function ContactMenu({ infoData }) {
   const { contactMenuIsOpened, isDarkMode, isAltLang } = useContext(PortfolioContext);
+  const [emailWasCopied, setEmailWasCopied] = useState(false);
+
+  const handleEmaiClick = () => {
+    navigator.clipboard.writeText('contact@andryratsimba.com');
+    setEmailWasCopied(true);
+    setTimeout(() => setEmailWasCopied(false), 5000);
+  }
 
   return(
     <StyledContactMenu className={`${contactMenuIsOpened && 'opened'} ${playfairDisplay.className}`}>
@@ -156,14 +176,17 @@ export default function ContactMenu({ infoData }) {
             </StyledContactLinkSpan>
           </StyledContactLinkContent>
         </StyledContactLinkShape>
-        <StyledContactLinkShape href={'mailto:contact@andryratsimba.com'} target="_blank" rel="roopener noreferer">
+        <StyledContactLinkShape onClick={handleEmaiClick}>
           <StyledContactLinkContent>
             <StyledContactLinkTitle>
               Email
             </StyledContactLinkTitle>
             <StyledContactIcon src={isDarkMode ? emaillight.src : emaildark.src} alt="Email Icon" />
-            <StyledContactLinkSpan>
-              {isAltLang ? 'Contact me directly' : 'Contactez-moi directement'}
+            <StyledContactLinkSpan className={emailWasCopied && 'animated'}>
+              {!emailWasCopied && isAltLang && 'Copy my email address'}
+              {!emailWasCopied && !isAltLang && 'Copier mon adresse email'}
+              {emailWasCopied && isAltLang && 'Email address was copied !'}
+              {emailWasCopied && !isAltLang && 'Adresse email copiée !'}
             </StyledContactLinkSpan>
           </StyledContactLinkContent>
         </StyledContactLinkShape>

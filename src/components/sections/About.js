@@ -106,7 +106,7 @@ const StyledTextContainer = styled.div`
 `
 
 const StyledItemCaption = styled.span`
-  font-size: 1.5rem;
+  font-size: 2rem;
 `
 
 const StyledItemContainer = styled.ul`

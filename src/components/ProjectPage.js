@@ -51,7 +51,7 @@ const StyledTextContainer = styled.div`
   width: 50vw;
   max-width: 1000px;
   text-align: justify;
-  font-size: clamp(0.8rem, 1.5vw, 2rem);
+  font-size: clamp(1rem, 1.25vw, 2rem);
   line-height: normal;
   @media (max-width: 768px) {
     width: 80vw;
@@ -73,7 +73,7 @@ const StyledCloseButton = styled.a`
 
 const StyledTechContainer = styled.div`
   display: flex;
-  font-size: clamp(0.8rem, 1.5vw, 2rem);
+  font-size: clamp(1rem, 1.5vw, 2rem);
   line-height: normal;
   flex-direction: column;
   align-items: center;
