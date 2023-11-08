@@ -1,9 +1,9 @@
-import { PortfolioContext } from "@/utils/Context"
-import { useContext } from "react"
-import { styled } from "styled-components"
-import { playfairDisplay } from "@/styles/fonts"
-import PortableText from "react-portable-text"
-import { useLenis } from "@studio-freight/react-lenis"
+import { PortfolioContext } from "@/utils/Context";
+import { useContext } from "react";
+import { styled } from "styled-components";
+import { playfairDisplay } from "@/styles/fonts";
+import PortableText from "react-portable-text";
+import { useLenis } from "@studio-freight/react-lenis";
 
 const StyledProjectPage = styled.div`
   width: 100%;
@@ -23,21 +23,21 @@ const StyledProjectPage = styled.div`
   &.opened {
     opacity: 1;
     pointer-events: all;
-  };
-  background-color: ${props => props.theme.background+'EE'};
-  color: ${props => props.theme.main};
-`
+  }
+  background-color: ${(props) => props.theme.background + "EE"};
+  color: ${(props) => props.theme.main};
+`;
 
 const StyledProjectTitle = styled.h3`
   font-size: clamp(1rem, 4vw, 5rem);
   letter-spacing: 1vw;
   margin: auto;
-  color: ${props => props.theme.main};
+  color: ${(props) => props.theme.main};
   text-decoration: none;
   &:hover {
-    color: ${props => props.theme.accent}
+    color: ${(props) => props.theme.accent};
   }
-`
+`;
 
 const StyledContainer = styled.div`
   display: flex;
@@ -45,7 +45,7 @@ const StyledContainer = styled.div`
   justify-content: space-around;
   align-items: center;
   gap: 5vh;
-`
+`;
 
 const StyledTextContainer = styled.div`
   width: 50vw;
@@ -55,21 +55,21 @@ const StyledTextContainer = styled.div`
   line-height: normal;
   @media (max-width: 768px) {
     width: 80vw;
-  };
-`
+  }
+`;
 
 const StyledCloseButton = styled.a`
   padding: 1rem;
-  border: 1px solid ${props => props.theme.main};
+  border: 1px solid ${(props) => props.theme.main};
   font-size: clamp(0.8rem, 1.5vw, 2rem);
   &:hover {
-    color: ${props => props.theme.accent};
-    border-color: ${props => props.theme.accent};
-  };
+    color: ${(props) => props.theme.accent};
+    border-color: ${(props) => props.theme.accent};
+  }
   width: fit-content;
   margin: auto;
   cursor: pointer;
-`
+`;
 
 const StyledTechContainer = styled.div`
   display: flex;
@@ -77,59 +77,79 @@ const StyledTechContainer = styled.div`
   line-height: normal;
   flex-direction: column;
   align-items: center;
-`
+`;
 
 const StyledTechList = styled.div`
   display: flex;
-`
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 50vw;
+`;
 
 const StyledTechLabel = styled.a`
   padding: 1rem;
-  color: ${props => props.theme.main};
+  color: ${(props) => props.theme.main};
   &:hover {
-    color: ${props => props.theme.accent};
+    color: ${(props) => props.theme.accent};
   }
-`
+`;
 
 export default function ProjectPage({ currentProject }) {
-  const { projectPageIsOpened, setProjectPageIsOpened, isAltLang } = useContext(PortfolioContext);
+  const { projectPageIsOpened, setProjectPageIsOpened, isAltLang } =
+    useContext(PortfolioContext);
   const lenis = useLenis();
   const handleCloseClick = (e) => {
-    console.log(e)
     e.stopPropagation();
     lenis.start();
     setProjectPageIsOpened(false);
-  }
+  };
 
-  const projectDescription = isAltLang ? currentProject.enDescription : currentProject.frDescription;
+  const projectDescription = isAltLang
+    ? currentProject.enDescription
+    : currentProject.frDescription;
 
   return (
-      <StyledProjectPage className={`${projectPageIsOpened && 'opened'} ${playfairDisplay.className}`} onClick={handleCloseClick}>
-        <StyledContainer>
-          <StyledProjectTitle as={'a'} href={currentProject.url} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}>
-            {`{ ${currentProject.title} }`}
-          </StyledProjectTitle>
-          <StyledTextContainer>
-            <PortableText
-              content={projectDescription}
-            />
-          </StyledTextContainer>
-          <StyledTechContainer>
-            <span>
-              {isAltLang ? 'Technologies used :' : 'Technologies utilisées :'}
-            </span>
-            <StyledTechList>
-              {currentProject.tech.map(tech => (
-                <StyledTechLabel key={tech.name} target="_blank" rel="noopener noreferrer" href={tech.url} onClick={e => e.stopPropagation()}>
-                  {tech.name}
-                </StyledTechLabel>
-              ))}
-            </StyledTechList>
-          </StyledTechContainer>
-          <StyledCloseButton onClick={handleCloseClick}>
-            {isAltLang ? 'Close' : 'Fermer'}
-          </StyledCloseButton>
-        </StyledContainer>
-      </StyledProjectPage>
-  )
+    <StyledProjectPage
+      className={`${projectPageIsOpened && "opened"} ${
+        playfairDisplay.className
+      }`}
+      onClick={handleCloseClick}
+    >
+      <StyledContainer>
+        <StyledProjectTitle
+          as={"a"}
+          href={currentProject.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {`{ ${currentProject.title} }`}
+        </StyledProjectTitle>
+        <StyledTextContainer>
+          <PortableText content={projectDescription} />
+        </StyledTextContainer>
+        <StyledTechContainer>
+          <span>
+            {isAltLang ? "Technologies used :" : "Technologies utilisées :"}
+          </span>
+          <StyledTechList>
+            {currentProject.tech.map((tech) => (
+              <StyledTechLabel
+                key={tech.name}
+                target="_blank"
+                rel="noopener noreferrer"
+                href={tech.url}
+                onClick={(e) => e.stopPropagation()}
+              >
+                {tech.name}
+              </StyledTechLabel>
+            ))}
+          </StyledTechList>
+        </StyledTechContainer>
+        <StyledCloseButton onClick={handleCloseClick}>
+          {isAltLang ? "Close" : "Fermer"}
+        </StyledCloseButton>
+      </StyledContainer>
+    </StyledProjectPage>
+  );
 }

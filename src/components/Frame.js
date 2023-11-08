@@ -1,36 +1,36 @@
-import { playfairDisplay } from "@/styles/fonts"
-import { PortfolioContext } from "@/utils/Context"
-import { useCallback, useContext } from "react"
-import styled from "styled-components"
-import { useLenis } from "@studio-freight/react-lenis"
-import ThemeButton from "./interactivity/ThemeButton"
-import ContactCTA from "./interactivity/ContactCTA"
-import LangButton from "./interactivity/LangButton"
+import { playfairDisplay } from "@/styles/fonts";
+import { PortfolioContext } from "@/utils/Context";
+import { useCallback, useContext } from "react";
+import styled from "styled-components";
+import { useLenis } from "@studio-freight/react-lenis";
+import ThemeButton from "./interactivity/ThemeButton";
+import ContactCTA from "./interactivity/ContactCTA";
+import LangButton from "./interactivity/LangButton";
 
 const StyledFrame = styled.div`
   position: fixed;
   height: calc(100dvh - 2vw);
   width: calc(100% - 2vw);
   z-index: 9;
-  border: 2px solid ${props => props.theme.main};
+  border: 2px solid ${(props) => props.theme.main};
   box-sizing: border-box;
   top: 0;
-  color: ${props => props.theme.main};
+  color: ${(props) => props.theme.main};
   margin: 1vw;
   padding: max(1vw, 0.5rem);
   pointer-events: none;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  outline: 10rem solid ${props => props.theme.background};
+  outline: 10rem solid ${(props) => props.theme.background};
   overflow: hidden;
-`
+`;
 
 const StyledHeader = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-`
+`;
 
 const StyledLogo = styled.div`
   display: flex;
@@ -39,18 +39,18 @@ const StyledLogo = styled.div`
   cursor: pointer;
   transition: all 0.5s;
   &:hover {
-    text-shadow: 3px 3px ${props => props.theme.accent}
+    text-shadow: 3px 3px ${(props) => props.theme.accent};
   }
-`
+`;
 
 const StyledNav = styled.nav`
   pointer-events: all;
-`
+`;
 
 const StyledNavLinkList = styled.ul`
   display: flex;
   gap: clamp(1rem, 2vw, 3rem);
-`
+`;
 
 const StyledNavLink = styled.li`
   font-size: clamp(1.25rem, 1.75vw, 2rem);
@@ -66,22 +66,22 @@ const StyledNavLink = styled.li`
     }
   }
   &::before {
-    content: '. ';
+    content: ". ";
     opacity: 0;
     position: absolute;
     left: -0.5rem;
     transition: opacity 0.5s;
-    color: ${props => props.theme.accent}
+    color: ${(props) => props.theme.accent};
   }
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     transition: all 0.5s;
     top: 175%;
     right: 0;
     width: 0%;
     height: 2px;
-    background-color: ${props => props.theme.accent};
+    background-color: ${(props) => props.theme.accent};
     @media (max-width: 768px) {
       display: none;
     }
@@ -90,86 +90,109 @@ const StyledNavLink = styled.li`
     width: 100%;
     left: 0;
   }
-`
+`;
 
-const StyledFooter = styled.footer``
+const StyledFooter = styled.footer``;
 
 const StyledButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: end;
-`
+`;
 
 const StyledSiteOptionsContainer = styled.div`
   display: flex;
   gap: 1rem;
   flex-direction: column;
   align-items: center;
-`
+`;
 
 export default function Frame({ currentSection }) {
-  const { 
-    contactMenuIsOpened, 
-    setContactMenuIsOpened, 
-    aboutSectionRef, 
+  const {
+    contactMenuIsOpened,
+    setContactMenuIsOpened,
+    aboutSectionRef,
     workSectionRef,
     isAltLang,
     projectPageIsOpened,
-    setProjectPageIsOpened
+    setProjectPageIsOpened,
   } = useContext(PortfolioContext);
-  
   const lenis = useLenis();
 
   const handleAboutLinkClick = useCallback(() => {
-    if(projectPageIsOpened) {
+    if (projectPageIsOpened) {
       lenis.start();
       setProjectPageIsOpened(false);
     }
-    if(contactMenuIsOpened) {
+    if (contactMenuIsOpened) {
       lenis.start();
       setContactMenuIsOpened(false);
     }
     lenis.scrollTo(aboutSectionRef.current);
-  },[contactMenuIsOpened, setContactMenuIsOpened, lenis, aboutSectionRef, projectPageIsOpened, setProjectPageIsOpened]);
+  }, [
+    contactMenuIsOpened,
+    setContactMenuIsOpened,
+    lenis,
+    aboutSectionRef,
+    projectPageIsOpened,
+    setProjectPageIsOpened,
+  ]);
 
   const handleWorkLinkClick = useCallback(() => {
-    if(projectPageIsOpened) {
+    if (projectPageIsOpened) {
       lenis.start();
       setProjectPageIsOpened(false);
     }
-    if(contactMenuIsOpened) {
+    if (contactMenuIsOpened) {
       lenis.start();
       setContactMenuIsOpened(false);
     }
     lenis.scrollTo(workSectionRef.current);
-  },[contactMenuIsOpened, setContactMenuIsOpened, lenis, workSectionRef, projectPageIsOpened, setProjectPageIsOpened]);
+  }, [
+    contactMenuIsOpened,
+    setContactMenuIsOpened,
+    lenis,
+    workSectionRef,
+    projectPageIsOpened,
+    setProjectPageIsOpened,
+  ]);
 
   const handleHomeLinkClick = useCallback(() => {
-    if(projectPageIsOpened) {
+    if (projectPageIsOpened) {
       lenis.start();
       setProjectPageIsOpened(false);
     }
-    if(contactMenuIsOpened) {
+    if (contactMenuIsOpened) {
       lenis.start();
       setContactMenuIsOpened(false);
     }
     lenis.scrollTo(0);
-  },[contactMenuIsOpened, setContactMenuIsOpened, lenis, projectPageIsOpened, setProjectPageIsOpened]);
-  
+  }, [
+    contactMenuIsOpened,
+    setContactMenuIsOpened,
+    lenis,
+    projectPageIsOpened,
+    setProjectPageIsOpened,
+  ]);
+
   return (
     <>
       <StyledFrame className={`${playfairDisplay.className}`}>
         <StyledHeader>
-          <StyledLogo onClick={handleHomeLinkClick}>
-            AR
-          </StyledLogo>
+          <StyledLogo onClick={handleHomeLinkClick}>AR</StyledLogo>
           <StyledNav>
             <StyledNavLinkList>
-              <StyledNavLink onClick={handleAboutLinkClick} className={currentSection === 'about' && 'current'}>
-                {isAltLang ? 'about' : 'à propos'}
+              <StyledNavLink
+                onClick={handleAboutLinkClick}
+                className={currentSection === "about" && "current"}
+              >
+                {isAltLang ? "about" : "à propos"}
               </StyledNavLink>
-              <StyledNavLink onClick={handleWorkLinkClick} className={currentSection === 'work' && 'current'}>
-                {isAltLang ? 'work' : 'projets'}
+              <StyledNavLink
+                onClick={handleWorkLinkClick}
+                className={currentSection === "work" && "current"}
+              >
+                {isAltLang ? "work" : "projets"}
               </StyledNavLink>
             </StyledNavLinkList>
           </StyledNav>
@@ -185,5 +208,5 @@ export default function Frame({ currentSection }) {
         </StyledFooter>
       </StyledFrame>
     </>
-  )
+  );
 }
