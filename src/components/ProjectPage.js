@@ -26,6 +26,8 @@ const StyledProjectPage = styled.div`
   }
   background-color: ${(props) => props.theme.background + "EE"};
   color: ${(props) => props.theme.main};
+  max-height: 100vh;
+  overflow-y: scroll;
 `;
 
 const StyledProjectTitle = styled.h3`
@@ -45,6 +47,9 @@ const StyledContainer = styled.div`
   justify-content: space-around;
   align-items: center;
   gap: 5vh;
+  @media (max-width: 768px) {
+    gap: 2.5vh;
+  }
 `;
 
 const StyledTextContainer = styled.div`
@@ -58,10 +63,17 @@ const StyledTextContainer = styled.div`
   }
 `;
 
-const StyledCloseButton = styled.a`
+const StyledLinksContainer = styled.div`
+  display: flex;
+  gap: 1rem;
+`;
+
+const StyledButton = styled.a`
   padding: 1rem;
   border: 1px solid ${(props) => props.theme.main};
   font-size: clamp(0.8rem, 1.5vw, 2rem);
+  color: inherit;
+  text-decoration: none;
   &:hover {
     color: ${(props) => props.theme.accent};
     border-color: ${(props) => props.theme.accent};
@@ -84,10 +96,13 @@ const StyledTechList = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   max-width: 50vw;
+  @media (max-width: 768px) {
+    max-width: 100vw;
+  }
 `;
 
 const StyledTechLabel = styled.a`
-  padding: 1rem;
+  padding: 0.5rem;
   color: ${(props) => props.theme.main};
   &:hover {
     color: ${(props) => props.theme.accent};
@@ -146,9 +161,27 @@ export default function ProjectPage({ currentProject }) {
             ))}
           </StyledTechList>
         </StyledTechContainer>
-        <StyledCloseButton onClick={handleCloseClick}>
+        <StyledLinksContainer>
+          <StyledButton
+            href={currentProject.url}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {isAltLang ? "Visit" : "Visiter"}
+          </StyledButton>
+          {currentProject.repo && (
+            <StyledButton
+              href={currentProject.repo}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Github
+            </StyledButton>
+          )}
+        </StyledLinksContainer>
+        <StyledButton onClick={handleCloseClick}>
           {isAltLang ? "Close" : "Fermer"}
-        </StyledCloseButton>
+        </StyledButton>
       </StyledContainer>
     </StyledProjectPage>
   );

@@ -1,11 +1,11 @@
-import { styled } from "styled-components"
-import { useEffect, useRef, useState, useContext } from "react"
-import { Splide, SplideTrack, SplideSlide } from '@splidejs/react-splide'
-import '@splidejs/react-splide/css';
-import { PortfolioContext } from "@/utils/Context"
-import Image from "next/image"
-import { useNextSanityImage } from "next-sanity-image"
-import { sanityClient } from "../../../sanity"
+import { styled } from "styled-components";
+import { useEffect, useRef, useState, useContext } from "react";
+import { Splide, SplideTrack, SplideSlide } from "@splidejs/react-splide";
+import "@splidejs/react-splide/css";
+import { PortfolioContext } from "@/utils/Context";
+import Image from "next/image";
+import { useNextSanityImage } from "next-sanity-image";
+import { sanityClient } from "../../../sanity";
 import { useMediaQuery } from "@studio-freight/hamo";
 import { useLenis } from "@studio-freight/react-lenis";
 
@@ -13,7 +13,7 @@ const StyledWorkSection = styled.section`
   display: flex;
   align-items: center;
   flex-direction: column;
-`
+`;
 
 const StyledInterlude = styled.section`
   width: 100%;
@@ -21,26 +21,26 @@ const StyledInterlude = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
-`
+`;
 
 const StyledSectionTitle = styled.span`
   font-size: clamp(1.5rem, 4vw, 5rem);
   letter-spacing: 1vw;
-`
+`;
 
 const StyledContainer = styled.div`
   height: 100lvh;
   width: 100%;
-  border-top: 1px solid ${props => props.theme.main};
-  background-color: ${props => props.theme.background};
+  border-top: 1px solid ${(props) => props.theme.main};
+  background-color: ${(props) => props.theme.background};
   display: flex;
   align-items: center;
-`
+`;
 
 const StyledCarouselContainer = styled.div`
   width: 100%;
   cursor: grab;
-`
+`;
 
 const StyledProjectCard = styled.a`
   display: block;
@@ -52,14 +52,14 @@ const StyledProjectCard = styled.a`
   cursor: pointer;
   @media (min-width: 768px) {
     filter: grayscale(1);
-  };
+  }
   &:hover {
     filter: grayscale(0);
     & div {
       opacity: 1;
     }
   }
-`
+`;
 
 const StyledProjectTitle = styled.div`
   position: absolute;
@@ -69,9 +69,9 @@ const StyledProjectTitle = styled.div`
   transform: translate(-50%, -50%);
   opacity: 0;
   font-size: 1.5rem;
-  color: ${props => props.theme.main};
-  text-shadow: 1px 1px ${props => props.theme.background};
-  background-color: ${props => props.theme.background};
+  color: ${(props) => props.theme.main};
+  text-shadow: 1px 1px ${(props) => props.theme.background};
+  background-color: ${(props) => props.theme.background};
   width: 100%;
   height: 3rem;
   display: flex;
@@ -80,8 +80,8 @@ const StyledProjectTitle = styled.div`
   transition: opacity 0.5s;
   @media (max-width: 768px) {
     opacity: 1;
-  };
-`
+  }
+`;
 
 function ProjectCard({ project, setCurrentProject }) {
   const [shift, setShift] = useState(50);
@@ -93,57 +93,55 @@ function ProjectCard({ project, setCurrentProject }) {
 
   const projectImageStyle = {
     objectPosition: `${shift}% center`,
-    objectFit: "cover"
+    objectFit: "cover",
   };
 
   useEffect(() => {
-    if(cardRef.current === null) {
-      return
+    if (cardRef.current === null) {
+      return;
     }
 
     let animationId;
-    
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting) {
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
           animated.current = true;
           animationId = window.requestAnimationFrame(adjustShift);
-        }
-        else {
+        } else {
           animated.current = false;
           window.cancelAnimationFrame(animationId);
         }
-      })
+      });
     });
 
     observer.observe(cardRef.current);
 
     const adjustShift = () => {
-      if(cardRef.current === null || animated.current === false) {
-        return
-      };
+      if (cardRef.current === null || animated.current === false) {
+        return;
+      }
 
       const rect = cardRef.current.getBoundingClientRect();
       const elWidth = rect.right - rect.left;
       const min = -elWidth;
       const max = window.innerWidth;
       const shift = ((rect.left + elWidth) / (max - min)) * 100;
-      const clampedShift = Math.max((Math.min(shift, 100)), 0);
+      const clampedShift = Math.max(Math.min(shift, 100), 0);
       setShift(clampedShift);
       window.requestAnimationFrame(adjustShift);
-    }
+    };
 
-    return (() => {
+    return () => {
       window.cancelAnimationFrame(animationId);
-    });
-    
-  },[]);
+    };
+  }, []);
 
   const handleProjectClick = () => {
     setProjectPageIsOpened(true);
     setCurrentProject(project);
     lenis.stop();
-  }
+  };
 
   return (
     <StyledProjectCard onClick={handleProjectClick}>
@@ -158,64 +156,69 @@ function ProjectCard({ project, setCurrentProject }) {
         sizes="(max-width: 768px) 125vw, (max-width: 1280px) 100vw, (max-width: 1920px) 75vw, 50vw"
         priority
       />
-      <StyledProjectTitle>
-        {project.title}
-      </StyledProjectTitle>
+      <StyledProjectTitle>{project.title}</StyledProjectTitle>
     </StyledProjectCard>
-  )
+  );
 }
- 
-export default function Work({ projectData, workSectionScroll, setCurrentProject }) {
+
+export default function Work({
+  projectData,
+  workSectionScroll,
+  setCurrentProject,
+}) {
   const { workSectionRef, isAltLang } = useContext(PortfolioContext);
-  const isMobile = useMediaQuery('(max-width: 768px)');
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   const sectionTitleStyle = {
-    letterSpacing: `${1 + workSectionScroll}vw`
+    letterSpacing: `${1 + workSectionScroll}vw`,
   };
 
   const noStyle = {};
-  
+
   return (
     <StyledWorkSection ref={workSectionRef}>
-      <StyledInterlude >
+      <StyledInterlude>
         <StyledSectionTitle style={isMobile ? noStyle : sectionTitleStyle}>
-          {isAltLang ? '{ work }' : '{ projets }'}
+          {isAltLang ? "{ work }" : "{ projets }"}
         </StyledSectionTitle>
       </StyledInterlude>
       <StyledContainer>
         <StyledCarouselContainer>
           <Splide
-            aria-label="Projects carousel" 
+            aria-label="Projects carousel"
             hasTrack={false}
-            options={ {
-              drag: 'free',
+            options={{
+              drag: "free",
               arrows: true,
               pagination: false,
               perPage: 5,
               lazyLoad: false,
-              focus: 'center',
+              focus: "center",
               snap: true,
               trimSpace: false,
               breakpoints: {
                 2560: {
-                  perPage: 4
+                  perPage: 4,
                 },
                 1920: {
-                  perPage: 3
+                  perPage: 3,
                 },
                 1440: {
-                  perPage: 2
+                  perPage: 2,
                 },
                 1024: {
-                  perPage: 1
-                }
-              }
-            } }
+                  perPage: 1,
+                },
+              },
+            }}
           >
             <SplideTrack>
               {projectData.map((project, index) => (
                 <SplideSlide key={project._id}>
-                  <ProjectCard project={project} setCurrentProject={setCurrentProject}/>
+                  <ProjectCard
+                    project={project}
+                    setCurrentProject={setCurrentProject}
+                  />
                 </SplideSlide>
               ))}
             </SplideTrack>
@@ -223,5 +226,5 @@ export default function Work({ projectData, workSectionScroll, setCurrentProject
         </StyledCarouselContainer>
       </StyledContainer>
     </StyledWorkSection>
-  )
+  );
 }

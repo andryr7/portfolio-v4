@@ -150,7 +150,7 @@ export async function getStaticProps() {
   const { infoData, projectData, skillData } = await sanityClient.fetch(
     `{
       "infoData": *[_type == "info"][0]{picture, enPresentationText, frPresentationText, linkedin, github},
-      "projectData": *[_type == "project"] | order(releaseDate asc){_id, title, image, url, tech[]->{name, url}, frDescription, enDescription},
+      "projectData": *[_type == "project"] | order(releaseDate asc){_id, title, image, url, repo, tech[]->{name, url}, frDescription, enDescription},
       "skillData": *[_type == "skill"]{_id, enName, frName, "skilltype": type->slug},
     }`
   );
