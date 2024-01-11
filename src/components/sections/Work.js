@@ -13,6 +13,8 @@ const StyledWorkSection = styled.section`
   display: flex;
   align-items: center;
   flex-direction: column;
+  margin-top: 100vh;
+  border-bottom: 1px solid ${(props) => props.theme.main};
 `;
 
 const StyledInterlude = styled.section`
@@ -26,6 +28,7 @@ const StyledInterlude = styled.section`
 const StyledSectionTitle = styled.span`
   font-size: clamp(1.5rem, 4vw, 5rem);
   letter-spacing: 1vw;
+  transition: opacity 0.5s;
 `;
 
 const StyledContainer = styled.div`
@@ -163,14 +166,16 @@ function ProjectCard({ project, setCurrentProject }) {
 
 export default function Work({
   projectData,
-  workSectionScroll,
+  aboutSectionScroll,
   setCurrentProject,
+  workSectionScroll,
 }) {
   const { workSectionRef, isAltLang } = useContext(PortfolioContext);
   const isMobile = useMediaQuery("(max-width: 768px)");
 
   const sectionTitleStyle = {
-    letterSpacing: `${1 + workSectionScroll}vw`,
+    letterSpacing: `${1 + aboutSectionScroll}vw`,
+    opacity: `${workSectionScroll >= 0.5 ? 1 : 0}`,
   };
 
   const noStyle = {};
@@ -179,7 +184,7 @@ export default function Work({
     <StyledWorkSection ref={workSectionRef}>
       <StyledInterlude>
         <StyledSectionTitle style={isMobile ? noStyle : sectionTitleStyle}>
-          {isAltLang ? "{ work }" : "{ projets }"}
+          {isAltLang ? "{ projects }" : "{ projets }"}
         </StyledSectionTitle>
       </StyledInterlude>
       <StyledContainer>

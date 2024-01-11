@@ -1,7 +1,7 @@
 import { PortfolioContext } from "@/utils/Context";
 import { useContext } from "react";
 import { styled } from "styled-components";
-import { playfairDisplay } from "@/styles/fonts";
+import { lato, playfairDisplay } from "@/styles/fonts";
 import PortableText from "react-portable-text";
 import { useLenis } from "@studio-freight/react-lenis";
 
@@ -102,6 +102,7 @@ const StyledTechList = styled.div`
 `;
 
 const StyledTechLabel = styled.a`
+  font-size: 0.8em;
   padding: 0.5rem;
   color: ${(props) => props.theme.main};
   &:hover {
@@ -140,14 +141,14 @@ export default function ProjectPage({ currentProject }) {
         >
           {`{ ${currentProject.title} }`}
         </StyledProjectTitle>
-        <StyledTextContainer>
+        <StyledTextContainer className={lato.className}>
           <PortableText content={projectDescription} />
         </StyledTextContainer>
         <StyledTechContainer>
           <span>
             {isAltLang ? "Technologies used :" : "Technologies utilisées :"}
           </span>
-          <StyledTechList>
+          <StyledTechList className={lato.className}>
             {currentProject.tech.map((tech) => (
               <StyledTechLabel
                 key={tech.name}

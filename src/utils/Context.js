@@ -2,7 +2,7 @@ import { createContext, useState, useRef, useEffect } from "react";
 
 export const PortfolioContext = createContext();
 
-export const PortfolioProvider = (({children}) => {
+export const PortfolioProvider = ({ children }) => {
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [isAltLang, setIsAltLang] = useState(false);
   const [contactMenuIsOpened, setContactMenuIsOpened] = useState(false);
@@ -26,26 +26,28 @@ export const PortfolioProvider = (({children}) => {
   //       setIsMobile(false);
   //     }
   //   };
-    
+
   //   window.addEventListener('resize', handleResize);
 
   //   return (() => window.removeEventListener('resize', handleResize))
   // }, [isMobile])
 
   return (
-    <PortfolioContext.Provider value={{
-      isDarkMode,
-      setIsDarkMode,
-      contactMenuIsOpened,
-      setContactMenuIsOpened,
-      isAltLang,
-      setIsAltLang,
-      aboutSectionRef,
-      workSectionRef,
-      projectPageIsOpened,
-      setProjectPageIsOpened
-    }}>
+    <PortfolioContext.Provider
+      value={{
+        isDarkMode,
+        setIsDarkMode,
+        contactMenuIsOpened,
+        setContactMenuIsOpened,
+        isAltLang,
+        setIsAltLang,
+        aboutSectionRef,
+        workSectionRef,
+        projectPageIsOpened,
+        setProjectPageIsOpened,
+      }}
+    >
       {children}
     </PortfolioContext.Provider>
-  )
-})
+  );
+};

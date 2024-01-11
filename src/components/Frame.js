@@ -183,16 +183,16 @@ export default function Frame({ currentSection }) {
           <StyledNav>
             <StyledNavLinkList>
               <StyledNavLink
+                onClick={handleWorkLinkClick}
+                className={currentSection === "work" && "current"}
+              >
+                {isAltLang ? "projects" : "projets"}
+              </StyledNavLink>
+              <StyledNavLink
                 onClick={handleAboutLinkClick}
                 className={currentSection === "about" && "current"}
               >
                 {isAltLang ? "about" : "à propos"}
-              </StyledNavLink>
-              <StyledNavLink
-                onClick={handleWorkLinkClick}
-                className={currentSection === "work" && "current"}
-              >
-                {isAltLang ? "work" : "projets"}
               </StyledNavLink>
             </StyledNavLinkList>
           </StyledNav>

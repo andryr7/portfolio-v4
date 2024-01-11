@@ -59,16 +59,16 @@ export default function Home({ infoData, projectData, skillData }) {
   // Scroll and current section updating
   const lenis = useLenis(() => {
     // Current section updating
-    const aboutSectionTop = aboutSectionRef.current.getBoundingClientRect().top;
-    const aboutSectionBottom =
-      aboutSectionRef.current.getBoundingClientRect().bottom;
-    if (aboutSectionTop > window.innerHeight / 2) {
+    const workSectionTop = workSectionRef.current.getBoundingClientRect().top;
+    const workSectonBottom =
+      workSectionRef.current.getBoundingClientRect().bottom;
+    if (workSectionTop > window.innerHeight / 2) {
       setCurrentSection("hero");
     } else {
-      if (aboutSectionBottom < window.innerHeight / 2) {
-        setCurrentSection("work");
-      } else {
+      if (workSectonBottom < window.innerHeight / 2) {
         setCurrentSection("about");
+      } else {
+        setCurrentSection("work");
       }
     }
 
@@ -126,15 +126,16 @@ export default function Home({ infoData, projectData, skillData }) {
           aboutSectionScroll={aboutSectionScroll}
           workSectionScroll={workSectionScroll}
         />
+        <Work
+          projectData={projectData}
+          workSectionScroll={workSectionScroll}
+          aboutSectionScroll={aboutSectionScroll}
+          setCurrentProject={setCurrentProject}
+        />
         <About
           infoData={infoData}
           skillData={skillData}
           aboutSectionScroll={aboutSectionScroll}
-        />
-        <Work
-          projectData={projectData}
-          workSectionScroll={workSectionScroll}
-          setCurrentProject={setCurrentProject}
         />
       </StyledMain>
       <ContactMenu infoData={infoData} />
