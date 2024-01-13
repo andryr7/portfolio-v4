@@ -196,20 +196,20 @@ export default function Work({
               drag: "free",
               arrows: true,
               pagination: false,
-              perPage: 5,
+              perPage: 3,
               lazyLoad: false,
               focus: "center",
               snap: true,
               trimSpace: false,
               breakpoints: {
                 2560: {
-                  perPage: 4,
+                  perPage: 2,
                 },
                 1920: {
-                  perPage: 3,
+                  perPage: 2,
                 },
                 1440: {
-                  perPage: 2,
+                  perPage: 1,
                 },
                 1024: {
                   perPage: 1,
