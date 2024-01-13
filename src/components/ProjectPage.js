@@ -144,11 +144,11 @@ export default function ProjectPage({ currentProject }) {
         <StyledTextContainer className={lato.className}>
           <PortableText content={projectDescription} />
         </StyledTextContainer>
-        <StyledTechContainer>
+        <StyledTechContainer className={lato.className}>
           <span>
             {isAltLang ? "Technologies used :" : "Technologies utilisées :"}
           </span>
-          <StyledTechList className={lato.className}>
+          <StyledTechList>
             {currentProject.tech.map((tech) => (
               <StyledTechLabel
                 key={tech.name}
