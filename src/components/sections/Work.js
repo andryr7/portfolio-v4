@@ -10,6 +10,7 @@ import { useMediaQuery } from "@studio-freight/hamo";
 import { useLenis } from "@studio-freight/react-lenis";
 
 const StyledWorkSection = styled.section`
+  min-height: 100vh;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -32,12 +33,13 @@ const StyledSectionTitle = styled.span`
 `;
 
 const StyledContainer = styled.div`
-  height: 100lvh;
+  height: 100%;
   width: 100%;
   border-top: 1px solid ${(props) => props.theme.main};
   background-color: ${(props) => props.theme.background};
   display: flex;
   align-items: center;
+  flex-grow: 1;
 `;
 
 const StyledCarouselContainer = styled.div`
