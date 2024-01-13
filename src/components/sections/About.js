@@ -43,6 +43,7 @@ const StyledTopContainer = styled.div`
   width: 100%;
   border-top: 1px solid ${(props) => props.theme.main};
   background-color: ${(props) => props.theme.background};
+  transition: background-color 0.5s;
   @media (max-width: 768px) {
     flex-direction: column;
     gap: 20vw;
@@ -61,6 +62,7 @@ const StyledBottomContainer = styled.div`
   width: 100%;
   border-top: 1px dashed ${(props) => props.theme.main};
   background-color: ${(props) => props.theme.background};
+  transition: background-color 0.5s;
   z-index: 1;
 `;
 

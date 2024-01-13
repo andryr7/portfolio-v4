@@ -37,6 +37,7 @@ const StyledContainer = styled.div`
   width: 100%;
   border-top: 1px solid ${(props) => props.theme.main};
   background-color: ${(props) => props.theme.background};
+  transition: background-color 0.5s;
   display: flex;
   align-items: center;
   flex-grow: 1;

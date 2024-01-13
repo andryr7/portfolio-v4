@@ -24,6 +24,7 @@ const StyledFrame = styled.div`
   justify-content: space-between;
   outline: 10rem solid ${(props) => props.theme.background};
   overflow: hidden;
+  transition: outline-color 0.5s;
 `;
 
 const StyledHeader = styled.div`

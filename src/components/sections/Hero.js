@@ -16,6 +16,7 @@ const StyledHeroSection = styled.section`
   position: fixed;
   z-index: -1;
   top: 0;
+  transition: background-color 0.5s;
 `;
 
 const StyledBackground = styled.div`
