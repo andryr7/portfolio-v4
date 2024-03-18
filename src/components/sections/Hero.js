@@ -150,7 +150,7 @@ const StyledIconContainer = styled.div`
   align-items: center;
 `;
 
-export default function Hero({ aboutSectionScroll, workSectionScroll }) {
+export default function Hero({ workSectionScroll }) {
   const { heroSectionRef, isAltLang } = useContext(PortfolioContext);
   const helloThere = useRef(null);
   const theme = useTheme();
@@ -159,10 +159,6 @@ export default function Hero({ aboutSectionScroll, workSectionScroll }) {
 
   const sectionStyle = {
     backgroundColor: `${theme.background}`,
-  };
-
-  const backgroundStyle = {
-    transform: `rotate(${aboutSectionScroll > 0 ? "180deg" : "0deg"})`,
   };
 
   const firstCircleStyle = {
@@ -229,7 +225,7 @@ export default function Hero({ aboutSectionScroll, workSectionScroll }) {
 
   return (
     <StyledHeroSection ref={heroSectionRef} style={sectionStyle}>
-      <StyledBackground style={backgroundStyle}>
+      <StyledBackground>
         <StyledFirstCircle style={isMobile ? noStyle : firstCircleStyle} />
         <StyledSecondCircle style={isMobile ? noStyle : secondCircleStyle} />
       </StyledBackground>

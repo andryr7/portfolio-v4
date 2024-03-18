@@ -13,6 +13,7 @@ import NoiseFilter from "@/components/NoiseFilter";
 import ContactMenu from "@/components/ContactMenu";
 import { createGlobalStyle } from "styled-components";
 import ProjectPage from "@/components/ProjectPage";
+import { NewVersion } from "@/components/NewVersion";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -122,10 +123,7 @@ export default function Home({ infoData, projectData, skillData }) {
       </Head>
       <GlobalStyle />
       <StyledMain className={`${playfairDisplay.className}`}>
-        <Hero
-          aboutSectionScroll={aboutSectionScroll}
-          workSectionScroll={workSectionScroll}
-        />
+        <Hero workSectionScroll={workSectionScroll} />
         <Work
           projectData={projectData}
           workSectionScroll={workSectionScroll}
@@ -143,6 +141,7 @@ export default function Home({ infoData, projectData, skillData }) {
       <Frame currentSection={currentSection} />
       {/* <GrainFilter /> */}
       <NoiseFilter />
+      <NewVersion />
     </>
   );
 }
